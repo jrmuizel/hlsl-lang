@@ -1,9 +1,9 @@
-//! `glsl-lang-quote` offers proc-macros to quote GLSL syntax in Rust, using the [glsl_lang] crate.
+//! `hlsl-lang-quote` offers proc-macros to quote HLSL syntax in Rust, using the [hlsl_lang] crate.
 //!
 //! # Usage
 //!
 //! ```
-//! use glsl_lang_quote::glsl;
+//! use hlsl_lang_quote::hlsl;
 //!
 //! // Parse a translation unit at compile time
 //! let ast = glsl! {
@@ -19,19 +19,19 @@
 //! # Parsing expressions
 //!
 //! This crate offers a set of features `quote-expr`, and `quote-statement`. Enabling those
-//! features enable the respective `parser-expr`, and `parser-statement` in [glsl_lang], which
+//! features enable the respective `parser-expr`, and `parser-statement` in [hlsl_lang], which
 //! creates dedicated parsers for those types of GLSL fragments of the language grammar.
 //!
 //! This is the most efficient option for parsing lots of expressions and statements at
 //! compile-time, however this will slow down the initial compilation of `glsl-lang-quote` since
-//! the generated parser file in [glsl_lang] will be much larger.
+//! the generated parser file in [hlsl_lang] will be much larger.
 //!
 //! This is why by default, this crate enables the `quote-parsable` feature, which uses
-//! [glsl_lang]'s [glsl_lang::parse::Parsable] trait, whose limitations apply. Whichever method you
+//! [hlsl_lang]'s [hlsl_lang::parse::Parsable] trait, whose limitations apply. Whichever method you
 //! chose, the following code will work:
 //!
 //! ```
-//! use glsl_lang_quote::glsl_expr;
+//! use hlsl_lang_quote::hlsl_expr;
 //!
 //! // Parse an expression
 //! let ast = glsl_expr! {
@@ -41,14 +41,14 @@
 //!
 //! # Quoting and stateful lexers
 //!
-//! Since [glsl_lang]'s parser has a stateful lexer (to handle the fact that GLSL's grammar is not
+//! Since [hlsl_lang]'s parser has a stateful lexer (to handle the fact that HLSL's grammar is not
 //! context-free), declaring a type (a `struct` for example) and using it must happen in the same
 //! macro invocation, otherwise the parser will *forget* about the previously declared types. The
 //! best is to only parse whole translation units ([glsl!] macro), or parse unambiguous fragments
 //! (such as expressions, but not statements).
 //!
 //! ```ignore
-//! use glsl_lang_quote::{glsl, glsl_statement};
+//! use hlsl_lang_quote::{hlsl, hlsl_statement};
 //!
 //! // This is ok:
 //! let ast = glsl! {
@@ -67,7 +67,7 @@
 
 #![deny(missing_docs)]
 
-use glsl_lang::{
+use hlsl_lang::{
     ast,
     parse::{Parsable, ParseOptions},
 };

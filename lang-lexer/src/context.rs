@@ -4,14 +4,14 @@ use std::rc::Rc;
 
 use lang_util::{FileId, SmolStr};
 
-use glsl_lang_types::ast;
+use hlsl_lang_types::ast;
 
 /// Parsing options
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ParseOptions {
-    /// Default GLSL version number to parse source as
+    /// Default HLSL version number to parse source as
     pub default_version: u16,
-    /// `true` if the GLSL target should be Vulkan instead of OpenGL
+    /// `true` if the HLSL target should be Vulkan instead of OpenGL
     pub target_vulkan: bool,
     /// Unique source identifier for token positions
     pub source_id: FileId,

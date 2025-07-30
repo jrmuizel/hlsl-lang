@@ -26,12 +26,12 @@ members = [
 ]
 
 [patch.crates-io]
-glsl-lang       = { path = "lang" }
-glsl-lang-pp    = { path = "lang-pp" }
-glsl-lang-lexer = { path = "lang-lexer" }
-glsl-lang-types = { path = "lang-types" }
-glsl-lang-quote = { path = "lang-quote" }
-glsl-lang-cli   = { path = "lang-cli" }
+hlsl-lang       = { path = "lang" }
+hlsl-lang-pp    = { path = "lang-pp" }
+hlsl-lang-lexer = { path = "lang-lexer" }
+hlsl-lang-types = { path = "lang-types" }
+hlsl-lang-quote = { path = "lang-quote" }
+hlsl-lang-cli   = { path = "lang-cli" }
 
 lang-util        = { path = "lang-util" }
 lang-util-derive = { path = "lang-util-derive" }

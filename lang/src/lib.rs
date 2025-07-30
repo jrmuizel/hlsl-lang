@@ -1,8 +1,8 @@
-//! `glsl-lang` is a crate implementing a LALR parser for the GLSL 4.x language,
+//! `hlsl-lang` is a crate implementing a LALR parser for the HLSL language,
 //! with partial support for preprocessor directives. Its AST and features are
 //! modeled after [Dimitri Sabadie's `glsl` crate](https://github.com/phaazon/glsl).
 //!
-//! See the [homepage](https://github.com/alixinne/glsl-lang) for more detailed comparison
+//! See the [homepage](https://github.com/alixinne/hlsl-lang) for more detailed comparison
 //! elements.
 //!
 //! # Examples
@@ -10,7 +10,7 @@
 //! ## Parsing GLSL
 //!
 //! ```
-//! use glsl_lang::{ast, parse::DefaultParse};
+//! use hlsl_lang::{ast, parse::DefaultParse};
 //!
 //! // Some GLSL source to parse
 //! let source = r#"void main() {
@@ -35,7 +35,7 @@
 //!
 //! ```
 //! // parse::Parse is not implemented for ast::Expr with the default features
-//! use glsl_lang::{ast, parse::Parsable};
+//! use hlsl_lang::{ast, parse::Parsable};
 //!
 //! let source = "a = b ? 1.0 : 0.0";
 //!
@@ -52,8 +52,8 @@
 
 use lalrpop_util::lalrpop_mod;
 
-pub use glsl_lang_lexer as lexer;
-pub use glsl_lang_types::ast;
+pub use hlsl_lang_lexer as lexer;
+pub use hlsl_lang_types::ast;
 lalrpop_mod!(
     #[allow(clippy::all)]
     parser

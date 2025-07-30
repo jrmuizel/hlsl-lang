@@ -4,9 +4,9 @@ use lang_util::position::LexerPosition;
 
 use crate::{ast, parser};
 
-use glsl_lang_lexer::{HasLexerError, LangLexer, Token};
+use hlsl_lang_lexer::{HasLexerError, LangLexer, Token};
 
-pub use glsl_lang_lexer::{ParseContext, ParseContextData, ParseOptions};
+pub use hlsl_lang_lexer::{ParseContext, ParseContextData, ParseOptions};
 
 mod builder;
 pub use builder::*;
@@ -43,25 +43,25 @@ pub trait HasParser: Sized {
 #[allow(clippy::result_large_err)]
 pub trait Parse: HasParser {
     /// Parse the input source
-    fn parse<'i, L: LangLexer<'i>>(
+    fn parse<'i, L: hlsl_lang_lexer::LangLexer<'i>>(
         source: L::Input,
     ) -> Result<Self, ParseError<<L::Iter as HasLexerError>::Error>>;
 
     /// Parse the input source with the given options
-    fn parse_with_options<'i, L: LangLexer<'i>>(
+    fn parse_with_options<'i, L: hlsl_lang_lexer::LangLexer<'i>>(
         source: L::Input,
         opts: &ParseOptions,
     ) -> ParseResult<L::Iter, <L::Iter as HasLexerError>::Error, Self>;
 
     /// Parse the input source with the given context
-    fn parse_with_context<'i, L: LangLexer<'i>>(
+    fn parse_with_context<'i, L: hlsl_lang_lexer::LangLexer<'i>>(
         source: L::Input,
         ctx: &ParseContext,
     ) -> ParseResult<L::Iter, <L::Iter as HasLexerError>::Error, Self>;
 }
 
 impl<T: HasParser> Parse for T {
-    fn parse<'i, L: LangLexer<'i>>(
+    fn parse<'i, L: hlsl_lang_lexer::LangLexer<'i>>(
         source: L::Input,
     ) -> Result<Self, ParseError<<L::Iter as HasLexerError>::Error>> {
         ParseBuilder::<L, Self>::new(source)
@@ -69,14 +69,14 @@ impl<T: HasParser> Parse for T {
             .map(|(parsed, _names, _lexer)| parsed)
     }
 
-    fn parse_with_options<'i, L: LangLexer<'i>>(
+    fn parse_with_options<'i, L: hlsl_lang_lexer::LangLexer<'i>>(
         source: L::Input,
         opts: &ParseOptions,
     ) -> ParseResult<L::Iter, <L::Iter as HasLexerError>::Error, Self> {
         ParseBuilder::<L, Self>::new(source).opts(opts).parse()
     }
 
-    fn parse_with_context<'i, L: LangLexer<'i>>(
+    fn parse_with_context<'i, L: hlsl_lang_lexer::LangLexer<'i>>(
         source: L::Input,
         ctx: &ParseContext,
     ) -> ParseResult<L::Iter, <L::Iter as HasLexerError>::Error, Self> {
@@ -96,7 +96,7 @@ pub type DefaultLexer<'i> = glsl_lang_lexer::min::str::Lexer<'i>;
 
 /// Default lexer to use for parsing sources
 #[cfg(feature = "lexer-full")]
-pub type DefaultLexer<'i> = glsl_lang_lexer::full::str::Lexer<'i>;
+pub type DefaultLexer<'i> = hlsl_lang_lexer::full::str::Lexer<'i>;
 
 /// GLSL parsing with the default lexer
 pub trait DefaultParse: Parse {

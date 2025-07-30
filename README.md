@@ -1,11 +1,11 @@
-# [glsl-lang](https://github.com/alixinne/glsl-lang)
+# [hlsl-lang](https://github.com/alixinne/hlsl-lang)
 
-[![Build](https://github.com/alixinne/glsl-lang/workflows/build/badge.svg?branch=master)](https://github.com/alixinne/glsl-lang/actions)
-[![Crates.io](https://img.shields.io/crates/v/glsl-lang)](https://crates.io/crates/glsl-lang)
-[![docs.rs](https://img.shields.io/docsrs/glsl-lang)](https://docs.rs/glsl-lang/)
-[![License](https://img.shields.io/github/license/alixinne/glsl-lang)](LICENSE)
+[![Build](https://github.com/alixinne/hlsl-lang/workflows/build/badge.svg?branch=master)](https://github.com/alixinne/hlsl-lang/actions)
+[![Crates.io](https://img.shields.io/crates/v/hlsl-lang)](https://crates.io/crates/hlsl-lang)
+[![docs.rs](https://img.shields.io/docsrs/hlsl-lang)](https://docs.rs/hlsl-lang/)
+[![License](https://img.shields.io/github/license/alixinne/hlsl-lang)](LICENSE)
 
-`glsl-lang` is a crate implementing a LALR parser for the GLSL language, with
+`hlsl-lang` is a crate implementing a LALR parser for the HLSL language, with
 full support for preprocessor directives. Its AST and features are modeled
 after [Dimitri Sabadie's `glsl` crate](https://github.com/phaazon/glsl).
 
@@ -14,18 +14,18 @@ after [Dimitri Sabadie's `glsl` crate](https://github.com/phaazon/glsl).
 <!-- vim-markdown-toc GFM -->
 
 * [Repository structure](#repository-structure)
-* [`glsl-lang` vs. `glsl` crates](#glsl-lang-vs-glsl-crates)
+* [`hlsl-lang` vs. `glsl` crates](#hlsl-lang-vs-glsl-crates)
   * [Why pick this crate?](#why-pick-this-crate)
     * [It's fast](#its-fast)
     * [Syntax nodes have location information](#syntax-nodes-have-location-information)
-    * [Re-written GLSL transpiler](#re-written-glsl-transpiler)
-    * [`glsl-lang-quote` quoting support](#glsl-lang-quote-quoting-support)
+    * [Re-written HLSL transpiler](#re-written-hlsl-transpiler)
+    * [`hlsl-lang-quote` quoting support](#hlsl-lang-quote-quoting-support)
     * [Full preprocessing support](#full-preprocessing-support)
-    * [Tested on the glslangValidator test suite](#tested-on-the-glslangvalidator-test-suite)
+    * [Tested on the DXC test suite](#tested-on-the-dxc-test-suite)
   * [Why not pick this crate?](#why-not-pick-this-crate)
     * [Stateful lexer](#stateful-lexer)
     * [Parser generation and compile times](#parser-generation-and-compile-times)
-    * [`glsl-lang-quote` state](#glsl-lang-quote-state)
+    * [`hlsl-lang-quote` state](#hlsl-lang-quote-state)
     * [AST differences](#ast-differences)
     * [Documentation](#documentation)
 * [Limitations](#limitations)
@@ -35,20 +35,20 @@ after [Dimitri Sabadie's `glsl` crate](https://github.com/phaazon/glsl).
 
 ## Repository structure
 
-| crates.io                                                                                                   | Path                                   | Description                                                       |
-| ---                                                                                                         | ---                                    | ---                                                               |
-| [![Crates.io](https://img.shields.io/crates/v/glsl-lang)](https://crates.io/crates/glsl-lang)               | [`lang`](lang)                         | Parser, visitor, transpiler for GLSL language                     |
-| [![Crates.io](https://img.shields.io/crates/v/glsl-lang-pp)](https://crates.io/crates/glsl-lang-pp)         | [`lang-pp`](lang-pp)                   | standalone preprocessor for the GLSL language                     |
-| [![Crates.io](https://img.shields.io/crates/v/glsl-lang-lexer)](https://crates.io/crates/glsl-lang-lexer)   | [`lang-lexer`](lang-lexer)             | Lexers for the GLSL language                                      |
-| [![Crates.io](https://img.shields.io/crates/v/glsl-lang-types)](https://crates.io/crates/glsl-lang-types)   | [`lang-types`](lang-types)             | AST and shared type definitions for the GLSL language             |
-| [![Crates.io](https://img.shields.io/crates/v/glsl-lang-quote)](https://crates.io/crates/glsl-lang-quote)   | [`lang-quote`](lang-quote)             | proc-macro crate to parse GLSL at compile-time                    |
-| [![Crates.io](https://img.shields.io/crates/v/glsl-lang-cli)](https://crates.io/crates/glsl-lang-cli)       | [`lang-cli`](lang-cli)                 | simple CLI tool to show GLSL syntax trees                         |
-| [![Crates.io](https://img.shields.io/crates/v/lang-util)](https://crates.io/crates/lang-util)               | [`lang-util`](lang-util)               | utilities for implementing syntax trees                           |
-| [![Crates.io](https://img.shields.io/crates/v/lang-util-derive)](https://crates.io/crates/lang-util-derive) | [`lang-util-derive`](lang-util-derive) | proc-macro crate to implement a syntax tree with span information |
-| [![Crates.io](https://img.shields.io/crates/v/lang-util-dev)](https://crates.io/crates/lang-util-dev)       | [`lang-util-dev`](lang-util-dev)       | development utilities for parsers implemented using lang-util     |
-|                                                                                                             | [`xtask`](xtask)                       | task runner, invoke with `cargo xtask`                            |
+| crates.io                                                                                                     | Path                                   | Description                                                       |
+| ---                                                                                                           | ---                                    | ---                                                               |
+| [![Crates.io](https://img.shields.io/crates/v/hlsl-lang)](https://crates.io/crates/hlsl-lang)                 | [`lang`](lang)                         | Parser, visitor, transpiler for HLSL language                     |
+| [![Crates.io](https://img.shields.io/crates/v/hlsl-lang-pp)](https://crates.io/crates/hlsl-lang-pp)           | [`lang-pp`](lang-pp)                   | standalone preprocessor for the HLSL language                     |
+| [![Crates.io](https://img.shields.io/crates/v/hlsl-lang-lexer)](https://crates.io/crates/hlsl-lang-lexer)     | [`lang-lexer`](lang-lexer)             | Lexers for the HLSL language                                      |
+| [![Crates.io](https://img.shields.io/crates/v/hlsl-lang-types)](https://crates.io/crates/hlsl-lang-types)     | [`lang-types`](lang-types)             | AST and shared type definitions for the HLSL language             |
+| [![Crates.io](https://img.shields.io/crates/v/hlsl-lang-quote)](https://crates.io/crates/hlsl-lang-quote)     | [`lang-quote`](lang-quote)             | proc-macro crate to parse HLSL at compile-time                    |
+| [![Crates.io](https://img.shields.io/crates/v/hlsl-lang-cli)](https://crates.io/crates/hlsl-lang-cli)         | [`lang-cli`](lang-cli)                 | simple CLI tool to show HLSL syntax trees                         |
+| [![Crates.io](https://img.shields.io/crates/v/lang-util)](https://crates.io/crates/lang-util)                 | [`lang-util`](lang-util)               | utilities for implementing syntax trees                           |
+| [![Crates.io](https://img.shields.io/crates/v/lang-util-derive)](https://crates.io/crates/lang-util-derive)   | [`lang-util-derive`](lang-util-derive) | proc-macro crate to implement a syntax tree with span information |
+| [![Crates.io](https://img.shields.io/crates/v/lang-util-dev)](https://crates.io/crates/lang-util-dev)         | [`lang-util-dev`](lang-util-dev)       | development utilities for parsers implemented using lang-util     |
+|                                                                                                               | [`xtask`](xtask)                       | task runner, invoke with `cargo xtask`                            |
 
-## `glsl-lang` vs. `glsl` crates
+## `hlsl-lang` vs. `glsl` crates
 
 ### Why pick this crate?
 
@@ -57,10 +57,10 @@ after [Dimitri Sabadie's `glsl` crate](https://github.com/phaazon/glsl).
 Due to using a LALR parser and dedicated tokenizer, it's 5-480x (average case
 10x) faster than `glsl`:
 
-    $ cargo bench --bench glsl -- --samples 1000
+    $ cargo bench --bench hlsl -- --samples 1000
     # Install with `cargo install critcmp`:
     $ critcmp new -g '([a-zA-Z0-9._-]*)/\w+'
-    group                                               new//glsl                               new//glsl_lang
+    group                                               new//glsl                               new//hlsl_lang
     -----                                               ---------                               --------------
     preprocessor.extensions.vert                        4.27     24.6±0.09µs     9.9 MB/sec     1.00      5.8±0.05µs    42.5 MB/sec
     [...]
@@ -80,15 +80,15 @@ Most nodes in the AST are wrapped in a special `Node` type, which holds:
 * `start`: the starting offset of the node in the corresponding input
 * `end`: the ending offset of the node in the corresponding input
 
-#### Re-written GLSL transpiler
+#### Re-written HLSL transpiler
 
-The GLSL transpiler has been partially rewritten to generate indented code.
+The HLSL transpiler has been partially rewritten to generate indented code.
 It's still a work-in-progress but generates (mostly) readable code.
 
-#### `glsl-lang-quote` quoting support
+#### `hlsl-lang-quote` quoting support
 
-`glsl-lang-quote` is the `glsl-lang` version of `glsl-quasiquote`. It parses
-GLSL at compile-time to generate an AST. However, you can also insert parts
+`hlsl-lang-quote` is the `hlsl-lang` version of `glsl-quasiquote`. It parses
+HLSL at compile-time to generate an AST. However, you can also insert parts
 of runtime-generated AST using a quoting syntax. Currently, the following
 insertion locations for the `#(rust code)` syntax are supported:
 
@@ -98,7 +98,7 @@ insertion locations for the `#(rust code)` syntax are supported:
 
 #### Full preprocessing support
 
-`glsl-lang-pp` implements a preprocessor following the GLSL 4.60 language
+`hlsl-lang-pp` implements a preprocessor following the HLSL language
 specification. While this adds a significant amount of complexity,
 preprocessing now happens in a proper stage before language parsing, thus
 supporting a wider family of inputs.
@@ -107,39 +107,38 @@ Since the preprocessing stage is also responsible for enabling/disabling
 extensions and/or pragmas, this allows us to track extra state at the token
 granularity.
 
-The preprocessor also supports include directives:
-* `GL_ARB_shading_language_include`: run-time includes
-* `GL_GOOGLE_include_directive`: compile-time includes
+The preprocessor also supports include directives and various HLSL-specific
+pragma directives.
 
-The preprocessor and lexer based on `glsl-lang-pp` can be used in `glsl-lang`
-by enabling the `glsl-lang/lexer-full` feature.
+The preprocessor and lexer based on `hlsl-lang-pp` can be used in `hlsl-lang`
+by enabling the `hlsl-lang/lexer-full` feature.
 
-#### Tested on the glslangValidator test suite
+#### Tested on the DXC test suite
 
 The `data` folder contains vendored test data from the
-[glslangValidator](https://github.com/KhronosGroup/glslang) project to be used
+[DirectX Shader Compiler (DXC)](https://github.com/microsoft/DirectXShaderCompiler) project to be used
 as a reference point for validating the preprocessor and parser.
 
 The `#[test]` definitions need to be generate before running the test suite on
-the glslang sources. Use the `gen-tests` task for this:
+the DXC sources. Use the `gen-tests` task for this:
 
     cargo xtask gen-tests
 
 Then run the tests:
 
-    cargo test --test glslang
+    cargo test --test dxc
 
-`glsl-lang-pp` and `glsl-lang` are tested against this test suite. This is a
+`hlsl-lang-pp` and `hlsl-lang` are tested against this test suite. This is a
 snapshot-based test suite which checks the following:
 
-* `glsl-lang-pp`: errors, events, preprocessed output and preprocessing AST
-* `glsl-lang`: if parsing succeeds, AST, else first parsing error
+* `hlsl-lang-pp`: errors, events, preprocessed output and preprocessing AST
+* `hlsl-lang`: if parsing succeeds, AST, else first parsing error
 
-Snapshots have not been thoroughly checked, i.e. the `glslang` test passing for
+Snapshots have not been thoroughly checked, i.e. the `dxc` test passing for
 both crates does not mean we are spec-compliant yet. Please open issues if you
 encounter parsing or preprocessing errors.
 
-`glslang` tests are run during CI but are currently non-fatal. They are used to
+`dxc` tests are run during CI but are currently non-fatal. They are used to
 track the progress towards a spec-compliant parser.
 
 ### Why not pick this crate?
@@ -148,7 +147,7 @@ track the progress towards a spec-compliant parser.
 
 C-based grammar are ambiguous by definition. The main ambiguity being the
 inability of the parser to solve conflicts between type names and identifiers
-without extra context. Thus, to enable LALR parsing of GLSL, we need to
+without extra context. Thus, to enable LALR parsing of HLSL, we need to
 maintain a list of identifiers that are declared as type names, so the lexer
 can properly return `IDENT` or `TYPE_NAME` as it is reading the file.
 
@@ -158,14 +157,14 @@ forwarding the type name/identifier disambiguation table to the second pass.
 
 #### Parser generation and compile times
 
-The GLSL grammar is implemented in
+The HLSL grammar is implemented in
 [`lang/src/parser.lalrpop`](lang/src/parser.lalrpop) using
 [LALRPOP](https://github.com/lalrpop/lalrpop). The default feature set only
-allows parsing translation units (the top-level rule in the GLSL grammar),
+allows parsing translation units (the top-level rule in the HLSL grammar),
 which results in a 25k lines parser file. If you want to include more parsers
 (for example for expressions, statements, etc.) you will need to enable the
 respective features (`parser-expr`, `parser-statement`, etc.) but this will
-slow down the compilation of `glsl-lang` by a significant amount.
+slow down the compilation of `hlsl-lang` by a significant amount.
 
 To alleviate this issue, you can use the `Parsable` trait: by wrapping a syntax
 item in a suitable source, and then matching the resulting AST, we can extract
@@ -173,13 +172,13 @@ the result of any rule in the grammar. Currently, this interface panics if the
 output AST cannot be matched, so don't use it on unknown input. It's fine for
 testing though.
 
-#### `glsl-lang-quote` state
+#### `hlsl-lang-quote` state
 
 Parsing preprocessor directives is currently not supported.
 
 #### AST differences
 
-There are some differences in both crate's ASTs, so porting to `glsl-lang`
+There are some differences in both crate's ASTs, so porting to `hlsl-lang`
 would require some changes to your code:
 * The `Statement/SimpleStatement/CompoundStatement` structure was flattened to `Statement`
 * The `subroutine` storage qualifier takes a `TypeSpecifier` array instead of a `TypeName` array
@@ -198,7 +197,7 @@ currently missing some usage examples. These will come soon enough, promise!
 
 Aside from the limitations mentioned in the paragraph above:
 
-* Starting with the 0.2 release of `glsl-lang`, the `glsl-lang-pp` (also part
+* Starting with the 0.2 release of `hlsl-lang`, the `hlsl-lang-pp` (also part
   of this project) is used to preprocess the input before running the parser.
   This means we can now parse shaders that are invalid without macro expansion,
   but as a result we lose some preprocessing directives in the AST. Also, since
@@ -211,5 +210,5 @@ Aside from the limitations mentioned in the paragraph above:
 
 This work is licensed under the BSD 3-clause license. Lexer and LALR parser by
 Alixinne <alixinne@pm.me>. Original AST, test suite and
-quoting code by Dimitri Sabadie <dimitri.sabadie@gmail.com>. glslangValidator
-test suite from the Khronos group.
+quoting code by Dimitri Sabadie <dimitri.sabadie@gmail.com>. DXC
+test suite from Microsoft.

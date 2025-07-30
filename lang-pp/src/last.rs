@@ -361,7 +361,7 @@ mod tests {
     }
 
     #[test]
-    /// Ensure that we can extract #(...) for glsl-lang-quote. This is not part of the spec so this
+    /// Ensure that we can extract #(...) for hlsl-lang-quote. This is not part of the spec so this
     /// explains why we need to re-examine tokens using Tokenizer::tokenize_single.
     ///
     /// The default behavior is spec-compliant (#( is an invalid preprocessor directive), but we

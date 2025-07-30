@@ -3,18 +3,18 @@ use criterion::{
     Throughput,
 };
 
-use glsl_lang::parse::IntoParseBuilderExt;
+use hlsl_lang::parse::IntoParseBuilderExt;
 
-fn parse_impl_glsl_lang<T, M>(group: &mut BenchmarkGroup<'_, M>, input: &str)
+fn parse_impl_hlsl_lang<T, M>(group: &mut BenchmarkGroup<'_, M>, input: &str)
 where
-    T: glsl_lang::parse::Parse,
+    T: hlsl_lang::parse::Parse,
     M: Measurement,
 {
-    group.bench_with_input("glsl_lang", input, |b, input| {
-        use glsl_lang::parse::LangParser;
+    group.bench_with_input("hlsl_lang", input, |b, input| {
+        use hlsl_lang::parse::LangParser;
 
         let parser = T::Parser::new();
-        let opts = glsl_lang::parse::ParseOptions::new();
+        let opts = hlsl_lang::parse::ParseOptions::new();
 
         b.iter(|| {
             input
@@ -41,21 +41,21 @@ where
 
 fn parse_impl<L, G>(c: &mut Criterion, input: &str, name: &str)
 where
-    L: glsl_lang::parse::Parse,
+    L: hlsl_lang::parse::Parse,
     G: glsl::parser::Parse,
 {
     let mut group = c.benchmark_group(name);
     group.throughput(Throughput::Bytes(input.len() as _));
 
     parse_impl_glsl::<G, _>(&mut group, input);
-    parse_impl_glsl_lang::<L, _>(&mut group, input);
+    parse_impl_hlsl_lang::<L, _>(&mut group, input);
 
     group.finish();
 }
 
 macro_rules! bench_file {
     ($c:ident, $name:literal) => {
-        parse_impl::<glsl_lang::ast::TranslationUnit, glsl::syntax::TranslationUnit>(
+        parse_impl::<hlsl_lang::ast::TranslationUnit, glsl::syntax::TranslationUnit>(
             $c,
             include_str!(concat!("../../data/", $name)),
             $name,
@@ -64,7 +64,7 @@ macro_rules! bench_file {
 }
 
 fn parse(c: &mut Criterion) {
-    parse_impl::<glsl_lang::ast::TranslationUnit, glsl::syntax::TranslationUnit>(
+    parse_impl::<hlsl_lang::ast::TranslationUnit, glsl::syntax::TranslationUnit>(
         c,
         "void main() { ((((((((1.0f)))))))); }",
         "nested_parens",
@@ -241,5 +241,5 @@ fn parse(c: &mut Criterion) {
     bench_file!(c, "xfbUnsizedArray.error.vert");
 }
 
-criterion_group!(glsl, parse);
-criterion_main!(glsl);
+criterion_group!(hlsl, parse);
+criterion_main!(hlsl);

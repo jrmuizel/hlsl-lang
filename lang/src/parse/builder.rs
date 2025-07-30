@@ -1,11 +1,11 @@
 //! Parse operation builder definition
 
-use glsl_lang_lexer::{HasLexerError, LangLexerIterator, ParseOptions};
+use hlsl_lang_lexer::{HasLexerError, LangLexerIterator, ParseOptions};
 
 use super::{Extractable, HasParser, LangLexer, LangParser, ParseContext, ParseResult};
 
 /// Builder structure for a parsing operation
-pub struct ParseBuilder<'i, 'o, 'c, 'p, L: LangLexer<'i>, T: HasParser> {
+pub struct ParseBuilder<'i, 'o, 'c, 'p, L: hlsl_lang_lexer::LangLexer<'i>, T: HasParser> {
     source: L::Input,
     opts: Option<&'o ParseOptions>,
     context: Option<&'c ParseContext>,
@@ -13,7 +13,7 @@ pub struct ParseBuilder<'i, 'o, 'c, 'p, L: LangLexer<'i>, T: HasParser> {
     parser: Option<&'p T::Parser>,
 }
 
-impl<'i, 'o, 'c, 'p, L: LangLexer<'i>, T: HasParser> ParseBuilder<'i, 'o, 'c, 'p, L, T> {
+impl<'i, 'o, 'c, 'p, L: hlsl_lang_lexer::LangLexer<'i>, T: HasParser> ParseBuilder<'i, 'o, 'c, 'p, L, T> {
     /// Create a new parse builder from the given input string
     pub fn new(source: L::Input) -> Self {
         Self {
@@ -137,7 +137,7 @@ impl<'i, 'o, 'c, 'p, T: HasParser> ParseBuilder<'i, 'o, 'c, 'p, super::DefaultLe
 /// Trait for creating parse builders from lexer inputs
 pub trait IntoParseBuilderExt<'i> {
     /// Type of the lexer associated with this input
-    type Lexer: LangLexer<'i>;
+    type Lexer: hlsl_lang_lexer::LangLexer<'i>;
 
     /// Create a builder for this lexer input
     fn builder<'o, 'c, 'p, T>(self) -> ParseBuilder<'i, 'o, 'c, 'p, Self::Lexer, T>
@@ -157,12 +157,12 @@ impl<'i> IntoParseBuilderExt<'i> for &'i str {
 }
 
 #[cfg(feature = "lexer-full")]
-impl<'r, 'p, F: glsl_lang_lexer::full::fs::FileSystem> IntoParseBuilderExt<'p>
-    for glsl_lang_lexer::full::fs::File<'r, 'p, F>
+impl<'r, 'p, F: hlsl_lang_lexer::full::fs::FileSystem> IntoParseBuilderExt<'p>
+    for hlsl_lang_lexer::full::fs::File<'r, 'p, F>
 where
-    glsl_lang_lexer::full::fs::File<'r, 'p, F>: 'p,
+    hlsl_lang_lexer::full::fs::File<'r, 'p, F>: 'p,
 {
-    type Lexer = glsl_lang_lexer::full::fs::Lexer<'r, 'p, F>;
+    type Lexer = hlsl_lang_lexer::full::fs::Lexer<'r, 'p, F>;
 
     fn builder<'o, 'c, 'q, T>(self) -> ParseBuilder<'p, 'o, 'c, 'q, Self::Lexer, T>
     where

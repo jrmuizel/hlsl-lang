@@ -1,21 +1,21 @@
 [package]
-name = "glsl-lang-cli"
+name = "hlsl-lang-cli"
 version = "0.8.0"
 authors = ["Alixinne <alixinne@pm.me>"]
 edition = "2021"
 license = "BSD-3-Clause"
-description = "CLI for the glsl-lang crate"
-homepage = "https://github.com/alixinne/glsl-lang"
-documentation = "https://docs.rs/glsl-lang-cli/"
-repository = "https://github.com/alixinne/glsl-lang"
+description = "CLI for the hlsl-lang crate"
+homepage = "https://github.com/alixinne/hlsl-lang"
+documentation = "https://docs.rs/hlsl-lang-cli/"
+repository = "https://github.com/alixinne/hlsl-lang"
 readme = "README.md"
-keywords = ["glsl", "language", "parser", "ast", "cli"]
+keywords = ["hlsl", "language", "parser", "ast", "cli"]
 categories = ["command-line-interface", "parser-implementations", "rendering"]
 rust-version = "1.82.0"
 
 [dependencies]
-glsl-lang = { version = "=0.8.0", features = ["lexer-full"] }
-glsl-lang-pp = { version = "=0.8.0" }
+hlsl-lang = { version = "=0.8.0", features = ["lexer-full"] }
+hlsl-lang-pp = { version = "=0.8.0" }
 lang-util = "=0.8.0"
 argh = "0.1"
 
@@ -25,4 +25,4 @@ thiserror = "2.0"
 
 [features]
 default = ["json"]
-json = ["serde_json", "glsl-lang/serde"]
+json = ["serde_json", "hlsl-lang/serde"]

@@ -1,7 +1,7 @@
 #[macro_use]
-extern crate glsl_lang_quote;
+extern crate hlsl_lang_quote;
 
-use glsl_lang::ast;
+use hlsl_lang::ast;
 
 #[test]
 fn void_main_empty() {

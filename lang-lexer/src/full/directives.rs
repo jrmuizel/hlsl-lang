@@ -1,10 +1,10 @@
 use std::cmp;
 
-use glsl_lang_pp::processor::{
+use hlsl_lang_pp::processor::{
     event::{DirectiveKind, EventDirective},
     nodes::VersionProfile,
 };
-use glsl_lang_types::ast::{
+use hlsl_lang_types::ast::{
     self, PreprocessorExtensionBehaviorData, PreprocessorExtensionNameData,
     PreprocessorVersionProfileData,
 };
@@ -95,26 +95,26 @@ impl Directives {
                     ast::PreprocessorData::Extension(
                         ast::PreprocessorExtensionData {
                             name: match extension.name {
-                                glsl_lang_pp::processor::nodes::ExtensionName::All => {
+                                hlsl_lang_pp::processor::nodes::ExtensionName::All => {
                                     PreprocessorExtensionNameData::All
                                 }
-                                glsl_lang_pp::processor::nodes::ExtensionName::Specific(
+                                hlsl_lang_pp::processor::nodes::ExtensionName::Specific(
                                     ref name,
                                 ) => PreprocessorExtensionNameData::Specific(name.as_ref().into()),
                             }
                             .into(),
                             behavior: Some(
                                 match extension.behavior {
-                                    glsl_lang_pp::processor::nodes::ExtensionBehavior::Require => {
+                                    hlsl_lang_pp::processor::nodes::ExtensionBehavior::Require => {
                                         PreprocessorExtensionBehaviorData::Require
                                     }
-                                    glsl_lang_pp::processor::nodes::ExtensionBehavior::Enable => {
+                                    hlsl_lang_pp::processor::nodes::ExtensionBehavior::Enable => {
                                         PreprocessorExtensionBehaviorData::Enable
                                     }
-                                    glsl_lang_pp::processor::nodes::ExtensionBehavior::Warn => {
+                                    hlsl_lang_pp::processor::nodes::ExtensionBehavior::Warn => {
                                         PreprocessorExtensionBehaviorData::Warn
                                     }
-                                    glsl_lang_pp::processor::nodes::ExtensionBehavior::Disable => {
+                                    hlsl_lang_pp::processor::nodes::ExtensionBehavior::Disable => {
                                         PreprocessorExtensionBehaviorData::Disable
                                     }
                                 }

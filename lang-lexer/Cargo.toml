@@ -1,21 +1,21 @@
 [package]
-name = "glsl-lang-lexer"
+name = "hlsl-lang-lexer"
 version = "0.8.0"
 authors = ["Alixinne <alixinne@pm.me>"]
 edition = "2021"
 license = "BSD-3-Clause"
-description = "GLSL language lexers"
-homepage = "https://github.com/alixinne/glsl-lang"
-documentation = "https://docs.rs/glsl-lang-lexer/"
-repository = "https://github.com/alixinne/glsl-lang"
+description = "HLSL language lexers"
+homepage = "https://github.com/alixinne/hlsl-lang"
+documentation = "https://docs.rs/hlsl-lang-lexer/"
+repository = "https://github.com/alixinne/hlsl-lang"
 readme = "README.md"
-keywords = ["glsl", "language", "parser"]
+keywords = ["hlsl", "language", "parser"]
 categories = ["parser-implementations", "rendering"]
 rust-version = "1.82.0"
 
 [dependencies]
-glsl-lang-pp = "=0.8.0"
-glsl-lang-types = "=0.8.0"
+hlsl-lang-pp = "=0.8.0"
+hlsl-lang-types = "=0.8.0"
 lang-util = { version = "=0.8.0", features = ["lalrpop"] }
 
 thiserror = "2.0"
@@ -25,7 +25,7 @@ rserde = { version = "1.0", optional = true, features = ["derive"], package = "s
 lalrpop-util = { version = "0.22.1", default-features = false }
 
 [features]
-full = ["glsl-lang-pp/full"]
+full = ["hlsl-lang-pp/full"]
 
 # AST Serialization
-serde = ["rserde", "glsl-lang-types/serde", "lang-util/serde"]
+serde = ["rserde", "hlsl-lang-types/serde", "lang-util/serde"]

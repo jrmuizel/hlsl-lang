@@ -1,6 +1,6 @@
-//! glsl-lang-pp/min based lexer
+//! hlsl-lang-pp/min based lexer
 
-use glsl_lang_pp::types;
+use hlsl_lang_pp::types;
 
 use lang_util::{
     position::{LexerPosition, NodeSpan},

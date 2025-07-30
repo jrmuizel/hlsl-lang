@@ -13,8 +13,8 @@
 //! For instance, we can imagine visiting an AST to count how many variables are declared:
 //!
 //! ```
-//! use glsl_lang::ast::{CompoundStatement, CompoundStatementData, ExprData, SingleDeclaration, StatementData, TypeSpecifierNonArrayData, NodeContent};
-//! use glsl_lang::visitor::{Host, Visit, Visitor};
+//! use hlsl_lang::ast::{CompoundStatement, CompoundStatementData, ExprData, SingleDeclaration, StatementData, TypeSpecifierNonArrayData, NodeContent};
+//! use hlsl_lang::visitor::{Host, Visit, Visitor};
 //! use std::iter::FromIterator;
 //!
 //! let decl0 = StatementData::declare_var(

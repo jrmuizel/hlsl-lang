@@ -1,12 +1,12 @@
 use std::collections::VecDeque;
 
-use glsl_lang_pp::{
+use hlsl_lang_pp::{
     last::{self, LocatedIterator, MaybeToken, TokenState, Tokenizer},
     processor::event::{self, Error, EventDirective, OutputToken},
     types,
 };
 
-use glsl_lang_types::ast;
+use hlsl_lang_types::ast;
 
 use lang_util::{located::Located, position::NodeSpan, FileId, NodeContent, TextRange};
 

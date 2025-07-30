@@ -1,4 +1,4 @@
-//! GLSL abstract syntax tree and grammar.
+//! HLSL abstract syntax tree and grammar.
 //!
 //! This module exports all the grammar syntax that defines GLSL. You’ll be handling ASTs
 //! representing your GLSL source.
@@ -62,7 +62,7 @@ impl_node_content! {
 }
 
 impl IdentifierData {
-    /// Parses this identifier as a glsl-lang-quote Rust identifier
+    /// Parses this identifier as a hlsl-lang-quote Rust identifier
     ///
     /// # Returns
     ///
@@ -1069,7 +1069,7 @@ impl FunIdentifierData {
         }
     }
 
-    /// Try to parse this function identifier as a `glsl-lang-quote` Rust identifier
+    /// Try to parse this function identifier as a `hlsl-lang-quote` Rust identifier
     pub fn as_rs_ident(&self) -> Option<&str> {
         if let Some(ident) = self.as_ident() {
             ident.as_rs_ident()
@@ -1266,7 +1266,7 @@ impl ExprData {
         Self::Variable(name.into().into())
     }
 
-    /// Try to parse this function identifier as a `glsl-lang-quote` Rust identifier
+    /// Try to parse this function identifier as a `hlsl-lang-quote` Rust identifier
     pub fn as_rs_ident(&self) -> Option<&str> {
         match self {
             Self::Variable(ident) => ident.as_rs_ident(),

@@ -7,23 +7,23 @@ use lang_util::{
     NodeContent, TextRange,
 };
 
-use glsl_lang_pp::{lexer::TextToken, types::type_names::TypeNameState};
-use glsl_lang_types::ast;
+use hlsl_lang_pp::{lexer::TextToken, types::type_names::TypeNameState};
+use hlsl_lang_types::ast;
 
 use crate::{HasLexerError, LangLexer, LangLexerIterator, ParseContext, ParseOptions, Token};
 
 use super::LexicalError;
 
-/// glsl-lang-pp memory lexer
+/// hlsl-lang-pp memory lexer
 pub struct Lexer<'i> {
-    inner: glsl_lang_pp::lexer::Lexer<'i>,
+    inner: hlsl_lang_pp::lexer::Lexer<'i>,
     opts: ParseOptions,
 }
 
 impl<'i> Lexer<'i> {
     pub(crate) fn new(source: &'i str, opts: &ParseOptions) -> Self {
         Self {
-            inner: glsl_lang_pp::lexer::Lexer::new(source),
+            inner: hlsl_lang_pp::lexer::Lexer::new(source),
             opts: *opts,
         }
     }
@@ -53,7 +53,7 @@ enum PpFlags {
 
 /// glsl-lang-pp memory lexer iterator
 pub struct LexerIterator<'i> {
-    inner: glsl_lang_pp::lexer::Lexer<'i>,
+    inner: hlsl_lang_pp::lexer::Lexer<'i>,
     ctx: ParseContext,
     opts: ParseOptions,
     pending_tokens: VecDeque<TextToken>,
@@ -80,7 +80,7 @@ impl<'i> LexerIterator<'i> {
         // allow: we need to release the borrow on self.inner to call input
         #[allow(clippy::while_let_on_iterator)]
         while let Some(token) = self.inner.next() {
-            if token.token == glsl_lang_pp::lexer::Token::NEWLINE {
+            if token.token == hlsl_lang_pp::lexer::Token::NEWLINE {
                 self.pending_tokens.push_back(token);
                 break;
             } else {
@@ -177,7 +177,7 @@ impl<'i> Iterator for LexerIterator<'i> {
                     // Handled later
 
                     // On newline, return to normal parsing
-                    if source_token.token == glsl_lang_pp::lexer::Token::NEWLINE {
+                    if source_token.token == hlsl_lang_pp::lexer::Token::NEWLINE {
                         self.flags = PpFlags::None;
                     }
                 }
@@ -185,11 +185,11 @@ impl<'i> Iterator for LexerIterator<'i> {
                 PpFlags::DefineName => {
                     // Start of a preprocessor define
                     match source_token.token {
-                        glsl_lang_pp::lexer::Token::IDENT_KW => {
+                        hlsl_lang_pp::lexer::Token::IDENT_KW => {
                             // We've seen the name, advance
                             self.flags = PpFlags::DefineStart;
                         }
-                        glsl_lang_pp::lexer::Token::NEWLINE => {
+                        hlsl_lang_pp::lexer::Token::NEWLINE => {
                             // Done with preprocessing directive
                             self.flags = PpFlags::None;
                         }
@@ -201,11 +201,11 @@ impl<'i> Iterator for LexerIterator<'i> {
 
                 PpFlags::DefineStart => {
                     match source_token.token {
-                        glsl_lang_pp::lexer::Token::LPAREN => {
+                        hlsl_lang_pp::lexer::Token::LPAREN => {
                             // Arguments
                             self.flags = PpFlags::DefineArgs;
                         }
-                        glsl_lang_pp::lexer::Token::NEWLINE => {
+                        hlsl_lang_pp::lexer::Token::NEWLINE => {
                             // Done with preprocessing directive
                             self.flags = PpFlags::None;
                         }
@@ -221,11 +221,11 @@ impl<'i> Iterator for LexerIterator<'i> {
                 PpFlags::DefineArgs => {
                     // Inside preprocessor arguments
                     match source_token.token {
-                        glsl_lang_pp::lexer::Token::RPAREN => {
+                        hlsl_lang_pp::lexer::Token::RPAREN => {
                             // Done with arguments
                             self.flags = PpFlags::Rest;
                         }
-                        glsl_lang_pp::lexer::Token::NEWLINE => {
+                        hlsl_lang_pp::lexer::Token::NEWLINE => {
                             // Done with preprocessing directive
                             self.flags = PpFlags::None;
                         }
@@ -236,7 +236,7 @@ impl<'i> Iterator for LexerIterator<'i> {
                 }
             }
 
-            let (token, _type_name_state) = glsl_lang_pp::types::Token::from_token(
+            let (token, _type_name_state) = hlsl_lang_pp::types::Token::from_token(
                 source_token,
                 self.inner.input(),
                 self.opts.default_version,
@@ -310,8 +310,8 @@ impl<'i> Iterator for LexerIterator<'i> {
                 }
 
                 Err((token, kind)) => match kind {
-                    glsl_lang_pp::types::token::ErrorKind::InvalidToken
-                        if !buffered && token == glsl_lang_pp::types::Token::HASH =>
+                    hlsl_lang_pp::types::token::ErrorKind::InvalidToken
+                        if !buffered && token == hlsl_lang_pp::types::Token::HASH =>
                     {
                         self.pending_tokens.push_back(source_token);
 
@@ -319,13 +319,13 @@ impl<'i> Iterator for LexerIterator<'i> {
                             self.pending_tokens.push_back(token);
 
                             match token.token {
-                                glsl_lang_pp::lexer::Token::IDENT_KW => {
+                                hlsl_lang_pp::lexer::Token::IDENT_KW => {
                                     // IDENT_KW, this is the name of the preprocessing directive
                                     break;
                                 }
-                                glsl_lang_pp::lexer::Token::WS
-                                | glsl_lang_pp::lexer::Token::COMMENT
-                                | glsl_lang_pp::lexer::Token::LINECONT => {
+                                hlsl_lang_pp::lexer::Token::WS
+                                | hlsl_lang_pp::lexer::Token::COMMENT
+                                | hlsl_lang_pp::lexer::Token::LINECONT => {
                                     // Whitespace, continue
                                 }
                                 _ => {
@@ -335,7 +335,7 @@ impl<'i> Iterator for LexerIterator<'i> {
                                 }
                             }
 
-                            if token.token == glsl_lang_pp::lexer::Token::IDENT_KW {
+                            if token.token == hlsl_lang_pp::lexer::Token::IDENT_KW {
                                 break;
                             }
                         }

@@ -1,6 +1,6 @@
 use argh::FromArgs;
 
-use glsl_lang::parse::DefaultParse;
+use hlsl_lang::parse::DefaultParse;
 use glsl_lang_pp::processor::ProcessorState;
 
 #[derive(FromArgs)]
@@ -26,6 +26,6 @@ pub fn main_pp(data: &[u8]) {
 
 pub fn main_lang(data: &[u8]) {
     if let Ok(s) = std::str::from_utf8(data) {
-        let _ = glsl_lang::ast::TranslationUnit::parse(s);
+        let _ = hlsl_lang::ast::TranslationUnit::parse(s);
     }
 }

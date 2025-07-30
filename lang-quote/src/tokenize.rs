@@ -1,6 +1,6 @@
 //! The [`Tokenize`] trait, turning [glsl](https://crates.io/crates/glsl) into [`TokenStream`]s.
 
-use glsl_lang::ast;
+use hlsl_lang::ast;
 use proc_macro2::TokenStream;
 use quote::{quote, ToTokens};
 use std::{iter::once, str::FromStr};
@@ -125,10 +125,10 @@ fn tokenize_path(p: &ast::Path) -> TokenStream {
 
     match p {
         ast::PathData::Absolute(ref s) => {
-            quote! { glsl_lang::ast::Path::new(glsl_lang::ast::PathData::Absolute(#s.to_owned()), #span) }
+            quote! { hlsl_lang::ast::Path::new(hlsl_lang::ast::PathData::Absolute(#s.to_owned()), #span) }
         }
         ast::PathData::Relative(ref s) => {
-            quote! { glsl_lang::ast::Path::new(glsl_lang::ast::PathData::Relative(#s.to_owned()), #span) }
+            quote! { hlsl_lang::ast::Path::new(hlsl_lang::ast::PathData::Relative(#s.to_owned()), #span) }
         }
     }
 }
@@ -144,482 +144,482 @@ fn tokenize_identifier(i: &ast::Identifier) -> TokenStream {
         // Regular identifier
         let t = i.0.to_owned().quote();
         let span = tokenize_span(&i.span);
-        quote! { glsl_lang::ast::Identifier::new(glsl_lang::ast::IdentifierData(#t), #span) }
+        quote! { hlsl_lang::ast::Identifier::new(hlsl_lang::ast::IdentifierData(#t), #span) }
     }
 }
 
 fn tokenize_type_name(tn: &ast::TypeName) -> TokenStream {
     let t = tn.0.to_owned().quote();
     let span = tokenize_span(&tn.span);
-    quote! { glsl_lang::ast::TypeName::new(glsl_lang::ast::TypeNameData(#t), #span) }
+    quote! { hlsl_lang::ast::TypeName::new(hlsl_lang::ast::TypeNameData(#t), #span) }
 }
 
 fn tokenize_type_specifier_non_array(t: &ast::TypeSpecifierNonArray) -> TokenStream {
     let span = tokenize_span(&t.span);
     let t = match **t {
         ast::TypeSpecifierNonArrayData::Void => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Void }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Void }
         }
         ast::TypeSpecifierNonArrayData::Bool => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Bool }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Bool }
         }
         ast::TypeSpecifierNonArrayData::Int => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Int }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Int }
         }
         ast::TypeSpecifierNonArrayData::UInt => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UInt }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UInt }
         }
         ast::TypeSpecifierNonArrayData::Float => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Float }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Float }
         }
         ast::TypeSpecifierNonArrayData::Double => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Double }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Double }
         }
         ast::TypeSpecifierNonArrayData::Vec2 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Vec2 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Vec2 }
         }
         ast::TypeSpecifierNonArrayData::Vec3 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Vec3 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Vec3 }
         }
         ast::TypeSpecifierNonArrayData::Vec4 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Vec4 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Vec4 }
         }
         ast::TypeSpecifierNonArrayData::DVec2 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DVec2 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DVec2 }
         }
         ast::TypeSpecifierNonArrayData::DVec3 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DVec3 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DVec3 }
         }
         ast::TypeSpecifierNonArrayData::DVec4 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DVec4 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DVec4 }
         }
         ast::TypeSpecifierNonArrayData::BVec2 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::BVec2 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::BVec2 }
         }
         ast::TypeSpecifierNonArrayData::BVec3 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::BVec3 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::BVec3 }
         }
         ast::TypeSpecifierNonArrayData::BVec4 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::BVec4 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::BVec4 }
         }
         ast::TypeSpecifierNonArrayData::IVec2 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IVec2 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IVec2 }
         }
         ast::TypeSpecifierNonArrayData::IVec3 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IVec3 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IVec3 }
         }
         ast::TypeSpecifierNonArrayData::IVec4 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IVec4 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IVec4 }
         }
         ast::TypeSpecifierNonArrayData::UVec2 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UVec2 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UVec2 }
         }
         ast::TypeSpecifierNonArrayData::UVec3 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UVec3 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UVec3 }
         }
         ast::TypeSpecifierNonArrayData::UVec4 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UVec4 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UVec4 }
         }
         ast::TypeSpecifierNonArrayData::Mat2 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat2 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat2 }
         }
         ast::TypeSpecifierNonArrayData::Mat3 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat3 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat3 }
         }
         ast::TypeSpecifierNonArrayData::Mat4 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat4 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat4 }
         }
         ast::TypeSpecifierNonArrayData::Mat22 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat22 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat22 }
         }
         ast::TypeSpecifierNonArrayData::Mat23 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat23 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat23 }
         }
         ast::TypeSpecifierNonArrayData::Mat24 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat24 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat24 }
         }
         ast::TypeSpecifierNonArrayData::Mat32 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat32 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat32 }
         }
         ast::TypeSpecifierNonArrayData::Mat33 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat33 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat33 }
         }
         ast::TypeSpecifierNonArrayData::Mat34 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat34 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat34 }
         }
         ast::TypeSpecifierNonArrayData::Mat42 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat42 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat42 }
         }
         ast::TypeSpecifierNonArrayData::Mat43 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat43 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat43 }
         }
         ast::TypeSpecifierNonArrayData::Mat44 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Mat44 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Mat44 }
         }
         ast::TypeSpecifierNonArrayData::DMat2 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat2 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat2 }
         }
         ast::TypeSpecifierNonArrayData::DMat3 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat3 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat3 }
         }
         ast::TypeSpecifierNonArrayData::DMat4 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat4 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat4 }
         }
         ast::TypeSpecifierNonArrayData::DMat22 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat22 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat22 }
         }
         ast::TypeSpecifierNonArrayData::DMat23 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat23 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat23 }
         }
         ast::TypeSpecifierNonArrayData::DMat24 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat24 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat24 }
         }
         ast::TypeSpecifierNonArrayData::DMat32 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat32 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat32 }
         }
         ast::TypeSpecifierNonArrayData::DMat33 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat33 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat33 }
         }
         ast::TypeSpecifierNonArrayData::DMat34 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat34 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat34 }
         }
         ast::TypeSpecifierNonArrayData::DMat42 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat42 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat42 }
         }
         ast::TypeSpecifierNonArrayData::DMat43 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat43 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat43 }
         }
         ast::TypeSpecifierNonArrayData::DMat44 => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::DMat44 }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::DMat44 }
         }
         ast::TypeSpecifierNonArrayData::Sampler1D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler1D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler1D }
         }
         ast::TypeSpecifierNonArrayData::Image1D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Image1D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Image1D }
         }
         ast::TypeSpecifierNonArrayData::Sampler2D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler2D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler2D }
         }
         ast::TypeSpecifierNonArrayData::Image2D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Image2D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Image2D }
         }
         ast::TypeSpecifierNonArrayData::Sampler3D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler3D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler3D }
         }
         ast::TypeSpecifierNonArrayData::Image3D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Image3D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Image3D }
         }
         ast::TypeSpecifierNonArrayData::SamplerCube => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::SamplerCube }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::SamplerCube }
         }
         ast::TypeSpecifierNonArrayData::ImageCube => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ImageCube }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ImageCube }
         }
         ast::TypeSpecifierNonArrayData::Sampler2DRect => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DRect }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DRect }
         }
         ast::TypeSpecifierNonArrayData::Image2DRect => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Image2DRect }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Image2DRect }
         }
         ast::TypeSpecifierNonArrayData::Sampler1DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler1DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler1DArray }
         }
         ast::TypeSpecifierNonArrayData::Image1DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Image1DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Image1DArray }
         }
         ast::TypeSpecifierNonArrayData::Sampler2DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DArray }
         }
         ast::TypeSpecifierNonArrayData::Image2DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Image2DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Image2DArray }
         }
         ast::TypeSpecifierNonArrayData::SamplerBuffer => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::SamplerBuffer }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::SamplerBuffer }
         }
         ast::TypeSpecifierNonArrayData::ImageBuffer => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ImageBuffer }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ImageBuffer }
         }
         ast::TypeSpecifierNonArrayData::Sampler2DMs => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DMs }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DMs }
         }
         ast::TypeSpecifierNonArrayData::Image2DMs => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Image2DMs }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Image2DMs }
         }
         ast::TypeSpecifierNonArrayData::Sampler2DMsArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DMsArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DMsArray }
         }
         ast::TypeSpecifierNonArrayData::Image2DMsArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Image2DMsArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Image2DMsArray }
         }
         ast::TypeSpecifierNonArrayData::SamplerCubeArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::SamplerCubeArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::SamplerCubeArray }
         }
         ast::TypeSpecifierNonArrayData::ImageCubeArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ImageCubeArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ImageCubeArray }
         }
         ast::TypeSpecifierNonArrayData::Sampler1DShadow => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler1DShadow }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler1DShadow }
         }
         ast::TypeSpecifierNonArrayData::Sampler2DShadow => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DShadow }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DShadow }
         }
         ast::TypeSpecifierNonArrayData::Sampler2DRectShadow => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DRectShadow }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DRectShadow }
         }
         ast::TypeSpecifierNonArrayData::Sampler1DArrayShadow => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler1DArrayShadow }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler1DArrayShadow }
         }
         ast::TypeSpecifierNonArrayData::Sampler2DArrayShadow => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DArrayShadow }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler2DArrayShadow }
         }
         ast::TypeSpecifierNonArrayData::SamplerCubeShadow => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::SamplerCubeShadow }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::SamplerCubeShadow }
         }
         ast::TypeSpecifierNonArrayData::SamplerCubeArrayShadow => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::SamplerCubeArrayShadow }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::SamplerCubeArrayShadow }
         }
         ast::TypeSpecifierNonArrayData::ISampler1D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISampler1D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISampler1D }
         }
         ast::TypeSpecifierNonArrayData::IImage1D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IImage1D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IImage1D }
         }
         ast::TypeSpecifierNonArrayData::ISampler2D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISampler2D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISampler2D }
         }
         ast::TypeSpecifierNonArrayData::IImage2D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IImage2D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IImage2D }
         }
         ast::TypeSpecifierNonArrayData::ISampler3D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISampler3D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISampler3D }
         }
         ast::TypeSpecifierNonArrayData::IImage3D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IImage3D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IImage3D }
         }
         ast::TypeSpecifierNonArrayData::ISamplerCube => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISamplerCube }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISamplerCube }
         }
         ast::TypeSpecifierNonArrayData::IImageCube => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IImageCube }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IImageCube }
         }
         ast::TypeSpecifierNonArrayData::ISampler2DRect => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISampler2DRect }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISampler2DRect }
         }
         ast::TypeSpecifierNonArrayData::IImage2DRect => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IImage2DRect }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IImage2DRect }
         }
         ast::TypeSpecifierNonArrayData::ISampler1DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISampler1DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISampler1DArray }
         }
         ast::TypeSpecifierNonArrayData::IImage1DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IImage1DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IImage1DArray }
         }
         ast::TypeSpecifierNonArrayData::ISampler2DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISampler2DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISampler2DArray }
         }
         ast::TypeSpecifierNonArrayData::IImage2DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IImage2DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IImage2DArray }
         }
         ast::TypeSpecifierNonArrayData::ISamplerBuffer => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISamplerBuffer }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISamplerBuffer }
         }
         ast::TypeSpecifierNonArrayData::IImageBuffer => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IImageBuffer }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IImageBuffer }
         }
         ast::TypeSpecifierNonArrayData::ISampler2DMs => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISampler2DMs }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISampler2DMs }
         }
         ast::TypeSpecifierNonArrayData::IImage2DMs => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IImage2DMs }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IImage2DMs }
         }
         ast::TypeSpecifierNonArrayData::ISampler2DMsArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISampler2DMsArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISampler2DMsArray }
         }
         ast::TypeSpecifierNonArrayData::IImage2DMsArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IImage2DMsArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IImage2DMsArray }
         }
         ast::TypeSpecifierNonArrayData::ISamplerCubeArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISamplerCubeArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISamplerCubeArray }
         }
         ast::TypeSpecifierNonArrayData::IImageCubeArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::IImageCubeArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::IImageCubeArray }
         }
         ast::TypeSpecifierNonArrayData::AtomicUInt => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::AtomicUInt }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::AtomicUInt }
         }
         ast::TypeSpecifierNonArrayData::USampler1D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USampler1D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USampler1D }
         }
         ast::TypeSpecifierNonArrayData::UImage1D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UImage1D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UImage1D }
         }
         ast::TypeSpecifierNonArrayData::USampler2D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USampler2D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USampler2D }
         }
         ast::TypeSpecifierNonArrayData::UImage2D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UImage2D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UImage2D }
         }
         ast::TypeSpecifierNonArrayData::USampler3D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USampler3D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USampler3D }
         }
         ast::TypeSpecifierNonArrayData::UImage3D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UImage3D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UImage3D }
         }
         ast::TypeSpecifierNonArrayData::USamplerCube => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USamplerCube }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USamplerCube }
         }
         ast::TypeSpecifierNonArrayData::UImageCube => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UImageCube }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UImageCube }
         }
         ast::TypeSpecifierNonArrayData::USampler2DRect => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USampler2DRect }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USampler2DRect }
         }
         ast::TypeSpecifierNonArrayData::UImage2DRect => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UImage2DRect }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UImage2DRect }
         }
         ast::TypeSpecifierNonArrayData::USampler1DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USampler1DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USampler1DArray }
         }
         ast::TypeSpecifierNonArrayData::UImage1DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UImage1DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UImage1DArray }
         }
         ast::TypeSpecifierNonArrayData::USampler2DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USampler2DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USampler2DArray }
         }
         ast::TypeSpecifierNonArrayData::UImage2DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UImage2DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UImage2DArray }
         }
         ast::TypeSpecifierNonArrayData::USamplerBuffer => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USamplerBuffer }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USamplerBuffer }
         }
         ast::TypeSpecifierNonArrayData::UImageBuffer => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UImageBuffer }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UImageBuffer }
         }
         ast::TypeSpecifierNonArrayData::USampler2DMs => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USampler2DMs }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USampler2DMs }
         }
         ast::TypeSpecifierNonArrayData::UImage2DMs => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UImage2DMs }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UImage2DMs }
         }
         ast::TypeSpecifierNonArrayData::USampler2DMsArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USampler2DMsArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USampler2DMsArray }
         }
         ast::TypeSpecifierNonArrayData::UImage2DMsArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UImage2DMsArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UImage2DMsArray }
         }
         ast::TypeSpecifierNonArrayData::USamplerCubeArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USamplerCubeArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USamplerCubeArray }
         }
         ast::TypeSpecifierNonArrayData::UImageCubeArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::UImageCubeArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::UImageCubeArray }
         }
 
         // GL_KHR_vulkan_glsl types
         ast::TypeSpecifierNonArrayData::Texture1D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Texture1D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Texture1D }
         }
         ast::TypeSpecifierNonArrayData::Texture2D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Texture2D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Texture2D }
         }
         ast::TypeSpecifierNonArrayData::Texture3D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Texture3D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Texture3D }
         }
         ast::TypeSpecifierNonArrayData::TextureCube => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::TextureCube }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::TextureCube }
         }
         ast::TypeSpecifierNonArrayData::Texture2DRect => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Texture2DRect }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Texture2DRect }
         }
         ast::TypeSpecifierNonArrayData::Texture1DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Texture1DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Texture1DArray }
         }
         ast::TypeSpecifierNonArrayData::Texture2DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Texture2DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Texture2DArray }
         }
         ast::TypeSpecifierNonArrayData::TextureBuffer => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::TextureBuffer }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::TextureBuffer }
         }
         ast::TypeSpecifierNonArrayData::Texture2DMs => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Texture2DMs }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Texture2DMs }
         }
         ast::TypeSpecifierNonArrayData::Texture2DMsArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Texture2DMsArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Texture2DMsArray }
         }
         ast::TypeSpecifierNonArrayData::TextureCubeArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::TextureCubeArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::TextureCubeArray }
         }
         ast::TypeSpecifierNonArrayData::ITexture1D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ITexture1D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ITexture1D }
         }
         ast::TypeSpecifierNonArrayData::ITexture2D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ITexture2D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ITexture2D }
         }
         ast::TypeSpecifierNonArrayData::ITexture3D => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ITexture3D }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ITexture3D }
         }
         ast::TypeSpecifierNonArrayData::ITextureCube => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ITextureCube }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ITextureCube }
         }
         ast::TypeSpecifierNonArrayData::ITexture2DRect => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ITexture2DRect }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ITexture2DRect }
         }
         ast::TypeSpecifierNonArrayData::ITexture1DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ITexture1DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ITexture1DArray }
         }
         ast::TypeSpecifierNonArrayData::ITexture2DArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ITexture2DArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ITexture2DArray }
         }
         ast::TypeSpecifierNonArrayData::ITextureBuffer => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ITextureBuffer }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ITextureBuffer }
         }
         ast::TypeSpecifierNonArrayData::ITexture2DMs => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ITexture2DMs }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ITexture2DMs }
         }
         ast::TypeSpecifierNonArrayData::ITexture2DMsArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ITexture2DMsArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ITexture2DMsArray }
         }
         ast::TypeSpecifierNonArrayData::ITextureCubeArray => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ITextureCubeArray }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ITextureCubeArray }
         }
         ast::TypeSpecifierNonArrayData::Sampler => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Sampler }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Sampler }
         }
         ast::TypeSpecifierNonArrayData::SamplerShadow => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::SamplerShadow }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::SamplerShadow }
         }
         ast::TypeSpecifierNonArrayData::SubpassInput => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::SubpassInput }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::SubpassInput }
         }
         ast::TypeSpecifierNonArrayData::ISubpassInput => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISubpassInput }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISubpassInput }
         }
         ast::TypeSpecifierNonArrayData::USubpassInput => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USubpassInput }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USubpassInput }
         }
         ast::TypeSpecifierNonArrayData::SubpassInputMs => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::SubpassInputMs }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::SubpassInputMs }
         }
         ast::TypeSpecifierNonArrayData::ISubpassInputMs => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::ISubpassInputMs }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::ISubpassInputMs }
         }
         ast::TypeSpecifierNonArrayData::USubpassInputMs => {
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::USubpassInputMs }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::USubpassInputMs }
         }
 
         // end GL_KHR_vulkan_glsl types
         ast::TypeSpecifierNonArrayData::Struct(ref s) => {
             let s = tokenize_struct_non_declaration(s);
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::Struct(#s) }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::Struct(#s) }
         }
 
         ast::TypeSpecifierNonArrayData::TypeName(ref tn) => {
             let tn = tokenize_type_name(tn);
-            quote! { glsl_lang::ast::TypeSpecifierNonArrayData::TypeName(#tn) }
+            quote! { hlsl_lang::ast::TypeSpecifierNonArrayData::TypeName(#tn) }
         }
     };
 
-    quote! { glsl_lang::ast::TypeSpecifierNonArray::new(#t, #span) }
+    quote! { hlsl_lang::ast::TypeSpecifierNonArray::new(#t, #span) }
 }
 
 fn tokenize_type_specifier(t: &ast::TypeSpecifier) -> TokenStream {
@@ -629,7 +629,7 @@ fn tokenize_type_specifier(t: &ast::TypeSpecifier) -> TokenStream {
         let array_specifier = t.array_specifier.as_ref().map(tokenize_array_spec).quote();
 
         quote! {
-          glsl_lang::ast::TypeSpecifierData {
+          hlsl_lang::ast::TypeSpecifierData {
             ty: #ty,
             array_specifier: #array_specifier
           }
@@ -637,7 +637,7 @@ fn tokenize_type_specifier(t: &ast::TypeSpecifier) -> TokenStream {
     };
 
     quote! {
-        glsl_lang::ast::TypeSpecifier::new(#data, #span)
+        hlsl_lang::ast::TypeSpecifier::new(#data, #span)
     }
 }
 
@@ -648,14 +648,14 @@ fn tokenize_fully_specified_type(t: &ast::FullySpecifiedType) -> TokenStream {
         let ty = tokenize_type_specifier(&t.ty);
 
         quote! {
-          glsl_lang::ast::FullySpecifiedTypeData {
+          hlsl_lang::ast::FullySpecifiedTypeData {
             qualifier: #qual,
             ty: #ty
           }
         }
     };
 
-    quote! { glsl_lang::ast::FullySpecifiedType::new(#t, #span) }
+    quote! { hlsl_lang::ast::FullySpecifiedType::new(#t, #span) }
 }
 
 fn tokenize_struct_non_declaration(s: &ast::StructSpecifier) -> TokenStream {
@@ -665,14 +665,14 @@ fn tokenize_struct_non_declaration(s: &ast::StructSpecifier) -> TokenStream {
         let fields = s.fields.iter().map(tokenize_struct_field);
 
         quote! {
-          glsl_lang::ast::StructSpecifierData {
+          hlsl_lang::ast::StructSpecifierData {
             name: Some(#name),
             fields: vec![#(#fields),*]
           }
         }
     };
 
-    quote! { glsl_lang::ast::StructSpecifier::new(#s, #span) }
+    quote! { hlsl_lang::ast::StructSpecifier::new(#s, #span) }
 }
 
 fn tokenize_struct_field(field: &ast::StructFieldSpecifier) -> TokenStream {
@@ -687,7 +687,7 @@ fn tokenize_struct_field(field: &ast::StructFieldSpecifier) -> TokenStream {
         let identifiers = field.identifiers.iter().map(tokenize_arrayed_identifier);
 
         quote! {
-          glsl_lang::ast::StructFieldSpecifierData {
+          hlsl_lang::ast::StructFieldSpecifierData {
             qualifier: #qual,
             ty: #ty,
             identifiers: vec![#(#identifiers),*]
@@ -695,7 +695,7 @@ fn tokenize_struct_field(field: &ast::StructFieldSpecifier) -> TokenStream {
         }
     };
 
-    quote! { glsl_lang::ast::StructFieldSpecifier::new(#field, #span) }
+    quote! { hlsl_lang::ast::StructFieldSpecifier::new(#field, #span) }
 }
 
 fn tokenize_array_spec(a: &ast::ArraySpecifier) -> TokenStream {
@@ -704,26 +704,26 @@ fn tokenize_array_spec(a: &ast::ArraySpecifier) -> TokenStream {
         let dimensions = a.dimensions.iter().map(tokenize_array_spec_dim);
 
         quote! {
-          glsl_lang::ast::ArraySpecifierData { dimensions: vec![#(#dimensions),*] }
+          hlsl_lang::ast::ArraySpecifierData { dimensions: vec![#(#dimensions),*] }
         }
     };
 
-    quote! { glsl_lang::ast::ArraySpecifier::new(#a, #span) }
+    quote! { hlsl_lang::ast::ArraySpecifier::new(#a, #span) }
 }
 
 fn tokenize_array_spec_dim(a: &ast::ArraySpecifierDimension) -> TokenStream {
     let span = tokenize_span(&a.span);
     let a = match a.content {
         ast::ArraySpecifierDimensionData::Unsized => {
-            quote! { glsl_lang::ast::ArraySpecifierDimensionData::Unsized }
+            quote! { hlsl_lang::ast::ArraySpecifierDimensionData::Unsized }
         }
         ast::ArraySpecifierDimensionData::ExplicitlySized(ref e) => {
             let expr = (&tokenize_expr(e)).quote();
-            quote! { glsl_lang::ast::ArraySpecifierDimensionData::ExplicitlySized(#expr) }
+            quote! { hlsl_lang::ast::ArraySpecifierDimensionData::ExplicitlySized(#expr) }
         }
     };
 
-    quote! { glsl_lang::ast::ArraySpecifierDimension::new(#a, #span) }
+    quote! { hlsl_lang::ast::ArraySpecifierDimension::new(#a, #span) }
 }
 
 fn tokenize_arrayed_identifier(identifier: &ast::ArrayedIdentifier) -> TokenStream {
@@ -737,11 +737,11 @@ fn tokenize_arrayed_identifier(identifier: &ast::ArrayedIdentifier) -> TokenStre
             .quote();
 
         quote! {
-          glsl_lang::ast::ArrayedIdentifierData::new(#ident, #array_spec)
+          hlsl_lang::ast::ArrayedIdentifierData::new(#ident, #array_spec)
         }
     };
 
-    quote! { glsl_lang::ast::ArrayedIdentifier::new(#identifier, #span) }
+    quote! { hlsl_lang::ast::ArrayedIdentifier::new(#identifier, #span) }
 }
 
 fn tokenize_type_qualifier(q: &ast::TypeQualifier) -> TokenStream {
@@ -750,13 +750,13 @@ fn tokenize_type_qualifier(q: &ast::TypeQualifier) -> TokenStream {
         let quals = q.qualifiers.iter().map(tokenize_type_qualifier_spec);
 
         quote! {
-          glsl_lang::ast::TypeQualifierData {
+          hlsl_lang::ast::TypeQualifierData {
             qualifiers: vec![#(#quals),*]
           }
         }
     };
 
-    quote! { glsl_lang::ast::TypeQualifier::new(#q, #span) }
+    quote! { hlsl_lang::ast::TypeQualifier::new(#q, #span) }
 }
 
 fn tokenize_type_qualifier_spec(q: &ast::TypeQualifierSpec) -> TokenStream {
@@ -764,97 +764,97 @@ fn tokenize_type_qualifier_spec(q: &ast::TypeQualifierSpec) -> TokenStream {
     let q = match **q {
         ast::TypeQualifierSpecData::Storage(ref s) => {
             let s = tokenize_storage_qualifier(s);
-            quote! { glsl_lang::ast::TypeQualifierSpecData::Storage(#s) }
+            quote! { hlsl_lang::ast::TypeQualifierSpecData::Storage(#s) }
         }
 
         ast::TypeQualifierSpecData::Layout(ref l) => {
             let l = tokenize_layout_qualifier(l);
-            quote! { glsl_lang::ast::TypeQualifierSpecData::Layout(#l) }
+            quote! { hlsl_lang::ast::TypeQualifierSpecData::Layout(#l) }
         }
 
         ast::TypeQualifierSpecData::Precision(ref p) => {
             let p = tokenize_precision_qualifier(p);
-            quote! { glsl_lang::ast::TypeQualifierSpecData::Precision(#p) }
+            quote! { hlsl_lang::ast::TypeQualifierSpecData::Precision(#p) }
         }
 
         ast::TypeQualifierSpecData::Interpolation(ref i) => {
             let i = tokenize_interpolation_qualifier(i);
-            quote! { glsl_lang::ast::TypeQualifierSpecData::Interpolation(#i) }
+            quote! { hlsl_lang::ast::TypeQualifierSpecData::Interpolation(#i) }
         }
 
         ast::TypeQualifierSpecData::Invariant => {
-            quote! { glsl_lang::ast::TypeQualifierSpecData::Invariant }
+            quote! { hlsl_lang::ast::TypeQualifierSpecData::Invariant }
         }
 
         ast::TypeQualifierSpecData::Precise => {
-            quote! { glsl_lang::ast::TypeQualifierSpecData::Precise }
+            quote! { hlsl_lang::ast::TypeQualifierSpecData::Precise }
         }
     };
 
-    quote! { glsl_lang::ast::TypeQualifierSpec::new(#q, #span) }
+    quote! { hlsl_lang::ast::TypeQualifierSpec::new(#q, #span) }
 }
 
 fn tokenize_storage_qualifier(q: &ast::StorageQualifier) -> TokenStream {
     let span = tokenize_span(&q.span);
     let q = match **q {
         ast::StorageQualifierData::Const => {
-            quote! { glsl_lang::ast::StorageQualifierData::Const }
+            quote! { hlsl_lang::ast::StorageQualifierData::Const }
         }
         ast::StorageQualifierData::InOut => {
-            quote! { glsl_lang::ast::StorageQualifierData::InOut }
+            quote! { hlsl_lang::ast::StorageQualifierData::InOut }
         }
-        ast::StorageQualifierData::In => quote! { glsl_lang::ast::StorageQualifierData::In },
-        ast::StorageQualifierData::Out => quote! { glsl_lang::ast::StorageQualifierData::Out },
+        ast::StorageQualifierData::In => quote! { hlsl_lang::ast::StorageQualifierData::In },
+        ast::StorageQualifierData::Out => quote! { hlsl_lang::ast::StorageQualifierData::Out },
         ast::StorageQualifierData::Centroid => {
-            quote! { glsl_lang::ast::StorageQualifierData::Centroid }
+            quote! { hlsl_lang::ast::StorageQualifierData::Centroid }
         }
         ast::StorageQualifierData::Patch => {
-            quote! { glsl_lang::ast::StorageQualifierData::Patch }
+            quote! { hlsl_lang::ast::StorageQualifierData::Patch }
         }
         ast::StorageQualifierData::Sample => {
-            quote! { glsl_lang::ast::StorageQualifierData::Sample }
+            quote! { hlsl_lang::ast::StorageQualifierData::Sample }
         }
         ast::StorageQualifierData::Uniform => {
-            quote! { glsl_lang::ast::StorageQualifierData::Uniform }
+            quote! { hlsl_lang::ast::StorageQualifierData::Uniform }
         }
         ast::StorageQualifierData::Buffer => {
-            quote! { glsl_lang::ast::StorageQualifierData::Buffer }
+            quote! { hlsl_lang::ast::StorageQualifierData::Buffer }
         }
         ast::StorageQualifierData::Shared => {
-            quote! { glsl_lang::ast::StorageQualifierData::Shared }
+            quote! { hlsl_lang::ast::StorageQualifierData::Shared }
         }
         ast::StorageQualifierData::Coherent => {
-            quote! { glsl_lang::ast::StorageQualifierData::Coherent }
+            quote! { hlsl_lang::ast::StorageQualifierData::Coherent }
         }
         ast::StorageQualifierData::Volatile => {
-            quote! { glsl_lang::ast::StorageQualifierData::Volatile }
+            quote! { hlsl_lang::ast::StorageQualifierData::Volatile }
         }
         ast::StorageQualifierData::Restrict => {
-            quote! { glsl_lang::ast::StorageQualifierData::Restrict }
+            quote! { hlsl_lang::ast::StorageQualifierData::Restrict }
         }
         ast::StorageQualifierData::ReadOnly => {
-            quote! { glsl_lang::ast::StorageQualifierData::ReadOnly }
+            quote! { hlsl_lang::ast::StorageQualifierData::ReadOnly }
         }
         ast::StorageQualifierData::WriteOnly => {
-            quote! { glsl_lang::ast::StorageQualifierData::WriteOnly }
+            quote! { hlsl_lang::ast::StorageQualifierData::WriteOnly }
         }
         ast::StorageQualifierData::Attribute => {
-            quote! { glsl_lang::ast::StorageQualifierData::Attribute }
+            quote! { hlsl_lang::ast::StorageQualifierData::Attribute }
         }
         ast::StorageQualifierData::Varying => {
-            quote! { glsl_lang::ast::StorageQualifierData::Varying }
+            quote! { hlsl_lang::ast::StorageQualifierData::Varying }
         }
 
         ast::StorageQualifierData::Subroutine(ref n) => {
             let n = n.iter().map(tokenize_type_specifier);
 
             quote! {
-                glsl_lang::ast::StorageQualifierData::Subroutine(vec![#(#n),*])
+                hlsl_lang::ast::StorageQualifierData::Subroutine(vec![#(#n),*])
             }
         }
     };
 
-    quote! { glsl_lang::ast::StorageQualifier::new(#q, #span) }
+    quote! { hlsl_lang::ast::StorageQualifier::new(#q, #span) }
 }
 
 fn tokenize_layout_qualifier(l: &ast::LayoutQualifier) -> TokenStream {
@@ -863,13 +863,13 @@ fn tokenize_layout_qualifier(l: &ast::LayoutQualifier) -> TokenStream {
         let ids = l.ids.iter().map(tokenize_layout_qualifier_spec);
 
         quote! {
-          glsl_lang::ast::LayoutQualifierData {
+          hlsl_lang::ast::LayoutQualifierData {
             ids: vec![#(#ids),*]
           }
         }
     };
 
-    quote! { glsl_lang::ast::LayoutQualifier::new(#l, #span) }
+    quote! { hlsl_lang::ast::LayoutQualifier::new(#l, #span) }
 }
 
 fn tokenize_layout_qualifier_spec(l: &ast::LayoutQualifierSpec) -> TokenStream {
@@ -878,47 +878,47 @@ fn tokenize_layout_qualifier_spec(l: &ast::LayoutQualifierSpec) -> TokenStream {
         ast::LayoutQualifierSpecData::Identifier(ref i, ref e) => {
             let i = tokenize_identifier(i);
             let expr = e.as_ref().map(|e| (&tokenize_expr(e)).quote()).quote();
-            quote! { glsl_lang::ast::LayoutQualifierSpecData::Identifier(#i, #expr) }
+            quote! { hlsl_lang::ast::LayoutQualifierSpecData::Identifier(#i, #expr) }
         }
 
         ast::LayoutQualifierSpecData::Shared => {
-            quote! { glsl_lang::ast::LayoutQualifierSpecData::Shared }
+            quote! { hlsl_lang::ast::LayoutQualifierSpecData::Shared }
         }
     };
 
-    quote! { glsl_lang::ast::LayoutQualifierSpec::new(#l, #span) }
+    quote! { hlsl_lang::ast::LayoutQualifierSpec::new(#l, #span) }
 }
 
 fn tokenize_precision_qualifier(p: &ast::PrecisionQualifier) -> TokenStream {
     let span = tokenize_span(&p.span);
     let p = match p.content {
         ast::PrecisionQualifierData::High => {
-            quote! { glsl_lang::ast::PrecisionQualifierData::High }
+            quote! { hlsl_lang::ast::PrecisionQualifierData::High }
         }
         ast::PrecisionQualifierData::Medium => {
-            quote! { glsl_lang::ast::PrecisionQualifierData::Medium }
+            quote! { hlsl_lang::ast::PrecisionQualifierData::Medium }
         }
-        ast::PrecisionQualifierData::Low => quote! { glsl_lang::ast::PrecisionQualifierData::Low },
+        ast::PrecisionQualifierData::Low => quote! { hlsl_lang::ast::PrecisionQualifierData::Low },
     };
 
-    quote! { glsl_lang::ast::PrecisionQualifier::new(#p, #span) }
+    quote! { hlsl_lang::ast::PrecisionQualifier::new(#p, #span) }
 }
 
 fn tokenize_interpolation_qualifier(i: &ast::InterpolationQualifier) -> TokenStream {
     let span = tokenize_span(&i.span);
     let i = match i.content {
         ast::InterpolationQualifierData::Smooth => {
-            quote! { glsl_lang::ast::InterpolationQualifierData::Smooth }
+            quote! { hlsl_lang::ast::InterpolationQualifierData::Smooth }
         }
         ast::InterpolationQualifierData::Flat => {
-            quote! { glsl_lang::ast::InterpolationQualifierData::Flat }
+            quote! { hlsl_lang::ast::InterpolationQualifierData::Flat }
         }
         ast::InterpolationQualifierData::NoPerspective => {
-            quote! { glsl_lang::ast::InterpolationQualifierData::NoPerspective }
+            quote! { hlsl_lang::ast::InterpolationQualifierData::NoPerspective }
         }
     };
 
-    quote! { glsl_lang::ast::InterpolationQualifier::new(#i, #span) }
+    quote! { hlsl_lang::ast::InterpolationQualifier::new(#i, #span) }
 }
 
 fn tokenize_expr(expr: &ast::Expr) -> TokenStream {
@@ -930,143 +930,143 @@ fn tokenize_expr(expr: &ast::Expr) -> TokenStream {
     let expr = match expr.content {
         ast::ExprData::Variable(ref i) => {
             let i = tokenize_identifier(i);
-            quote! { glsl_lang::ast::ExprData::Variable(#i) }
+            quote! { hlsl_lang::ast::ExprData::Variable(#i) }
         }
 
-        ast::ExprData::IntConst(ref x) => quote! { glsl_lang::ast::ExprData::IntConst(#x) },
+        ast::ExprData::IntConst(ref x) => quote! { hlsl_lang::ast::ExprData::IntConst(#x) },
 
-        ast::ExprData::UIntConst(ref x) => quote! { glsl_lang::ast::ExprData::UIntConst(#x) },
+        ast::ExprData::UIntConst(ref x) => quote! { hlsl_lang::ast::ExprData::UIntConst(#x) },
 
-        ast::ExprData::BoolConst(ref x) => quote! { glsl_lang::ast::ExprData::BoolConst(#x) },
+        ast::ExprData::BoolConst(ref x) => quote! { hlsl_lang::ast::ExprData::BoolConst(#x) },
 
-        ast::ExprData::FloatConst(ref x) => quote! { glsl_lang::ast::ExprData::FloatConst(#x) },
+        ast::ExprData::FloatConst(ref x) => quote! { hlsl_lang::ast::ExprData::FloatConst(#x) },
 
-        ast::ExprData::DoubleConst(ref x) => quote! { glsl_lang::ast::ExprData::DoubleConst(#x) },
+        ast::ExprData::DoubleConst(ref x) => quote! { hlsl_lang::ast::ExprData::DoubleConst(#x) },
 
         ast::ExprData::Unary(ref op, ref e) => {
             let op = tokenize_unary_op(op);
             let e = (&tokenize_expr(e)).quote();
-            quote! { glsl_lang::ast::ExprData::Unary(#op, #e) }
+            quote! { hlsl_lang::ast::ExprData::Unary(#op, #e) }
         }
 
         ast::ExprData::Binary(ref op, ref l, ref r) => {
             let op = tokenize_binary_op(op);
             let l = (&tokenize_expr(l)).quote();
             let r = (&tokenize_expr(r)).quote();
-            quote! { glsl_lang::ast::ExprData::Binary(#op, #l, #r) }
+            quote! { hlsl_lang::ast::ExprData::Binary(#op, #l, #r) }
         }
 
         ast::ExprData::Ternary(ref c, ref s, ref e) => {
             let c = (&tokenize_expr(c)).quote();
             let s = (&tokenize_expr(s)).quote();
             let e = (&tokenize_expr(e)).quote();
-            quote! { glsl_lang::ast::ExprData::Ternary(#c, #s, #e) }
+            quote! { hlsl_lang::ast::ExprData::Ternary(#c, #s, #e) }
         }
 
         ast::ExprData::Assignment(ref v, ref op, ref e) => {
             let v = (&tokenize_expr(v)).quote();
             let op = tokenize_assignment_op(op);
             let e = (&tokenize_expr(e)).quote();
-            quote! { glsl_lang::ast::ExprData::Assignment(#v, #op, #e) }
+            quote! { hlsl_lang::ast::ExprData::Assignment(#v, #op, #e) }
         }
 
         ast::ExprData::Bracket(ref e, ref a) => {
             let e = (&tokenize_expr(e)).quote();
             let a = tokenize_expr(a);
-            quote! { glsl_lang::ast::ExprData::Bracket(#e, #a) }
+            quote! { hlsl_lang::ast::ExprData::Bracket(#e, #a) }
         }
 
         ast::ExprData::FunCall(ref fun, ref args) => {
             let fun = tokenize_function_identifier(fun);
             let args = args.iter().map(tokenize_expr);
-            quote! { glsl_lang::ast::ExprData::FunCall(#fun, vec![#(#args),*]) }
+            quote! { hlsl_lang::ast::ExprData::FunCall(#fun, vec![#(#args),*]) }
         }
 
         ast::ExprData::Dot(ref e, ref i) => {
             let e = (&tokenize_expr(e)).quote();
             let i = tokenize_identifier(i);
 
-            quote! { glsl_lang::ast::ExprData::Dot(#e, #i) }
+            quote! { hlsl_lang::ast::ExprData::Dot(#e, #i) }
         }
 
         ast::ExprData::PostInc(ref e) => {
             let e = (&tokenize_expr(e)).quote();
-            quote! { glsl_lang::ast::ExprData::PostInc(#e) }
+            quote! { hlsl_lang::ast::ExprData::PostInc(#e) }
         }
 
         ast::ExprData::PostDec(ref e) => {
             let e = (&tokenize_expr(e)).quote();
-            quote! { glsl_lang::ast::ExprData::PostDec(#e) }
+            quote! { hlsl_lang::ast::ExprData::PostDec(#e) }
         }
 
         ast::ExprData::Comma(ref a, ref b) => {
             let a = (&tokenize_expr(a)).quote();
             let b = (&tokenize_expr(b)).quote();
-            quote! { glsl_lang::ast::ExprData::Comma(#a, #b) }
+            quote! { hlsl_lang::ast::ExprData::Comma(#a, #b) }
         }
     };
 
-    quote! { glsl_lang::ast::Expr::new(#expr, #span) }
+    quote! { hlsl_lang::ast::Expr::new(#expr, #span) }
 }
 
 fn tokenize_unary_op(op: &ast::UnaryOp) -> TokenStream {
     let span = tokenize_span(&op.span);
     let op = match op.content {
-        ast::UnaryOpData::Inc => quote! { glsl_lang::ast::UnaryOpData::Inc },
-        ast::UnaryOpData::Dec => quote! { glsl_lang::ast::UnaryOpData::Dec },
-        ast::UnaryOpData::Add => quote! { glsl_lang::ast::UnaryOpData::Add },
-        ast::UnaryOpData::Minus => quote! { glsl_lang::ast::UnaryOpData::Minus },
-        ast::UnaryOpData::Not => quote! { glsl_lang::ast::UnaryOpData::Not },
-        ast::UnaryOpData::Complement => quote! { glsl_lang::ast::UnaryOpData::Complement },
+        ast::UnaryOpData::Inc => quote! { hlsl_lang::ast::UnaryOpData::Inc },
+        ast::UnaryOpData::Dec => quote! { hlsl_lang::ast::UnaryOpData::Dec },
+        ast::UnaryOpData::Add => quote! { hlsl_lang::ast::UnaryOpData::Add },
+        ast::UnaryOpData::Minus => quote! { hlsl_lang::ast::UnaryOpData::Minus },
+        ast::UnaryOpData::Not => quote! { hlsl_lang::ast::UnaryOpData::Not },
+        ast::UnaryOpData::Complement => quote! { hlsl_lang::ast::UnaryOpData::Complement },
     };
 
-    quote! { glsl_lang::ast::UnaryOp::new(#op, #span) }
+    quote! { hlsl_lang::ast::UnaryOp::new(#op, #span) }
 }
 
 fn tokenize_binary_op(op: &ast::BinaryOp) -> TokenStream {
     let span = tokenize_span(&op.span);
     let op = match op.content {
-        ast::BinaryOpData::Or => quote! { glsl_lang::ast::BinaryOpData::Or },
-        ast::BinaryOpData::Xor => quote! { glsl_lang::ast::BinaryOpData::Xor },
-        ast::BinaryOpData::And => quote! { glsl_lang::ast::BinaryOpData::And },
-        ast::BinaryOpData::BitOr => quote! { glsl_lang::ast::BinaryOpData::BitOr },
-        ast::BinaryOpData::BitXor => quote! { glsl_lang::ast::BinaryOpData::BitXor },
-        ast::BinaryOpData::BitAnd => quote! { glsl_lang::ast::BinaryOpData::BitAnd },
-        ast::BinaryOpData::Equal => quote! { glsl_lang::ast::BinaryOpData::Equal },
-        ast::BinaryOpData::NonEqual => quote! { glsl_lang::ast::BinaryOpData::NonEqual },
-        ast::BinaryOpData::Lt => quote! { glsl_lang::ast::BinaryOpData::Lt },
-        ast::BinaryOpData::Gt => quote! { glsl_lang::ast::BinaryOpData::Gt },
-        ast::BinaryOpData::Lte => quote! { glsl_lang::ast::BinaryOpData::Lte },
-        ast::BinaryOpData::Gte => quote! { glsl_lang::ast::BinaryOpData::Gte },
-        ast::BinaryOpData::LShift => quote! { glsl_lang::ast::BinaryOpData::LShift },
-        ast::BinaryOpData::RShift => quote! { glsl_lang::ast::BinaryOpData::RShift },
-        ast::BinaryOpData::Add => quote! { glsl_lang::ast::BinaryOpData::Add },
-        ast::BinaryOpData::Sub => quote! { glsl_lang::ast::BinaryOpData::Sub },
-        ast::BinaryOpData::Mult => quote! { glsl_lang::ast::BinaryOpData::Mult },
-        ast::BinaryOpData::Div => quote! { glsl_lang::ast::BinaryOpData::Div },
-        ast::BinaryOpData::Mod => quote! { glsl_lang::ast::BinaryOpData::Mod },
+        ast::BinaryOpData::Or => quote! { hlsl_lang::ast::BinaryOpData::Or },
+        ast::BinaryOpData::Xor => quote! { hlsl_lang::ast::BinaryOpData::Xor },
+        ast::BinaryOpData::And => quote! { hlsl_lang::ast::BinaryOpData::And },
+        ast::BinaryOpData::BitOr => quote! { hlsl_lang::ast::BinaryOpData::BitOr },
+        ast::BinaryOpData::BitXor => quote! { hlsl_lang::ast::BinaryOpData::BitXor },
+        ast::BinaryOpData::BitAnd => quote! { hlsl_lang::ast::BinaryOpData::BitAnd },
+        ast::BinaryOpData::Equal => quote! { hlsl_lang::ast::BinaryOpData::Equal },
+        ast::BinaryOpData::NonEqual => quote! { hlsl_lang::ast::BinaryOpData::NonEqual },
+        ast::BinaryOpData::Lt => quote! { hlsl_lang::ast::BinaryOpData::Lt },
+        ast::BinaryOpData::Gt => quote! { hlsl_lang::ast::BinaryOpData::Gt },
+        ast::BinaryOpData::Lte => quote! { hlsl_lang::ast::BinaryOpData::Lte },
+        ast::BinaryOpData::Gte => quote! { hlsl_lang::ast::BinaryOpData::Gte },
+        ast::BinaryOpData::LShift => quote! { hlsl_lang::ast::BinaryOpData::LShift },
+        ast::BinaryOpData::RShift => quote! { hlsl_lang::ast::BinaryOpData::RShift },
+        ast::BinaryOpData::Add => quote! { hlsl_lang::ast::BinaryOpData::Add },
+        ast::BinaryOpData::Sub => quote! { hlsl_lang::ast::BinaryOpData::Sub },
+        ast::BinaryOpData::Mult => quote! { hlsl_lang::ast::BinaryOpData::Mult },
+        ast::BinaryOpData::Div => quote! { hlsl_lang::ast::BinaryOpData::Div },
+        ast::BinaryOpData::Mod => quote! { hlsl_lang::ast::BinaryOpData::Mod },
     };
 
-    quote! { glsl_lang::ast::BinaryOp::new(#op, #span) }
+    quote! { hlsl_lang::ast::BinaryOp::new(#op, #span) }
 }
 
 fn tokenize_assignment_op(op: &ast::AssignmentOp) -> TokenStream {
     let span = tokenize_span(&op.span);
     let op = match op.content {
-        ast::AssignmentOpData::Equal => quote! { glsl_lang::ast::AssignmentOpData::Equal },
-        ast::AssignmentOpData::Mult => quote! { glsl_lang::ast::AssignmentOpData::Mult },
-        ast::AssignmentOpData::Div => quote! { glsl_lang::ast::AssignmentOpData::Div },
-        ast::AssignmentOpData::Mod => quote! { glsl_lang::ast::AssignmentOpData::Mod },
-        ast::AssignmentOpData::Add => quote! { glsl_lang::ast::AssignmentOpData::Add },
-        ast::AssignmentOpData::Sub => quote! { glsl_lang::ast::AssignmentOpData::Sub },
-        ast::AssignmentOpData::LShift => quote! { glsl_lang::ast::AssignmentOpData::LShift },
-        ast::AssignmentOpData::RShift => quote! { glsl_lang::ast::AssignmentOpData::RShift },
-        ast::AssignmentOpData::And => quote! { glsl_lang::ast::AssignmentOpData::And },
-        ast::AssignmentOpData::Xor => quote! { glsl_lang::ast::AssignmentOpData::Xor },
+        ast::AssignmentOpData::Equal => quote! { hlsl_lang::ast::AssignmentOpData::Equal },
+        ast::AssignmentOpData::Mult => quote! { hlsl_lang::ast::AssignmentOpData::Mult },
+        ast::AssignmentOpData::Div => quote! { hlsl_lang::ast::AssignmentOpData::Div },
+        ast::AssignmentOpData::Mod => quote! { hlsl_lang::ast::AssignmentOpData::Mod },
+        ast::AssignmentOpData::Add => quote! { hlsl_lang::ast::AssignmentOpData::Add },
+        ast::AssignmentOpData::Sub => quote! { hlsl_lang::ast::AssignmentOpData::Sub },
+        ast::AssignmentOpData::LShift => quote! { hlsl_lang::ast::AssignmentOpData::LShift },
+        ast::AssignmentOpData::RShift => quote! { hlsl_lang::ast::AssignmentOpData::RShift },
+        ast::AssignmentOpData::And => quote! { hlsl_lang::ast::AssignmentOpData::And },
+        ast::AssignmentOpData::Xor => quote! { hlsl_lang::ast::AssignmentOpData::Xor },
         ast::AssignmentOpData::Or => quote! { AssignmentOpData::Or },
     };
 
-    quote! { glsl_lang::ast::AssignmentOp::new(#op, #span) }
+    quote! { hlsl_lang::ast::AssignmentOp::new(#op, #span) }
 }
 
 fn tokenize_function_identifier(i: &ast::FunIdentifier) -> TokenStream {
@@ -1078,54 +1078,54 @@ fn tokenize_function_identifier(i: &ast::FunIdentifier) -> TokenStream {
     let i = match i.content {
         ast::FunIdentifierData::TypeSpecifier(ref n) => {
             let n = (&tokenize_type_specifier(n)).quote();
-            quote! { glsl_lang::ast::FunIdentifierData::TypeSpecifier(#n) }
+            quote! { hlsl_lang::ast::FunIdentifierData::TypeSpecifier(#n) }
         }
 
         ast::FunIdentifierData::Expr(ref e) => {
             let e = (&tokenize_expr(e)).quote();
-            quote! { glsl_lang::ast::FunIdentifierData::Expr(#e) }
+            quote! { hlsl_lang::ast::FunIdentifierData::Expr(#e) }
         }
     };
 
-    quote! { glsl_lang::ast::FunIdentifier::new(#i, #span) }
+    quote! { hlsl_lang::ast::FunIdentifier::new(#i, #span) }
 }
 
 fn tokenize_declaration(d: &ast::Declaration) -> TokenStream {
     let decl = match **d {
         ast::DeclarationData::FunctionPrototype(ref proto) => {
             let p = tokenize_function_prototype(proto);
-            quote! { glsl_lang::ast::DeclarationData::FunctionPrototype(#p) }
+            quote! { hlsl_lang::ast::DeclarationData::FunctionPrototype(#p) }
         }
 
         ast::DeclarationData::InitDeclaratorList(ref list) => {
             let l = tokenize_init_declarator_list(list);
-            quote! { glsl_lang::ast::DeclarationData::InitDeclaratorList(#l) }
+            quote! { hlsl_lang::ast::DeclarationData::InitDeclaratorList(#l) }
         }
 
         ast::DeclarationData::Precision(ref qual, ref ty) => {
             let qual = tokenize_precision_qualifier(qual);
             let ty = tokenize_type_specifier(ty);
-            quote! { glsl_lang::ast::DeclarationData::Precision(#qual, #ty) }
+            quote! { hlsl_lang::ast::DeclarationData::Precision(#qual, #ty) }
         }
 
         ast::DeclarationData::Block(ref block) => {
             let block = tokenize_block(block);
-            quote! { glsl_lang::ast::DeclarationData::Block(#block) }
+            quote! { hlsl_lang::ast::DeclarationData::Block(#block) }
         }
 
         ast::DeclarationData::Invariant(ref ident) => {
             let ident = tokenize_identifier(ident);
-            quote! { glsl_lang::ast::DeclarationData::Invariant(#ident) }
+            quote! { hlsl_lang::ast::DeclarationData::Invariant(#ident) }
         }
 
         ast::DeclarationData::TypeOnly(ref q) => {
             let q = tokenize_type_qualifier(q);
-            quote! { glsl_lang::ast::DeclarationData::TypeOnly(#q) }
+            quote! { hlsl_lang::ast::DeclarationData::TypeOnly(#q) }
         }
     };
 
     let span = tokenize_span(&d.span);
-    quote! { glsl_lang::ast::Declaration::new(#decl, #span) }
+    quote! { hlsl_lang::ast::Declaration::new(#decl, #span) }
 }
 
 fn tokenize_function_prototype(fp: &ast::FunctionPrototype) -> TokenStream {
@@ -1138,8 +1138,8 @@ fn tokenize_function_prototype(fp: &ast::FunctionPrototype) -> TokenStream {
 
     let span = tokenize_span(&fp.span);
     quote! {
-      glsl_lang::ast::FunctionPrototype::new(
-        glsl_lang::ast::FunctionPrototypeData {
+      hlsl_lang::ast::FunctionPrototype::new(
+        hlsl_lang::ast::FunctionPrototypeData {
           ty: #ty,
           name: #name,
           parameters: vec![#(#params),*]
@@ -1154,18 +1154,18 @@ fn tokenize_function_parameter_declaration(p: &ast::FunctionParameterDeclaration
         ast::FunctionParameterDeclarationData::Named(ref qual, ref fpd) => {
             let qual = qual.as_ref().map(tokenize_type_qualifier).quote();
             let fpd = tokenize_function_parameter_declarator(fpd);
-            quote! { glsl_lang::ast::FunctionParameterDeclarationData::Named(#qual, #fpd) }
+            quote! { hlsl_lang::ast::FunctionParameterDeclarationData::Named(#qual, #fpd) }
         }
 
         ast::FunctionParameterDeclarationData::Unnamed(ref qual, ref ty) => {
             let qual = qual.as_ref().map(tokenize_type_qualifier).quote();
             let ty = tokenize_type_specifier(ty);
-            quote! { glsl_lang::ast::FunctionParameterDeclarationData::Unnamed(#qual, #ty) }
+            quote! { hlsl_lang::ast::FunctionParameterDeclarationData::Unnamed(#qual, #ty) }
         }
     };
 
     let span = tokenize_span(&p.span);
-    quote! { glsl_lang::ast::FunctionParameterDeclaration::new(#decl, #span) }
+    quote! { hlsl_lang::ast::FunctionParameterDeclaration::new(#decl, #span) }
 }
 
 fn tokenize_function_parameter_declarator(p: &ast::FunctionParameterDeclarator) -> TokenStream {
@@ -1175,14 +1175,14 @@ fn tokenize_function_parameter_declarator(p: &ast::FunctionParameterDeclarator) 
         let ident = tokenize_arrayed_identifier(&p.ident);
 
         quote! {
-          glsl_lang::ast::FunctionParameterDeclaratorData {
+          hlsl_lang::ast::FunctionParameterDeclaratorData {
             ty: #ty,
             ident: #ident
           }
         }
     };
 
-    quote! { glsl_lang::ast::FunctionParameterDeclarator::new(#p, #span) }
+    quote! { hlsl_lang::ast::FunctionParameterDeclarator::new(#p, #span) }
 }
 
 fn tokenize_init_declarator_list(i: &ast::InitDeclaratorList) -> TokenStream {
@@ -1192,14 +1192,14 @@ fn tokenize_init_declarator_list(i: &ast::InitDeclaratorList) -> TokenStream {
         let tail = i.tail.iter().map(tokenize_single_declaration_no_type);
 
         quote! {
-          glsl_lang::ast::InitDeclaratorListData {
+          hlsl_lang::ast::InitDeclaratorListData {
             head: #head,
             tail: vec![#(#tail),*]
           }
         }
     };
 
-    quote! { glsl_lang::ast::InitDeclaratorList::new(#i, #span) }
+    quote! { hlsl_lang::ast::InitDeclaratorList::new(#i, #span) }
 }
 
 fn tokenize_single_declaration(d: &ast::SingleDeclaration) -> TokenStream {
@@ -1211,7 +1211,7 @@ fn tokenize_single_declaration(d: &ast::SingleDeclaration) -> TokenStream {
         let initializer = d.initializer.as_ref().map(tokenize_initializer).quote();
 
         quote! {
-          glsl_lang::ast::SingleDeclarationData {
+          hlsl_lang::ast::SingleDeclarationData {
             ty: #ty,
             name: #name,
             array_specifier: #array_specifier,
@@ -1220,7 +1220,7 @@ fn tokenize_single_declaration(d: &ast::SingleDeclaration) -> TokenStream {
         }
     };
 
-    quote! { glsl_lang::ast::SingleDeclaration::new(#d, #span) }
+    quote! { hlsl_lang::ast::SingleDeclaration::new(#d, #span) }
 }
 
 fn tokenize_single_declaration_no_type(d: &ast::SingleDeclarationNoType) -> TokenStream {
@@ -1230,14 +1230,14 @@ fn tokenize_single_declaration_no_type(d: &ast::SingleDeclarationNoType) -> Toke
         let initializer = d.initializer.as_ref().map(tokenize_initializer).quote();
 
         quote! {
-          glsl_lang::ast::SingleDeclarationNoTypeData {
+          hlsl_lang::ast::SingleDeclarationNoTypeData {
             ident: #ident,
             initializer: #initializer
           }
         }
     };
 
-    quote! { glsl_lang::ast::SingleDeclarationNoType::new(#d, #span) }
+    quote! { hlsl_lang::ast::SingleDeclarationNoType::new(#d, #span) }
 }
 
 fn tokenize_initializer(i: &ast::Initializer) -> TokenStream {
@@ -1245,16 +1245,16 @@ fn tokenize_initializer(i: &ast::Initializer) -> TokenStream {
     let i = match i.content {
         ast::InitializerData::Simple(ref e) => {
             let e = (&tokenize_expr(e)).quote();
-            quote! { glsl_lang::ast::InitializerData::Simple(#e) }
+            quote! { hlsl_lang::ast::InitializerData::Simple(#e) }
         }
 
         ast::InitializerData::List(ref list) => {
             let l = list.iter().map(tokenize_initializer);
-            quote! { glsl_lang::ast::InitializerData::List(vec![#(#l),*]) }
+            quote! { hlsl_lang::ast::InitializerData::List(vec![#(#l),*]) }
         }
     };
 
-    quote! { glsl_lang::ast::Initializer::new(#i, #span) }
+    quote! { hlsl_lang::ast::Initializer::new(#i, #span) }
 }
 
 fn tokenize_block(b: &ast::Block) -> TokenStream {
@@ -1270,7 +1270,7 @@ fn tokenize_block(b: &ast::Block) -> TokenStream {
             .quote();
 
         quote! {
-          glsl_lang::ast::BlockData {
+          hlsl_lang::ast::BlockData {
             qualifier: #qual,
             name: #name,
             fields: vec![#(#fields),*],
@@ -1279,7 +1279,7 @@ fn tokenize_block(b: &ast::Block) -> TokenStream {
         }
     };
 
-    quote! { glsl_lang::ast::Block::new(#b, #span) }
+    quote! { hlsl_lang::ast::Block::new(#b, #span) }
 }
 
 fn tokenize_function_definition(fd: &ast::FunctionDefinition) -> TokenStream {
@@ -1288,8 +1288,8 @@ fn tokenize_function_definition(fd: &ast::FunctionDefinition) -> TokenStream {
 
     let span = tokenize_span(&fd.span);
     quote! {
-      glsl_lang::ast::FunctionDefinition::new(
-        glsl_lang::ast::FunctionDefinitionData {
+      hlsl_lang::ast::FunctionDefinition::new(
+        hlsl_lang::ast::FunctionDefinitionData {
           prototype: #p,
           statement: #s
         },
@@ -1303,8 +1303,8 @@ fn tokenize_compound_statement(cst: &ast::CompoundStatement) -> TokenStream {
 
     let span = tokenize_span(&cst.span);
     quote! {
-      glsl_lang::ast::CompoundStatement::new(
-        glsl_lang::ast::CompoundStatementData {
+      hlsl_lang::ast::CompoundStatement::new(
+        hlsl_lang::ast::CompoundStatementData {
           statement_list: vec![#(#s),*]
         },
         #span
@@ -1316,57 +1316,57 @@ fn tokenize_statement(sst: &ast::Statement) -> TokenStream {
     let st = match **sst {
         ast::StatementData::Declaration(ref d) => {
             let d = tokenize_declaration(d);
-            quote! { glsl_lang::ast::StatementData::Declaration(#d) }
+            quote! { hlsl_lang::ast::StatementData::Declaration(#d) }
         }
 
         ast::StatementData::Expression(ref e) => {
             let e = tokenize_expr_statement(e);
-            quote! { glsl_lang::ast::StatementData::Expression(#e) }
+            quote! { hlsl_lang::ast::StatementData::Expression(#e) }
         }
 
         ast::StatementData::Selection(ref s) => {
             let s = tokenize_selection_statement(s);
-            quote! { glsl_lang::ast::StatementData::Selection(#s) }
+            quote! { hlsl_lang::ast::StatementData::Selection(#s) }
         }
 
         ast::StatementData::Switch(ref s) => {
             let s = tokenize_switch_statement(s);
-            quote! { glsl_lang::ast::StatementData::Switch(#s) }
+            quote! { hlsl_lang::ast::StatementData::Switch(#s) }
         }
 
         ast::StatementData::CaseLabel(ref cl) => {
             let cl = tokenize_case_label(cl);
-            quote! { glsl_lang::ast::StatementData::CaseLabel(#cl) }
+            quote! { hlsl_lang::ast::StatementData::CaseLabel(#cl) }
         }
 
         ast::StatementData::Iteration(ref i) => {
             let i = tokenize_iteration_statement(i);
-            quote! { glsl_lang::ast::StatementData::Iteration(#i) }
+            quote! { hlsl_lang::ast::StatementData::Iteration(#i) }
         }
 
         ast::StatementData::Jump(ref j) => {
             let j = tokenize_jump_statement(j);
-            quote! { glsl_lang::ast::StatementData::Jump(#j) }
+            quote! { hlsl_lang::ast::StatementData::Jump(#j) }
         }
 
         ast::StatementData::Compound(ref c) => {
             let c = tokenize_compound_statement(c);
-            quote! { glsl_lang::ast::StatementData::Compound(#c) }
+            quote! { hlsl_lang::ast::StatementData::Compound(#c) }
         }
     };
 
     let span = tokenize_span(&sst.span);
-    quote! { glsl_lang::ast::Statement::new(#st, #span) }
+    quote! { hlsl_lang::ast::Statement::new(#st, #span) }
 }
 
 fn tokenize_expr_statement(est: &ast::ExprStatement) -> TokenStream {
     let span = tokenize_span(&est.span);
     let est = {
         let e = est.0.as_ref().map(tokenize_expr).quote();
-        quote! { glsl_lang::ast::ExprStatementData(#e) }
+        quote! { hlsl_lang::ast::ExprStatementData(#e) }
     };
 
-    quote! { glsl_lang::ast::ExprStatement::new(#est, #span) }
+    quote! { hlsl_lang::ast::ExprStatement::new(#est, #span) }
 }
 
 fn tokenize_selection_statement(sst: &ast::SelectionStatement) -> TokenStream {
@@ -1376,14 +1376,14 @@ fn tokenize_selection_statement(sst: &ast::SelectionStatement) -> TokenStream {
         let rest = tokenize_selection_rest_statement(&sst.rest);
 
         quote! {
-          glsl_lang::ast::SelectionStatementData {
+          hlsl_lang::ast::SelectionStatementData {
             cond: #cond,
             rest: #rest
           }
         }
     };
 
-    quote! { glsl_lang::ast::SelectionStatement::new(#sst, #span) }
+    quote! { hlsl_lang::ast::SelectionStatement::new(#sst, #span) }
 }
 
 fn tokenize_selection_rest_statement(sst: &ast::SelectionRestStatement) -> TokenStream {
@@ -1391,17 +1391,17 @@ fn tokenize_selection_rest_statement(sst: &ast::SelectionRestStatement) -> Token
     let sst = match sst.content {
         ast::SelectionRestStatementData::Statement(ref if_st) => {
             let e = (&tokenize_statement(if_st)).quote();
-            quote! { glsl_lang::ast::SelectionRestStatementData::Statement(#e) }
+            quote! { hlsl_lang::ast::SelectionRestStatementData::Statement(#e) }
         }
 
         ast::SelectionRestStatementData::Else(ref if_st, ref else_st) => {
             let if_st = (&tokenize_statement(if_st)).quote();
             let else_st = (&tokenize_statement(else_st)).quote();
-            quote! { glsl_lang::ast::SelectionRestStatementData::Else(#if_st, #else_st) }
+            quote! { hlsl_lang::ast::SelectionRestStatementData::Else(#if_st, #else_st) }
         }
     };
 
-    quote! { glsl_lang::ast::SelectionRestStatement::new(#sst, #span) }
+    quote! { hlsl_lang::ast::SelectionRestStatement::new(#sst, #span) }
 }
 
 fn tokenize_switch_statement(sst: &ast::SwitchStatement) -> TokenStream {
@@ -1411,14 +1411,14 @@ fn tokenize_switch_statement(sst: &ast::SwitchStatement) -> TokenStream {
         let body = sst.body.iter().map(tokenize_statement);
 
         quote! {
-          glsl_lang::ast::SwitchStatementData {
+          hlsl_lang::ast::SwitchStatementData {
             head: #head,
             body: vec![#(#body),*]
           }
         }
     };
 
-    quote! { glsl_lang::ast::SwitchStatement::new(#sst, #span) }
+    quote! { hlsl_lang::ast::SwitchStatement::new(#sst, #span) }
 }
 
 fn tokenize_case_label(cl: &ast::CaseLabel) -> TokenStream {
@@ -1426,13 +1426,13 @@ fn tokenize_case_label(cl: &ast::CaseLabel) -> TokenStream {
     let cl = match cl.content {
         ast::CaseLabelData::Case(ref e) => {
             let e = (&tokenize_expr(e)).quote();
-            quote! { glsl_lang::ast::CaseLabelData::Case(#e) }
+            quote! { hlsl_lang::ast::CaseLabelData::Case(#e) }
         }
 
-        ast::CaseLabelData::Def => quote! { glsl_lang::ast::CaseLabelData::Def },
+        ast::CaseLabelData::Def => quote! { hlsl_lang::ast::CaseLabelData::Def },
     };
 
-    quote! { glsl_lang::ast::CaseLabel::new(#cl, #span) }
+    quote! { hlsl_lang::ast::CaseLabel::new(#cl, #span) }
 }
 
 fn tokenize_iteration_statement(ist: &ast::IterationStatement) -> TokenStream {
@@ -1441,24 +1441,24 @@ fn tokenize_iteration_statement(ist: &ast::IterationStatement) -> TokenStream {
         ast::IterationStatementData::While(ref cond, ref body) => {
             let cond = tokenize_condition(cond);
             let body = (&tokenize_statement(body)).quote();
-            quote! { glsl_lang::ast::IterationStatementData::While(#cond, #body) }
+            quote! { hlsl_lang::ast::IterationStatementData::While(#cond, #body) }
         }
 
         ast::IterationStatementData::DoWhile(ref body, ref cond) => {
             let body = (&tokenize_statement(body)).quote();
             let cond = (&tokenize_expr(cond)).quote();
-            quote! { glsl_lang::ast::IterationStatementData::DoWhile(#body, #cond) }
+            quote! { hlsl_lang::ast::IterationStatementData::DoWhile(#body, #cond) }
         }
 
         ast::IterationStatementData::For(ref init, ref rest, ref body) => {
             let init = tokenize_for_init_statement(init);
             let rest = tokenize_for_rest_statement(rest);
             let body = (&tokenize_statement(body)).quote();
-            quote! { glsl_lang::ast::IterationStatementData::For(#init, #rest, #body) }
+            quote! { hlsl_lang::ast::IterationStatementData::For(#init, #rest, #body) }
         }
     };
 
-    quote! { glsl_lang::ast::IterationStatement::new(#ist, #span) }
+    quote! { hlsl_lang::ast::IterationStatement::new(#ist, #span) }
 }
 
 fn tokenize_condition(c: &ast::Condition) -> TokenStream {
@@ -1466,7 +1466,7 @@ fn tokenize_condition(c: &ast::Condition) -> TokenStream {
     let c = match c.content {
         ast::ConditionData::Expr(ref e) => {
             let e = (&tokenize_expr(e)).quote();
-            quote! { glsl_lang::ast::ConditionData::Expr(#e) }
+            quote! { hlsl_lang::ast::ConditionData::Expr(#e) }
         }
 
         ast::ConditionData::Assignment(ref ty, ref name, ref initializer) => {
@@ -1474,11 +1474,11 @@ fn tokenize_condition(c: &ast::Condition) -> TokenStream {
             let name = tokenize_identifier(name);
             let initializer = tokenize_initializer(initializer);
 
-            quote! { glsl_lang::ast::ConditionData::Assignment(#ty, #name, #initializer) }
+            quote! { hlsl_lang::ast::ConditionData::Assignment(#ty, #name, #initializer) }
         }
     };
 
-    quote! { glsl_lang::ast::Condition::new(#c, #span) }
+    quote! { hlsl_lang::ast::Condition::new(#c, #span) }
 }
 
 fn tokenize_for_init_statement(i: &ast::ForInitStatement) -> TokenStream {
@@ -1486,16 +1486,16 @@ fn tokenize_for_init_statement(i: &ast::ForInitStatement) -> TokenStream {
     let i = match i.content {
         ast::ForInitStatementData::Expression(ref expr) => {
             let e = expr.as_ref().map(tokenize_expr).quote();
-            quote! { glsl_lang::ast::ForInitStatementData::Expression(#e) }
+            quote! { hlsl_lang::ast::ForInitStatementData::Expression(#e) }
         }
 
         ast::ForInitStatementData::Declaration(ref d) => {
             let d = (&tokenize_declaration(d)).quote();
-            quote! { glsl_lang::ast::ForInitStatementData::Declaration(#d) }
+            quote! { hlsl_lang::ast::ForInitStatementData::Declaration(#d) }
         }
     };
 
-    quote! { glsl_lang::ast::ForInitStatement::new(#i, #span) }
+    quote! { hlsl_lang::ast::ForInitStatement::new(#i, #span) }
 }
 
 fn tokenize_for_rest_statement(r: &ast::ForRestStatement) -> TokenStream {
@@ -1509,104 +1509,104 @@ fn tokenize_for_rest_statement(r: &ast::ForRestStatement) -> TokenStream {
             .quote();
 
         quote! {
-          glsl_lang::ast::ForRestStatement {
+          hlsl_lang::ast::ForRestStatement {
             condition: #cond,
             post: #post
           }
         }
     };
 
-    quote! { glsl_lang::ast::ForRestStatement::new(#r, #span) }
+    quote! { hlsl_lang::ast::ForRestStatement::new(#r, #span) }
 }
 
 fn tokenize_jump_statement(j: &ast::JumpStatement) -> TokenStream {
     let span = tokenize_span(&j.span);
     let j = match j.content {
-        ast::JumpStatementData::Continue => quote! { glsl_lang::ast::JumpStatementData::Continue },
-        ast::JumpStatementData::Break => quote! { glsl_lang::ast::JumpStatementData::Break },
-        ast::JumpStatementData::Discard => quote! { glsl_lang::ast::JumpStatementData::Discard },
+        ast::JumpStatementData::Continue => quote! { hlsl_lang::ast::JumpStatementData::Continue },
+        ast::JumpStatementData::Break => quote! { hlsl_lang::ast::JumpStatementData::Break },
+        ast::JumpStatementData::Discard => quote! { hlsl_lang::ast::JumpStatementData::Discard },
         ast::JumpStatementData::Return(ref e) => {
             let e = e.as_ref().map(|e| (&tokenize_expr(e)).quote()).quote();
-            quote! { glsl_lang::ast::JumpStatementData::Return(#e) }
+            quote! { hlsl_lang::ast::JumpStatementData::Return(#e) }
         }
     };
 
-    quote! { glsl_lang::ast::JumpStatement::new(#j, #span) }
+    quote! { hlsl_lang::ast::JumpStatement::new(#j, #span) }
 }
 
 fn tokenize_preprocessor(pp: &ast::Preprocessor) -> TokenStream {
     let decl = match **pp {
         ast::PreprocessorData::Define(ref pd) => {
             let pd = tokenize_preprocessor_define(pd);
-            quote! { glsl_lang::ast::PreprocessorData::Define(#pd) }
+            quote! { hlsl_lang::ast::PreprocessorData::Define(#pd) }
         }
 
         ast::PreprocessorData::Else => {
-            quote! { glsl_lang::ast::PreprocessorData::Else }
+            quote! { hlsl_lang::ast::PreprocessorData::Else }
         }
 
         ast::PreprocessorData::ElseIf(ref pei) => {
             let pei = tokenize_preprocessor_elseif(pei);
-            quote! { glsl_lang::ast::PreprocessorData::ElseIf(#pei) }
+            quote! { hlsl_lang::ast::PreprocessorData::ElseIf(#pei) }
         }
 
         ast::PreprocessorData::EndIf => {
-            quote! { glsl_lang::ast::PreprocessorData::EndIf }
+            quote! { hlsl_lang::ast::PreprocessorData::EndIf }
         }
 
         ast::PreprocessorData::Error(ref pe) => {
             let pe = tokenize_preprocessor_error(pe);
-            quote! { glsl_lang::ast::PreprocessorData::Error(#pe) }
+            quote! { hlsl_lang::ast::PreprocessorData::Error(#pe) }
         }
 
         ast::PreprocessorData::If(ref pi) => {
             let pi = tokenize_preprocessor_if(pi);
-            quote! { glsl_lang::ast::PreprocessorData::If(#pi) }
+            quote! { hlsl_lang::ast::PreprocessorData::If(#pi) }
         }
 
         ast::PreprocessorData::IfDef(ref pid) => {
             let pid = tokenize_preprocessor_ifdef(pid);
-            quote! { glsl_lang::ast::PreprocessorData::IfDef(#pid) }
+            quote! { hlsl_lang::ast::PreprocessorData::IfDef(#pid) }
         }
 
         ast::PreprocessorData::IfNDef(ref pind) => {
             let pind = tokenize_preprocessor_ifndef(pind);
-            quote! { glsl_lang::ast::PreprocessorData::IfNDef(#pind) }
+            quote! { hlsl_lang::ast::PreprocessorData::IfNDef(#pind) }
         }
 
         ast::PreprocessorData::Include(ref pi) => {
             let pi = tokenize_preprocessor_include(pi);
-            quote! { glsl_lang::ast::PreprocessorData::Include(#pi) }
+            quote! { hlsl_lang::ast::PreprocessorData::Include(#pi) }
         }
 
         ast::PreprocessorData::Line(ref pl) => {
             let pl = tokenize_preprocessor_line(pl);
-            quote! { glsl_lang::ast::PreprocessorData::Line(#pl) }
+            quote! { hlsl_lang::ast::PreprocessorData::Line(#pl) }
         }
 
         ast::PreprocessorData::Pragma(ref pp) => {
             let pp = tokenize_preprocessor_pragma(pp);
-            quote! { glsl_lang::ast::PreprocessorData::Pragma(#pp) }
+            quote! { hlsl_lang::ast::PreprocessorData::Pragma(#pp) }
         }
 
         ast::PreprocessorData::Undef(ref pu) => {
             let pu = tokenize_preprocessor_undef(pu);
-            quote! { glsl_lang::ast::PreprocessorData::Undef(#pu) }
+            quote! { hlsl_lang::ast::PreprocessorData::Undef(#pu) }
         }
 
         ast::PreprocessorData::Version(ref pv) => {
             let pv = tokenize_preprocessor_version(pv);
-            quote! { glsl_lang::ast::PreprocessorData::Version(#pv) }
+            quote! { hlsl_lang::ast::PreprocessorData::Version(#pv) }
         }
 
         ast::PreprocessorData::Extension(ref pe) => {
             let pe = tokenize_preprocessor_extension(pe);
-            quote! { glsl_lang::ast::PreprocessorData::Extension(#pe) }
+            quote! { hlsl_lang::ast::PreprocessorData::Extension(#pe) }
         }
     };
 
     let span = tokenize_span(&pp.span);
-    quote! { glsl_lang::ast::Preprocessor::new(#decl, #span) }
+    quote! { hlsl_lang::ast::Preprocessor::new(#decl, #span) }
 }
 
 fn tokenize_preprocessor_define(pd: &ast::PreprocessorDefine) -> TokenStream {
@@ -1620,7 +1620,7 @@ fn tokenize_preprocessor_define(pd: &ast::PreprocessorDefine) -> TokenStream {
             let value = value.quote();
 
             quote! {
-              glsl_lang::ast::PreprocessorDefineData::ObjectLike {
+              hlsl_lang::ast::PreprocessorDefineData::ObjectLike {
                 ident: #ident,
                 value: #value
               }
@@ -1637,7 +1637,7 @@ fn tokenize_preprocessor_define(pd: &ast::PreprocessorDefine) -> TokenStream {
             let value = value.quote();
 
             quote! {
-              glsl_lang::ast::PreprocessorDefineData::FunctionLike {
+              hlsl_lang::ast::PreprocessorDefineData::FunctionLike {
                 ident: #ident,
                 args: vec![#(#args),*],
                 value: #value
@@ -1646,7 +1646,7 @@ fn tokenize_preprocessor_define(pd: &ast::PreprocessorDefine) -> TokenStream {
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorDefine::new(#pd, #span) }
+    quote! { hlsl_lang::ast::PreprocessorDefine::new(#pd, #span) }
 }
 
 fn tokenize_preprocessor_elseif(pei: &ast::PreprocessorElseIf) -> TokenStream {
@@ -1655,13 +1655,13 @@ fn tokenize_preprocessor_elseif(pei: &ast::PreprocessorElseIf) -> TokenStream {
         let condition = pei.condition.quote();
 
         quote! {
-          glsl_lang::ast::PreprocessorElseIfData {
+          hlsl_lang::ast::PreprocessorElseIfData {
             condition: #condition
           }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorElseIf::new(#pei, #span) }
+    quote! { hlsl_lang::ast::PreprocessorElseIf::new(#pei, #span) }
 }
 
 fn tokenize_preprocessor_error(pe: &ast::PreprocessorError) -> TokenStream {
@@ -1670,13 +1670,13 @@ fn tokenize_preprocessor_error(pe: &ast::PreprocessorError) -> TokenStream {
         let message = &pe.message;
 
         quote! {
-          glsl_lang::ast::PreprocessorErrorData {
+          hlsl_lang::ast::PreprocessorErrorData {
             message: #message.to_owned()
           }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorError::new(#pe, #span) }
+    quote! { hlsl_lang::ast::PreprocessorError::new(#pe, #span) }
 }
 
 fn tokenize_preprocessor_if(pi: &ast::PreprocessorIf) -> TokenStream {
@@ -1685,13 +1685,13 @@ fn tokenize_preprocessor_if(pi: &ast::PreprocessorIf) -> TokenStream {
         let condition = pi.condition.quote();
 
         quote! {
-          glsl_lang::ast::PreprocessorIfData {
+          hlsl_lang::ast::PreprocessorIfData {
             condition: #condition
           }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorIf::new(#pi, #span) }
+    quote! { hlsl_lang::ast::PreprocessorIf::new(#pi, #span) }
 }
 
 fn tokenize_preprocessor_ifdef(pid: &ast::PreprocessorIfDef) -> TokenStream {
@@ -1700,13 +1700,13 @@ fn tokenize_preprocessor_ifdef(pid: &ast::PreprocessorIfDef) -> TokenStream {
         let ident = tokenize_identifier(&pid.ident);
 
         quote! {
-          glsl_lang::ast::PreprocessorIfDefData {
+          hlsl_lang::ast::PreprocessorIfDefData {
             ident: #ident
           }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorIfDef::new(#pid, #span) }
+    quote! { hlsl_lang::ast::PreprocessorIfDef::new(#pid, #span) }
 }
 
 fn tokenize_preprocessor_ifndef(pind: &ast::PreprocessorIfNDef) -> TokenStream {
@@ -1715,13 +1715,13 @@ fn tokenize_preprocessor_ifndef(pind: &ast::PreprocessorIfNDef) -> TokenStream {
         let ident = tokenize_identifier(&pind.ident);
 
         quote! {
-          glsl_lang::ast::PreprocessorIfNDefData {
+          hlsl_lang::ast::PreprocessorIfNDefData {
             ident: #ident
           }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorIfNDef::new(#pind, #span) }
+    quote! { hlsl_lang::ast::PreprocessorIfNDef::new(#pind, #span) }
 }
 
 fn tokenize_preprocessor_include(pi: &ast::PreprocessorInclude) -> TokenStream {
@@ -1730,13 +1730,13 @@ fn tokenize_preprocessor_include(pi: &ast::PreprocessorInclude) -> TokenStream {
         let path = tokenize_path(&pi.path);
 
         quote! {
-          glsl_lang::ast::PreprocessorIncludeData {
+          hlsl_lang::ast::PreprocessorIncludeData {
             path: #path
           }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorInclude::new(#pi, #span) }
+    quote! { hlsl_lang::ast::PreprocessorInclude::new(#pi, #span) }
 }
 
 fn tokenize_preprocessor_line(pl: &ast::PreprocessorLine) -> TokenStream {
@@ -1746,14 +1746,14 @@ fn tokenize_preprocessor_line(pl: &ast::PreprocessorLine) -> TokenStream {
         let source_string_number = pl.source_string_number.quote();
 
         quote! {
-          glsl_lang::ast::PreprocessorLineData {
+          hlsl_lang::ast::PreprocessorLineData {
             line: #line,
             source_string_number: #source_string_number
           }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorLine::new(#pl, #span) }
+    quote! { hlsl_lang::ast::PreprocessorLine::new(#pl, #span) }
 }
 
 fn tokenize_preprocessor_pragma(pp: &ast::PreprocessorPragma) -> TokenStream {
@@ -1762,13 +1762,13 @@ fn tokenize_preprocessor_pragma(pp: &ast::PreprocessorPragma) -> TokenStream {
         let command = &pp.command;
 
         quote! {
-          glsl_lang::ast::PreprocessorPragmaData {
+          hlsl_lang::ast::PreprocessorPragmaData {
             command: #command.to_owned()
           }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorPragma::new(#pp, #span) }
+    quote! { hlsl_lang::ast::PreprocessorPragma::new(#pp, #span) }
 }
 
 fn tokenize_preprocessor_undef(pu: &ast::PreprocessorUndef) -> TokenStream {
@@ -1777,13 +1777,13 @@ fn tokenize_preprocessor_undef(pu: &ast::PreprocessorUndef) -> TokenStream {
         let name = tokenize_identifier(&pu.name);
 
         quote! {
-          glsl_lang::ast::PreprocessorUndefData {
+          hlsl_lang::ast::PreprocessorUndefData {
             name: #name
           }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorUndef::new(#pu, #span) }
+    quote! { hlsl_lang::ast::PreprocessorUndef::new(#pu, #span) }
 }
 
 fn tokenize_preprocessor_version(pv: &ast::PreprocessorVersion) -> TokenStream {
@@ -1797,31 +1797,31 @@ fn tokenize_preprocessor_version(pv: &ast::PreprocessorVersion) -> TokenStream {
             .quote();
 
         quote! {
-          glsl_lang::ast::PreprocessorVersionData {
+          hlsl_lang::ast::PreprocessorVersionData {
             version: #version,
             profile: #profile
           }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorVersion::new(#pv, #span) }
+    quote! { hlsl_lang::ast::PreprocessorVersion::new(#pv, #span) }
 }
 
 fn tokenize_preprocessor_version_profile(profile: &ast::PreprocessorVersionProfile) -> TokenStream {
     let span = tokenize_span(&profile.span);
     let profile = match profile.content {
         ast::PreprocessorVersionProfileData::Core => {
-            quote! { glsl_lang::ast::PreprocessorVersionProfileData::Core }
+            quote! { hlsl_lang::ast::PreprocessorVersionProfileData::Core }
         }
         ast::PreprocessorVersionProfileData::Compatibility => {
-            quote! { glsl_lang::ast::PreprocessorVersionProfileData::Compatibility }
+            quote! { hlsl_lang::ast::PreprocessorVersionProfileData::Compatibility }
         }
         ast::PreprocessorVersionProfileData::Es => {
-            quote! { glsl_lang::ast::PreprocessorVersionProfileData::Es }
+            quote! { hlsl_lang::ast::PreprocessorVersionProfileData::Es }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorVersionProfile::new(#profile, #span) }
+    quote! { hlsl_lang::ast::PreprocessorVersionProfile::new(#profile, #span) }
 }
 
 fn tokenize_preprocessor_extension(pe: &ast::PreprocessorExtension) -> TokenStream {
@@ -1835,29 +1835,29 @@ fn tokenize_preprocessor_extension(pe: &ast::PreprocessorExtension) -> TokenStre
             .quote();
 
         quote! {
-          glsl_lang::ast::PreprocessorExtensionData {
+          hlsl_lang::ast::PreprocessorExtensionData {
             name: #name,
             behavior: #behavior
           }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorExtension::new(#pe, #span) }
+    quote! { hlsl_lang::ast::PreprocessorExtension::new(#pe, #span) }
 }
 
 fn tokenize_preprocessor_extension_name(name: &ast::PreprocessorExtensionName) -> TokenStream {
     let span = tokenize_span(&name.span);
     let name = match name.content {
         ast::PreprocessorExtensionNameData::All => {
-            quote! { glsl_lang::ast::PreprocessorExtensionNameData::All }
+            quote! { hlsl_lang::ast::PreprocessorExtensionNameData::All }
         }
         ast::PreprocessorExtensionNameData::Specific(ref n) => {
             let n = n.quote();
-            quote! { glsl_lang::ast::PreprocessorExtensionNameData::Specific(#n) }
+            quote! { hlsl_lang::ast::PreprocessorExtensionNameData::Specific(#n) }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorExtensionName::new(#name, #span) }
+    quote! { hlsl_lang::ast::PreprocessorExtensionName::new(#name, #span) }
 }
 
 fn tokenize_preprocessor_extension_behavior(
@@ -1866,31 +1866,31 @@ fn tokenize_preprocessor_extension_behavior(
     let span = tokenize_span(&behavior.span);
     let behavior = match behavior.content {
         ast::PreprocessorExtensionBehaviorData::Require => {
-            quote! { glsl_lang::ast::PreprocessorExtensionBehaviorData::Require }
+            quote! { hlsl_lang::ast::PreprocessorExtensionBehaviorData::Require }
         }
         ast::PreprocessorExtensionBehaviorData::Enable => {
-            quote! { glsl_lang::ast::PreprocessorExtensionBehaviorData::Enable }
+            quote! { hlsl_lang::ast::PreprocessorExtensionBehaviorData::Enable }
         }
         ast::PreprocessorExtensionBehaviorData::Warn => {
-            quote! { glsl_lang::ast::PreprocessorExtensionBehaviorData::Warn }
+            quote! { hlsl_lang::ast::PreprocessorExtensionBehaviorData::Warn }
         }
         ast::PreprocessorExtensionBehaviorData::Disable => {
-            quote! { glsl_lang::ast::PreprocessorExtensionBehaviorData::Disable }
+            quote! { hlsl_lang::ast::PreprocessorExtensionBehaviorData::Disable }
         }
     };
 
-    quote! { glsl_lang::ast::PreprocessorExtensionBehavior::new(#behavior, #span) }
+    quote! { hlsl_lang::ast::PreprocessorExtensionBehavior::new(#behavior, #span) }
 }
 
-fn tokenize_text_size(text_size: glsl_lang::ast::TextSize) -> TokenStream {
+fn tokenize_text_size(text_size: hlsl_lang::ast::TextSize) -> TokenStream {
     let inner = u32::from(text_size);
-    quote! { glsl_lang::ast::TextSize::from(#inner) }
+    quote! { hlsl_lang::ast::TextSize::from(#inner) }
 }
 
-fn tokenize_text_range(text_range: glsl_lang::ast::TextRange) -> TokenStream {
+fn tokenize_text_range(text_range: hlsl_lang::ast::TextRange) -> TokenStream {
     let start = tokenize_text_size(text_range.start());
     let end = tokenize_text_size(text_range.end());
-    quote! { glsl_lang::ast::TextRange::new(#start, #end) }
+    quote! { hlsl_lang::ast::TextRange::new(#start, #end) }
 }
 
 fn tokenize_span(s: &Option<ast::NodeSpan>) -> TokenStream {
@@ -1898,7 +1898,7 @@ fn tokenize_span(s: &Option<ast::NodeSpan>) -> TokenStream {
         let source_id = u32::from(s.source_id());
         let range = tokenize_text_range(s.range());
 
-        quote! { Some(glsl_lang::ast::NodeSpan::new(#source_id.into(), #range)) }
+        quote! { Some(hlsl_lang::ast::NodeSpan::new(#source_id.into(), #range)) }
     } else {
         quote! { None }
     }
@@ -1908,25 +1908,25 @@ fn tokenize_external_declaration(ed: &ast::ExternalDeclaration) -> TokenStream {
     let contents = match **ed {
         ast::ExternalDeclarationData::Preprocessor(ref pp) => {
             let pp = tokenize_preprocessor(pp);
-            quote! { glsl_lang::ast::ExternalDeclarationData::Preprocessor(#pp) }
+            quote! { hlsl_lang::ast::ExternalDeclarationData::Preprocessor(#pp) }
         }
 
         ast::ExternalDeclarationData::FunctionDefinition(ref fd) => {
             let fd = tokenize_function_definition(fd);
-            quote! { glsl_lang::ast::ExternalDeclarationData::FunctionDefinition(#fd) }
+            quote! { hlsl_lang::ast::ExternalDeclarationData::FunctionDefinition(#fd) }
         }
 
         ast::ExternalDeclarationData::Declaration(ref d) => {
             let d = tokenize_declaration(d);
-            quote! { glsl_lang::ast::ExternalDeclarationData::Declaration(#d) }
+            quote! { hlsl_lang::ast::ExternalDeclarationData::Declaration(#d) }
         }
     };
 
     let span = tokenize_span(&ed.span);
-    quote! { glsl_lang::ast::Node::new(#contents, #span) }
+    quote! { hlsl_lang::ast::Node::new(#contents, #span) }
 }
 
 fn tokenize_translation_unit(tu: &ast::TranslationUnit) -> TokenStream {
     let tu = (tu.0).iter().map(tokenize_external_declaration);
-    quote! { glsl_lang::ast::TranslationUnit(vec![#(#tu),*]) }
+    quote! { hlsl_lang::ast::TranslationUnit(vec![#(#tu),*]) }
 }

@@ -1,15 +1,15 @@
 [package]
-name = "glsl-lang"
+name = "hlsl-lang"
 version = "0.8.0"
 authors = ["Alixinne <alixinne@pm.me>"]
 edition = "2021"
 license = "BSD-3-Clause"
-description = "GLSL 4.6 language LALR parser and AST"
-homepage = "https://github.com/alixinne/glsl-lang"
-documentation = "https://docs.rs/glsl-lang/"
-repository = "https://github.com/alixinne/glsl-lang"
+description = "HLSL language LALR parser and AST"
+homepage = "https://github.com/alixinne/hlsl-lang"
+documentation = "https://docs.rs/hlsl-lang/"
+repository = "https://github.com/alixinne/hlsl-lang"
 readme = "README.md"
-keywords = ["glsl", "language", "parser", "ast"]
+keywords = ["hlsl", "language", "parser", "ast"]
 categories = ["parser-implementations", "rendering"]
 rust-version = "1.82.0"
 
@@ -19,9 +19,9 @@ once_cell = "1.21.3"
 thiserror = "2.0"
 
 lang-util = { version = "=0.8.0", features = ["lalrpop"] }
-glsl-lang-pp = { version = "=0.8.0", optional = true }
-glsl-lang-lexer = "=0.8.0"
-glsl-lang-types = "=0.8.0"
+hlsl-lang-pp = { version = "=0.8.0", optional = true }
+hlsl-lang-lexer = "=0.8.0"
+hlsl-lang-types = "=0.8.0"
 
 rserde = { version = "1.0", optional = true, features = ["derive"], package = "serde" }
 
@@ -30,7 +30,7 @@ lalrpop = "0.22.1"
 
 [dev-dependencies]
 lang-util-dev = "=0.8.0"
-glsl-lang-pp = "=0.8.0"
+hlsl-lang-pp = "=0.8.0"
 
 criterion = "0.6"
 expect-test = "1.5"
@@ -41,7 +41,7 @@ name = "pos_error"
 required-features = ["lexer-full"]
 
 [[bench]]
-name = "glsl"
+name = "hlsl"
 harness = false
 
 [features]
@@ -49,11 +49,11 @@ harness = false
 default = []
 
 # Provide interface to lexers through the lexers module
-lexer-full = ["glsl-lang-lexer/full"]
+lexer-full = ["hlsl-lang-lexer/full"]
 
 # Additional sub-parsers. Increases compilation time.
 parser-expr = []
 parser-statement = []
 
 # AST Serialization
-serde = ["rserde", "lang-util/serde", "glsl-lang-lexer/serde", "glsl-lang-types/serde"]
+serde = ["rserde", "lang-util/serde", "hlsl-lang-lexer/serde", "hlsl-lang-types/serde"]
