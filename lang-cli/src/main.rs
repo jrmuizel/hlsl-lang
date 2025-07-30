@@ -1,12 +1,12 @@
-//! [`glsl-lang`](https://crates.io/crates/glsl-lang) debugging CLI.
+//! [`hlsl-lang`](https://crates.io/crates/hlsl-lang) debugging CLI.
 //!
 //! *This is only a prototype for debugging, more options will be added in later updates.*
 //!
 //! # Usage
 //!
-//! Print GLSL AST to the standard output:
+//! Print HLSL AST to the standard output:
 //! ```bash
-//! $ cargo run < source.glsl
+//! $ cargo run < source.hlsl
 //! TranslationUnit
 //!   ExternalDeclaration@0:0..45 `Declaration`
 //!     Declaration@0:0..45 `Block`
@@ -19,7 +19,7 @@ use std::{io::prelude::*, path::Path};
 
 use argh::FromArgs;
 
-use glsl_lang::{
+use hlsl_lang::{
     ast::{NodeDisplay, TranslationUnit},
     lexer::full::fs::PreprocessorExt,
     parse::IntoParseBuilderExt,
@@ -36,13 +36,13 @@ fn output_json(output: &mut dyn std::io::Write, tu: TranslationUnit) -> std::io:
     Ok(())
 }
 
-fn output_glsl(output: &mut dyn std::io::Write, tu: TranslationUnit) -> std::io::Result<()> {
+fn output_hlsl(output: &mut dyn std::io::Write, tu: TranslationUnit) -> std::io::Result<()> {
     let mut s = String::new();
 
-    glsl_lang::transpiler::glsl::show_translation_unit(
+    hlsl_lang::transpiler::glsl::show_translation_unit(
         &mut s,
         &tu,
-        glsl_lang::transpiler::glsl::FormattingState::default(),
+        hlsl_lang::transpiler::glsl::FormattingState::default(),
     )
     .unwrap();
 
@@ -52,10 +52,10 @@ fn output_glsl(output: &mut dyn std::io::Write, tu: TranslationUnit) -> std::io:
 }
 
 #[derive(Debug, FromArgs)]
-/// glsl-lang command-line interface
+/// hlsl-lang command-line interface
 struct Opts {
     #[argh(option, default = "\"text\".to_owned()")]
-    /// output format (text, json or glsl)
+    /// output format (text, json or hlsl)
     format: String,
 
     #[argh(positional)]
@@ -66,7 +66,7 @@ struct Opts {
 use miette::{Diagnostic, SourceSpan};
 
 #[derive(Debug, Diagnostic)]
-#[diagnostic(code(glsl_lang::parse::error))]
+#[diagnostic(code(hlsl_lang::parse::error))]
 struct ParseError<I: std::error::Error + 'static> {
     inner: lang_util::located::Located<I>,
     #[source_code]
@@ -86,7 +86,7 @@ impl<I: std::error::Error> std::fmt::Display for ParseError<I> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
-            "Failed to parse input GLSL at line {} column {}.",
+            "Failed to parse input HLSL at line {} column {}.",
             self.inner.line() + 1,
             self.inner.col() + 1
         )
@@ -94,9 +94,9 @@ impl<I: std::error::Error> std::fmt::Display for ParseError<I> {
 }
 
 use miette::{NamedSource, Result};
-fn parse_tu(source: &str, path: &str) -> Result<glsl_lang::ast::TranslationUnit> {
-    let mut processor = glsl_lang_pp::processor::fs::StdProcessor::new();
-    let tu: Result<glsl_lang::ast::TranslationUnit, _> = processor
+fn parse_tu(source: &str, path: &str) -> Result<hlsl_lang::ast::TranslationUnit> {
+    let mut processor = hlsl_lang_pp::processor::fs::StdProcessor::new();
+    let tu: Result<hlsl_lang::ast::TranslationUnit, _> = processor
         .open_source(
             source,
             Path::new(path).parent().unwrap_or_else(|| Path::new(".")),
@@ -117,7 +117,7 @@ fn parse_tu(source: &str, path: &str) -> Result<glsl_lang::ast::TranslationUnit>
             let start = usize::from(pos.start());
             let end = usize::from(pos.end());
 
-            // TODO: '\n' isn't what GLSL calls a line
+            // TODO: '\n' isn't what HLSL calls a line
             let before = source
                 .rmatch_indices('\n')
                 .filter(|(i, _ch)| *i < start)
@@ -152,7 +152,7 @@ fn main() -> Result<(), std::io::Error> {
         "text" => output_text,
         #[cfg(feature = "json")]
         "json" => output_json,
-        "glsl" => output_glsl,
+        "hlsl" => output_hlsl,
         other => panic!("unknown output format: {}", other),
     };
 

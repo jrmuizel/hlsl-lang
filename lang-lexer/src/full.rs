@@ -1,6 +1,6 @@
-//! glsl-lang-pp/full based lexer
+//! hlsl-lang-pp/full based lexer
 
-use glsl_lang_pp::{processor, types};
+use hlsl_lang_pp::{processor, types};
 
 use lang_util::{
     located::Located,

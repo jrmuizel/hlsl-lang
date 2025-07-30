@@ -1,15 +1,15 @@
 [package]
-name = "glsl-lang-types"
+name = "hlsl-lang-types"
 version = "0.8.0"
 authors = ["Alixinne <alixinne@pm.me>"]
 edition = "2021"
 license = "BSD-3-Clause"
-description = "GLSL language AST"
-homepage = "https://github.com/alixinne/glsl-lang"
-documentation = "https://docs.rs/glsl-lang-lexer/"
-repository = "https://github.com/alixinne/glsl-lang"
+description = "HLSL language AST"
+homepage = "https://github.com/alixinne/hlsl-lang"
+documentation = "https://docs.rs/hlsl-lang-lexer/"
+repository = "https://github.com/alixinne/hlsl-lang"
 readme = "README.md"
-keywords = ["glsl", "language", "parser"]
+keywords = ["hlsl", "language", "parser"]
 categories = ["rendering"]
 rust-version = "1.82.0"
 

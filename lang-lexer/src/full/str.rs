@@ -2,7 +2,7 @@
 
 use lang_util::{position::LexerPosition, FileId};
 
-use glsl_lang_pp::{
+use hlsl_lang_pp::{
     exts::{Registry, DEFAULT_REGISTRY},
     last::{self, Event},
     processor::{

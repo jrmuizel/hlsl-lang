@@ -1,6 +1,6 @@
-use glsl_lang_pp::types;
+use hlsl_lang_pp::types;
 
-use glsl_lang_types::ast::NodeSpan;
+use hlsl_lang_types::ast::NodeSpan;
 use lang_util::position::LexerPosition;
 
 use crate::{ParseContext, Token};

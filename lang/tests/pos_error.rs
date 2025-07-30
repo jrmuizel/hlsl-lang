@@ -1,5 +1,5 @@
 use expect_test::{expect, Expect};
-use glsl_lang::{
+use hlsl_lang::{
     lexer::full::fs::PreprocessorExt,
     parse::{IntoParseBuilderExt, ParseOptions},
 };
@@ -13,7 +13,7 @@ fn check<E: std::error::Error>(src: E, expected: Expect) {
 #[test]
 fn file_pos_error() {
     let mut processor = glsl_lang_pp::processor::fs::StdProcessor::new();
-    let tu: Result<glsl_lang::ast::TranslationUnit, _> = processor
+    let tu: Result<hlsl_lang::ast::TranslationUnit, _> = processor
         .open("data/tests/pos_error_a.glsl")
         .expect("failed to open file")
         .builder()
@@ -30,7 +30,7 @@ fn file_pos_error() {
 
 #[test]
 fn str_pos_error() {
-    let tu: Result<glsl_lang::ast::TranslationUnit, _> =
+    let tu: Result<hlsl_lang::ast::TranslationUnit, _> =
         include_str!("../data/tests/pos_error_b.glsl")
             .builder()
             .opts(&ParseOptions {

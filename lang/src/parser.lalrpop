@@ -1,6 +1,6 @@
 use lang_util::position::LexerPosition;
 
-use glsl_lang_lexer::{IdentifierContext, Token, HasLexerError};
+use hlsl_lang_lexer::{IdentifierContext, Token, HasLexerError};
 
 use crate::{
     ast::{self, NodeContent},

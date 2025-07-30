@@ -18,7 +18,7 @@ pub trait HasLexerError {
     type Error: lang_util::error::LexicalError;
 }
 
-/// GLSL language lexer
+/// HLSL language lexer
 pub trait LangLexer<'i>: HasLexerError + Sized {
     /// Type of the input for this lexer
     type Input: 'i;
@@ -37,7 +37,7 @@ pub trait LangLexer<'i>: HasLexerError + Sized {
     fn run(self, ctx: ParseContext) -> Self::Iter;
 }
 
-/// GLSL language lexer iterator
+/// HLSL language lexer iterator
 pub trait LangLexerIterator:
     Iterator<Item = Result<(LexerPosition, Token, LexerPosition), Self::Error>> + HasLexerError
 {

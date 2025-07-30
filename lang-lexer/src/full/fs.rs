@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 
 use lang_util::position::LexerPosition;
 
-use glsl_lang_pp::{
+use hlsl_lang_pp::{
     exts::{Registry, DEFAULT_REGISTRY},
     last::{self, Event},
     processor::{
@@ -20,7 +20,7 @@ use super::{
     Directives, LexicalError,
 };
 
-pub use glsl_lang_pp::processor::fs::FileSystem;
+pub use hlsl_lang_pp::processor::fs::FileSystem;
 
 /// glsl-lang-pp filesystem lexer
 pub struct Lexer<'r, 'p, F: FileSystem> {
