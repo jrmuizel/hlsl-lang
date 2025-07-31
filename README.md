@@ -19,13 +19,11 @@ after [Dimitri Sabadie's `glsl` crate](https://github.com/phaazon/glsl).
     * [It's fast](#its-fast)
     * [Syntax nodes have location information](#syntax-nodes-have-location-information)
     * [Re-written HLSL transpiler](#re-written-hlsl-transpiler)
-    * [`hlsl-lang-quote` quoting support](#hlsl-lang-quote-quoting-support)
     * [Full preprocessing support](#full-preprocessing-support)
     * [Tested on the DXC test suite](#tested-on-the-dxc-test-suite)
   * [Why not pick this crate?](#why-not-pick-this-crate)
     * [Stateful lexer](#stateful-lexer)
     * [Parser generation and compile times](#parser-generation-and-compile-times)
-    * [`hlsl-lang-quote` state](#hlsl-lang-quote-state)
     * [AST differences](#ast-differences)
     * [Documentation](#documentation)
 * [Limitations](#limitations)
@@ -41,7 +39,7 @@ after [Dimitri Sabadie's `glsl` crate](https://github.com/phaazon/glsl).
 | [![Crates.io](https://img.shields.io/crates/v/hlsl-lang-pp)](https://crates.io/crates/hlsl-lang-pp)           | [`lang-pp`](lang-pp)                   | standalone preprocessor for the HLSL language                     |
 | [![Crates.io](https://img.shields.io/crates/v/hlsl-lang-lexer)](https://crates.io/crates/hlsl-lang-lexer)     | [`lang-lexer`](lang-lexer)             | Lexers for the HLSL language                                      |
 | [![Crates.io](https://img.shields.io/crates/v/hlsl-lang-types)](https://crates.io/crates/hlsl-lang-types)     | [`lang-types`](lang-types)             | AST and shared type definitions for the HLSL language             |
-| [![Crates.io](https://img.shields.io/crates/v/hlsl-lang-quote)](https://crates.io/crates/hlsl-lang-quote)     | [`lang-quote`](lang-quote)             | proc-macro crate to parse HLSL at compile-time                    |
+
 | [![Crates.io](https://img.shields.io/crates/v/hlsl-lang-cli)](https://crates.io/crates/hlsl-lang-cli)         | [`lang-cli`](lang-cli)                 | simple CLI tool to show HLSL syntax trees                         |
 | [![Crates.io](https://img.shields.io/crates/v/lang-util)](https://crates.io/crates/lang-util)                 | [`lang-util`](lang-util)               | utilities for implementing syntax trees                           |
 | [![Crates.io](https://img.shields.io/crates/v/lang-util-derive)](https://crates.io/crates/lang-util-derive)   | [`lang-util-derive`](lang-util-derive) | proc-macro crate to implement a syntax tree with span information |
@@ -84,17 +82,6 @@ Most nodes in the AST are wrapped in a special `Node` type, which holds:
 
 The HLSL transpiler has been partially rewritten to generate indented code.
 It's still a work-in-progress but generates (mostly) readable code.
-
-#### `hlsl-lang-quote` quoting support
-
-`hlsl-lang-quote` is the `hlsl-lang` version of `glsl-quasiquote`. It parses
-HLSL at compile-time to generate an AST. However, you can also insert parts
-of runtime-generated AST using a quoting syntax. Currently, the following
-insertion locations for the `#(rust code)` syntax are supported:
-
-* Identifier
-* Expression
-* Function name
 
 #### Full preprocessing support
 
@@ -171,10 +158,6 @@ item in a suitable source, and then matching the resulting AST, we can extract
 the result of any rule in the grammar. Currently, this interface panics if the
 output AST cannot be matched, so don't use it on unknown input. It's fine for
 testing though.
-
-#### `hlsl-lang-quote` state
-
-Parsing preprocessor directives is currently not supported.
 
 #### AST differences
 

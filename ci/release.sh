@@ -14,7 +14,6 @@ for P in lang-util-dev \
          lang-pp \
          lang-lexer \
          lang \
-         lang-quote \
          lang-cli ; do
   (
     set +e
