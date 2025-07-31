@@ -1,4 +1,4 @@
-use glsl_lang_lexer::{HasLexerError, ParseOptions};
+use hlsl_lang_lexer::{HasLexerError, ParseOptions};
 use lang_util::node::NodeContent;
 
 use crate::{
@@ -2505,7 +2505,7 @@ fn parse_multifile_pp_a() {
     use crate::lexer::full::fs::PreprocessorExt;
     use expect_test::expect;
 
-    let mut processor = glsl_lang_pp::processor::fs::StdProcessor::new();
+    let mut processor = hlsl_lang_pp::processor::fs::StdProcessor::new();
     let (mut tu, iter): (crate::ast::TranslationUnit, _) = processor
         .open("data/tests/multifile_pp_a.glsl")
         .expect("failed to open file")

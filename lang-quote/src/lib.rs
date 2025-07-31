@@ -3,7 +3,7 @@
 //! # Usage
 //!
 //! ```
-//! use hlsl_lang_quote::hlsl;
+//! use hlsl_lang_quote::glsl;
 //!
 //! // Parse a translation unit at compile time
 //! let ast = glsl! {
@@ -31,7 +31,7 @@
 //! chose, the following code will work:
 //!
 //! ```
-//! use hlsl_lang_quote::hlsl_expr;
+//! use hlsl_lang_quote::glsl_expr;
 //!
 //! // Parse an expression
 //! let ast = glsl_expr! {

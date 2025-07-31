@@ -97,7 +97,7 @@ fn quote_ident() {
 #[test]
 fn type_qualifier() {
     let _ = glsl! {
-        highp float x;
+        float x;
     };
 }
 

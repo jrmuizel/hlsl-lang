@@ -12,7 +12,7 @@ fn check<E: std::error::Error>(src: E, expected: Expect) {
 
 #[test]
 fn file_pos_error() {
-    let mut processor = glsl_lang_pp::processor::fs::StdProcessor::new();
+    let mut processor = hlsl_lang_pp::processor::fs::StdProcessor::new();
     let tu: Result<hlsl_lang::ast::TranslationUnit, _> = processor
         .open("data/tests/pos_error_a.glsl")
         .expect("failed to open file")

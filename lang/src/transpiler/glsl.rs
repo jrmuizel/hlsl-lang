@@ -2359,7 +2359,7 @@ mod tests {
     use super::*;
     use crate::parse::{DefaultLexer, Parsable, ParseError};
     use expect_test::{expect, Expect};
-    use glsl_lang_lexer::HasLexerError;
+    use hlsl_lang_lexer::HasLexerError;
 
     fn check_expr(src: &str, expected: Expect) {
         let expr = ast::Expr::parse(src).unwrap();

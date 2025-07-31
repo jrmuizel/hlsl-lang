@@ -45,6 +45,12 @@ pub enum Token {
     Mat3,
     #[lang_util(token = "float4x4", kind = "type name")]
     Mat4,
+    #[lang_util(token = "mat2x2", kind = "type name")]
+    Mat22,
+    #[lang_util(token = "mat3x3", kind = "type name")]
+    Mat33,
+    #[lang_util(token = "mat4x4", kind = "type name")]
+    Mat44,
     #[lang_util(token = "float2x3", kind = "type name")]
     Mat2x3,
     #[lang_util(token = "float2x4", kind = "type name")]
