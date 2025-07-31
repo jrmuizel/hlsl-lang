@@ -1,13 +1,13 @@
-# glsl-lang
+# hlsl-lang
 
-[![Crates.io](https://img.shields.io/crates/v/glsl-lang)](https://crates.io/crates/glsl-lang)
-[![docs.rs](https://img.shields.io/docsrs/glsl-lang)](https://docs.rs/glsl-lang/)
+[![Crates.io](https://img.shields.io/crates/v/hlsl-lang)](https://crates.io/crates/hlsl-lang)
+[![docs.rs](https://img.shields.io/docsrs/hlsl-lang)](https://docs.rs/hlsl-lang/)
 
-`glsl-lang` is a crate implementing a LALR parser for the GLSL 4.x language,
+`hlsl-lang` is a crate implementing a LALR parser for the HLSL language,
 with partial support for preprocessor directives. Its AST and features are
 modeled after [Dimitri Sabadie's `glsl` crate](https://github.com/phaazon/glsl).
 
-See the [homepage](https://github.com/alixinne/glsl-lang) for more detailed comparison
+See the [homepage](https://github.com/alixinne/hlsl-lang) for more detailed comparison
 elements.
 
 ## Examples
@@ -15,7 +15,7 @@ elements.
 ### Parsing GLSL
 
 ```rust
-use glsl_lang::{ast, parse::DefaultParse};
+use hlsl_lang::{ast, parse::DefaultParse};
 
 // Some GLSL source to parse
 let source = r#"void main() {
@@ -40,7 +40,7 @@ we're interested in.
 
 ```rust
 // parse::Parse is not implemented for ast::Expr with the default features
-use glsl_lang::{ast, parse::Parsable};
+use hlsl_lang::{ast, parse::Parsable};
 
 let source = "a = b ? 1.0 : 0.0";
 

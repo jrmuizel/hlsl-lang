@@ -157,9 +157,17 @@ pub enum Token {
     CBuffer,
     #[lang_util(token = "tbuffer", kind = "storage qualifier", kind = "type qualifier")]
     TBuffer,
-    #[lang_util(token = "register", kind = "storage qualifier", kind = "type qualifier")]
+    #[lang_util(
+        token = "register",
+        kind = "storage qualifier",
+        kind = "type qualifier"
+    )]
     Register,
-    #[lang_util(token = "packoffset", kind = "storage qualifier", kind = "type qualifier")]
+    #[lang_util(
+        token = "packoffset",
+        kind = "storage qualifier",
+        kind = "type qualifier"
+    )]
     Packoffset,
     #[lang_util(token = "static", kind = "storage qualifier", kind = "type qualifier")]
     Static,
