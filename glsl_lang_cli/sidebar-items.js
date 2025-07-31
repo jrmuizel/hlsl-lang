@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["main","output_glsl","output_json","output_text","parse_tu"],"struct":["Opts","ParseError"]};

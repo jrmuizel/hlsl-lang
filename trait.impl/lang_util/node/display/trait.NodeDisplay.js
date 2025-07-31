@@ -1,5 +1,5 @@
 (function() {
-    var implementors = Object.fromEntries([["glsl_lang",[]],["glsl_lang_types",[]],["lang_util",[]]]);
+    var implementors = Object.fromEntries([["hlsl_lang",[]],["hlsl_lang_types",[]],["lang_util",[]]]);
     if (window.register_implementors) {
         window.register_implementors(implementors);
     } else {

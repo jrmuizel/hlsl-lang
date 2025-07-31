@@ -1,0 +1,1 @@
+searchState.loadedDescShard("hlsl_lang_cli", 0, "<code>hlsl-lang</code> debugging CLI.\nhlsl-lang command-line interface\noutput format (text, json or hlsl)\nReturns the argument unchanged.\nReturns the argument unchanged.\nCalls <code>U::from(self)</code>.\nCalls <code>U::from(self)</code>.\nCLI entry point\ninput file path")

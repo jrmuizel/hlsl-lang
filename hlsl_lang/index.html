@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="`hlsl-lang` is a crate implementing a LALR parser for the HLSL language, with partial support for preprocessor directives. Its AST and features are modeled after Dimitri Sabadie’s `glsl` crate."><title>hlsl_lang - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-1a91846b.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="hlsl_lang" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../static.files/storage-4e99c027.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../hlsl_lang/index.html">hlsl_<wbr>lang</a><span class="version">0.8.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#examples" title="Examples">Examples</a><ul><li><a href="#parsing-glsl" title="Parsing GLSL">Parsing GLSL</a></li></ul></li><li><a href="#crate-features" title="Crate features">Crate features</a></li><li><a href="#useful-links" title="Useful links">Useful links</a></li></ul><h3><a href="#reexports">Crate Items</a></h3><ul class="block"><li><a href="#reexports" title="Re-exports">Re-exports</a></li><li><a href="#modules" title="Modules">Modules</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>hlsl_lang</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/hlsl_lang/lib.rs.html#1-66">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><code>hlsl-lang</code> is a crate implementing a LALR parser for the HLSL language,
+with partial support for preprocessor directives. Its AST and features are
+modeled after <a href="https://github.com/phaazon/glsl">Dimitri Sabadie’s <code>glsl</code> crate</a>.</p>
+<p>See the <a href="https://github.com/alixinne/hlsl-lang">homepage</a> for more detailed comparison
+elements.</p>
+<h2 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h2><h3 id="parsing-glsl"><a class="doc-anchor" href="#parsing-glsl">§</a>Parsing GLSL</h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>hlsl_lang::{ast, parse::DefaultParse};
+
+<span class="comment">// Some GLSL source to parse
+</span><span class="kw">let </span>source = <span class="string">r#"void main() {
+    gl_FragColor = vec4(1., 0.5, 0.25, 1.);
+}"#</span>;
+
+<span class="comment">// Try parsing the source
+</span><span class="kw">let </span>ast = ast::TranslationUnit::parse(source);
+<span class="macro">assert!</span>(ast.is_ok());</code></pre></div>
+<h2 id="crate-features"><a class="doc-anchor" href="#crate-features">§</a>Crate features</h2>
+<p>This crate has the following features:</p>
+<ul>
+<li><code>parser-expr</code>: generate parser code for parsing GLSL expressions</li>
+<li><code>parser-statement</code>: generate parser code for parsing GLSL statements</li>
+</ul>
+<p>None of these features are enabled by default, as they significantly increase the compile
+times. As an alternative, you may use the <a href="parse/trait.Parsable.html" title="trait hlsl_lang::parse::Parsable"><code>Parsable</code></a> trait, which
+wraps grammar rules in suitable source and matches the result to extract the part of the AST
+we’re interested in.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// parse::Parse is not implemented for ast::Expr with the default features
+</span><span class="kw">use </span>hlsl_lang::{ast, parse::Parsable};
+
+<span class="kw">let </span>source = <span class="string">"a = b ? 1.0 : 0.0"</span>;
+
+<span class="comment">// Parse with Parsable::parse
+</span><span class="kw">let </span>ast = ast::Expr::parse(source);
+<span class="macro">assert!</span>(ast.is_ok());</code></pre></div>
+<h2 id="useful-links"><a class="doc-anchor" href="#useful-links">§</a>Useful links</h2>
+<ul>
+<li><a href="https://www.khronos.org/registry/OpenGL/specs/gl/GLSLangSpec.4.60.pdf">The OpenGL Shading Language Version 4.60</a></li>
+</ul>
+</div></details><h2 id="reexports" class="section-header">Re-exports<a href="#reexports" class="anchor">§</a></h2><dl class="item-table reexports"><dt id="reexport.lexer"><code>pub use <a class="mod" href="../hlsl_lang_lexer/index.html" title="mod hlsl_lang_lexer">hlsl_lang_lexer</a> as lexer;</code></dt></dl><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="ast/index.html" title="mod hlsl_lang::ast">ast</a></dt><dd>HLSL abstract syntax tree and grammar.</dd><dt><a class="mod" href="parse/index.html" title="mod hlsl_lang::parse">parse</a></dt><dd>Parsing utilities and entry points</dd><dt><a class="mod" href="parser/index.html" title="mod hlsl_lang::parser">parser</a><span title="Restricted Visibility">&nbsp;🔒</span> </dt><dt><a class="mod" href="transpiler/index.html" title="mod hlsl_lang::transpiler">transpiler</a></dt><dd>GLSL transpilers – i.e. going from GLSL to anything else.</dd><dt><a class="mod" href="visitor/index.html" title="mod hlsl_lang::visitor">visitor</a></dt><dd>AST visitors (i.e. on-the-fly mutation at different places in the AST).</dd></dl></section></div></main></body></html>

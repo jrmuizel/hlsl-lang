@@ -1,5 +1,5 @@
 (function() {
-    var type_impls = Object.fromEntries([["glsl_lang",[]]]);
+    var type_impls = Object.fromEntries([["hlsl_lang",[]]]);
     if (window.register_type_impls) {
         window.register_type_impls(type_impls);
     } else {

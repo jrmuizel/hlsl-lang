@@ -1,5 +1,5 @@
 (function() {
-    var implementors = Object.fromEntries([["glsl_lang_pp",[["impl HasFileNumber for <a class=\"struct\" href=\"glsl_lang_pp/processor/expand/struct.ExpandLocation.html\" title=\"struct glsl_lang_pp::processor::expand::ExpandLocation\">ExpandLocation</a>"]]]]);
+    var implementors = Object.fromEntries([["hlsl_lang_pp",[["impl HasFileNumber for <a class=\"struct\" href=\"hlsl_lang_pp/processor/expand/struct.ExpandLocation.html\" title=\"struct hlsl_lang_pp::processor::expand::ExpandLocation\">ExpandLocation</a>"]]]]);
     if (window.register_implementors) {
         window.register_implementors(implementors);
     } else {
