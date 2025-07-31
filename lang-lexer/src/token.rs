@@ -15,54 +15,48 @@ pub enum Token {
     UInt,
     #[lang_util(token = "double", kind = "type name")]
     Double,
-    #[lang_util(token = "bvec2", kind = "type name")]
+    #[lang_util(token = "bool2", kind = "type name")]
     BVec2,
-    #[lang_util(token = "bvec3", kind = "type name")]
+    #[lang_util(token = "bool3", kind = "type name")]
     BVec3,
-    #[lang_util(token = "bvec4", kind = "type name")]
+    #[lang_util(token = "bool4", kind = "type name")]
     BVec4,
-    #[lang_util(token = "ivec2", kind = "type name")]
+    #[lang_util(token = "int2", kind = "type name")]
     IVec2,
-    #[lang_util(token = "ivec3", kind = "type name")]
+    #[lang_util(token = "int3", kind = "type name")]
     IVec3,
-    #[lang_util(token = "ivec4", kind = "type name")]
+    #[lang_util(token = "int4", kind = "type name")]
     IVec4,
-    #[lang_util(token = "uvec2", kind = "type name")]
+    #[lang_util(token = "uint2", kind = "type name")]
     UVec2,
-    #[lang_util(token = "uvec3", kind = "type name")]
+    #[lang_util(token = "uint3", kind = "type name")]
     UVec3,
-    #[lang_util(token = "uvec4", kind = "type name")]
+    #[lang_util(token = "uint4", kind = "type name")]
     UVec4,
-    #[lang_util(token = "vec2", kind = "type name")]
+    #[lang_util(token = "float2", kind = "type name")]
     Vec2,
-    #[lang_util(token = "vec3", kind = "type name")]
+    #[lang_util(token = "float3", kind = "type name")]
     Vec3,
-    #[lang_util(token = "vec4", kind = "type name")]
+    #[lang_util(token = "float4", kind = "type name")]
     Vec4,
-    #[lang_util(token = "mat2", kind = "type name")]
+    #[lang_util(token = "float2x2", kind = "type name")]
     Mat2,
-    #[lang_util(token = "mat3", kind = "type name")]
+    #[lang_util(token = "float3x3", kind = "type name")]
     Mat3,
-    #[lang_util(token = "mat4", kind = "type name")]
+    #[lang_util(token = "float4x4", kind = "type name")]
     Mat4,
-    #[lang_util(token = "mat2x2", kind = "type name")]
-    Mat2x2,
-    #[lang_util(token = "mat2x3", kind = "type name")]
+    #[lang_util(token = "float2x3", kind = "type name")]
     Mat2x3,
-    #[lang_util(token = "mat2x4", kind = "type name")]
+    #[lang_util(token = "float2x4", kind = "type name")]
     Mat2x4,
-    #[lang_util(token = "mat3x2", kind = "type name")]
+    #[lang_util(token = "float3x2", kind = "type name")]
     Mat3x2,
-    #[lang_util(token = "mat3x3", kind = "type name")]
-    Mat3x3,
-    #[lang_util(token = "mat3x4", kind = "type name")]
+    #[lang_util(token = "float3x4", kind = "type name")]
     Mat3x4,
-    #[lang_util(token = "mat4x2", kind = "type name")]
+    #[lang_util(token = "float4x2", kind = "type name")]
     Mat4x2,
-    #[lang_util(token = "mat4x3", kind = "type name")]
+    #[lang_util(token = "float4x3", kind = "type name")]
     Mat4x3,
-    #[lang_util(token = "mat4x4", kind = "type name")]
-    Mat4x4,
     #[lang_util(token = "dvec2", kind = "type name")]
     DVec2,
     #[lang_util(token = "dvec3", kind = "type name")]
@@ -153,6 +147,28 @@ pub enum Token {
     Attribute,
     #[lang_util(token = "varying", kind = "storage qualifier", kind = "type qualifier")]
     Varying,
+    #[lang_util(token = "cbuffer", kind = "storage qualifier", kind = "type qualifier")]
+    CBuffer,
+    #[lang_util(token = "tbuffer", kind = "storage qualifier", kind = "type qualifier")]
+    TBuffer,
+    #[lang_util(token = "register", kind = "storage qualifier", kind = "type qualifier")]
+    Register,
+    #[lang_util(token = "packoffset", kind = "storage qualifier", kind = "type qualifier")]
+    Packoffset,
+    #[lang_util(token = "static", kind = "storage qualifier", kind = "type qualifier")]
+    Static,
+    #[lang_util(token = "extern", kind = "storage qualifier", kind = "type qualifier")]
+    Extern,
+    #[lang_util(token = "inline", kind = "storage qualifier", kind = "type qualifier")]
+    Inline,
+    #[lang_util(token = "SV_Position", kind = "semantic")]
+    SvPosition,
+    #[lang_util(token = "SV_Target", kind = "semantic")]
+    SvTarget,
+    #[lang_util(token = "SV_VertexID", kind = "semantic")]
+    SvVertexId,
+    #[lang_util(token = "SV_InstanceID", kind = "semantic")]
+    SvInstanceId,
     #[lang_util(
         token = "noperspective",
         kind = "interpolation qualifier",
@@ -175,7 +191,7 @@ pub enum Token {
     Layout,
     #[lang_util(token = "atomic_uint", kind = "type name")]
     AtomicUInt,
-    #[lang_util(token = "sampler1D", kind = "type name")]
+    #[lang_util(token = "Texture1D", kind = "type name")]
     Sampler1D,
     #[lang_util(
         token = "sampler1DShadow",
@@ -211,7 +227,7 @@ pub enum Token {
         kind = "vulkan type name"
     )]
     USampler1DArray,
-    #[lang_util(token = "sampler2D", kind = "type name")]
+    #[lang_util(token = "Texture2D", kind = "type name")]
     Sampler2D,
     #[lang_util(
         token = "sampler2DShadow",
@@ -291,13 +307,13 @@ pub enum Token {
         kind = "vulkan type name"
     )]
     USampler2DMsArray,
-    #[lang_util(token = "sampler3D", kind = "type name")]
+    #[lang_util(token = "Texture3D", kind = "type name")]
     Sampler3D,
     #[lang_util(token = "isampler3D", kind = "type name")]
     ISampler3D,
     #[lang_util(token = "usampler3D", kind = "type name")]
     USampler3D,
-    #[lang_util(token = "samplerCube", kind = "type name")]
+    #[lang_util(token = "TextureCube", kind = "type name")]
     SamplerCube,
     #[lang_util(
         token = "samplerCubeShadow",
