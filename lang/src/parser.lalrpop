@@ -125,6 +125,9 @@ type_specifier_non_struct: ast::TypeSpecifierNonArrayData = {
     "float2x2"               => ast::TypeSpecifierNonArrayData::Mat2,
     "float3x3"               => ast::TypeSpecifierNonArrayData::Mat3,
     "float4x4"               => ast::TypeSpecifierNonArrayData::Mat4,
+    "mat2x2"                 => ast::TypeSpecifierNonArrayData::Mat22,
+    "mat3x3"                 => ast::TypeSpecifierNonArrayData::Mat33,
+    "mat4x4"                 => ast::TypeSpecifierNonArrayData::Mat44,
     "float2x3"               => ast::TypeSpecifierNonArrayData::Mat23,
     "float2x4"               => ast::TypeSpecifierNonArrayData::Mat24,
     "float3x2"               => ast::TypeSpecifierNonArrayData::Mat32,
@@ -564,9 +567,9 @@ interpolation_qualifier: ast::InterpolationQualifier = {
 };
 
 precision_qualifier_data: ast::PrecisionQualifierData = {
-    "static"  => ast::PrecisionQualifierData::High,
-    "extern"  => ast::PrecisionQualifierData::Medium,
-    "inline"  => ast::PrecisionQualifierData::Low,
+    "highp"   => ast::PrecisionQualifierData::High,
+    "mediump" => ast::PrecisionQualifierData::Medium,
+    "lowp"    => ast::PrecisionQualifierData::Low,
 };
 
 precision_qualifier: ast::PrecisionQualifier = {
@@ -932,6 +935,9 @@ extern {
         "subroutine"             => Token::Subroutine,
         "layout"                 => Token::Layout,
         "precision"              => Token::Precision,
+        "highp"                  => Token::HighPrecision,
+        "mediump"                => Token::MediumPrecision,
+        "lowp"                   => Token::LowPrecision,
         "SV_Position"            => Token::SvPosition,
         "SV_Target"              => Token::SvTarget,
         "SV_VertexID"            => Token::SvVertexId,
@@ -960,6 +966,9 @@ extern {
         "float2x2"               => Token::Mat2,
         "float3x3"               => Token::Mat3,
         "float4x4"               => Token::Mat4,
+        "mat2x2"                 => Token::Mat22,
+        "mat3x3"                 => Token::Mat33,
+        "mat4x4"                 => Token::Mat44,
         "float2x3"               => Token::Mat2x3,
         "float2x4"               => Token::Mat2x4,
         "float3x2"               => Token::Mat3x2,
