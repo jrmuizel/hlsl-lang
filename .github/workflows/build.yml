@@ -121,10 +121,6 @@ jobs:
           cargo test -p glsl-lang -q --test glslang --no-default-features
           cargo test -p glsl-lang -q --test glslang --no-default-features --features lexer-full
 
-      - name: Run glsl-lang-quote tests
-        run: |
-          cargo test -p glsl-lang-quote
-
   release:
     name: Release crate
     needs: [check, test]

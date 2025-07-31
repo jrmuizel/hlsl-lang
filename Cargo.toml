@@ -8,7 +8,6 @@ default-members = [
 	"lang-util",
 	"lang-util-derive",
 	"lang-util-dev",
-	"lang-quote",
 	"lang-cli",
 ]
 
@@ -20,7 +19,6 @@ members = [
 	"lang-util",
 	"lang-util-derive",
 	"lang-util-dev",
-	"lang-quote",
 	"lang-cli",
 	"xtask",
 ]
@@ -30,7 +28,6 @@ hlsl-lang       = { path = "lang" }
 hlsl-lang-pp    = { path = "lang-pp" }
 hlsl-lang-lexer = { path = "lang-lexer" }
 hlsl-lang-types = { path = "lang-types" }
-hlsl-lang-quote = { path = "lang-quote" }
 hlsl-lang-cli   = { path = "lang-cli" }
 
 lang-util        = { path = "lang-util" }
