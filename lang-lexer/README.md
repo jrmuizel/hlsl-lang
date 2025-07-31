@@ -1,7 +1,7 @@
-# glsl-lang-lexer
+# hlsl-lang-lexer
 
-[![Crates.io](https://img.shields.io/crates/v/glsl-lang-lexer)](https://crates.io/crates/glsl-lang-lexer)
-[![docs.rs](https://img.shields.io/docsrs/glsl-lang-lexer)](https://docs.rs/glsl-lang-lexer/)
+[![Crates.io](https://img.shields.io/crates/v/hlsl-lang-lexer)](https://crates.io/crates/hlsl-lang-lexer)
+[![docs.rs](https://img.shields.io/docsrs/hlsl-lang-lexer)](https://docs.rs/hlsl-lang-lexer/)
 
 
 

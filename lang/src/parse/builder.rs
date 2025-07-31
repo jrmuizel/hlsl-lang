@@ -13,7 +13,9 @@ pub struct ParseBuilder<'i, 'o, 'c, 'p, L: hlsl_lang_lexer::LangLexer<'i>, T: Ha
     parser: Option<&'p T::Parser>,
 }
 
-impl<'i, 'o, 'c, 'p, L: hlsl_lang_lexer::LangLexer<'i>, T: HasParser> ParseBuilder<'i, 'o, 'c, 'p, L, T> {
+impl<'i, 'o, 'c, 'p, L: hlsl_lang_lexer::LangLexer<'i>, T: HasParser>
+    ParseBuilder<'i, 'o, 'c, 'p, L, T>
+{
     /// Create a new parse builder from the given input string
     pub fn new(source: L::Input) -> Self {
         Self {
