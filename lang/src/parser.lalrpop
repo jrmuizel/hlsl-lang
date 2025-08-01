@@ -100,6 +100,28 @@ struct_specifier: ast::StructSpecifier = {
     }.spanned(l, r),
 };
 
+class_member: ast::ClassMember = {
+    // Field specification: type identifier[, identifier, ...] ;
+    <l:@L> <f:struct_field_specifier> <r:@R> => ast::ClassMemberData::Field(f).spanned(l, r),
+    // Method definition: type identifier ( params ) { body }
+    <l:@L> <rt:fully_specified_type> <n:identifier> "(" <p:comma<function_parameter_declaration>> ")" <s:compound_statement> <r:@R> => 
+        ast::ClassMemberData::Method(ast::FunctionDefinitionData {
+            prototype: ast::FunctionPrototypeData {
+                ty: rt,
+                name: n,
+                parameters: p,
+            }.spanned(l.clone(), s.span().start),
+            statement: s,
+        }.spanned(l, r)),
+};
+
+class_specifier: ast::ClassSpecifier = {
+    <l:@L> "class" <i:identifier?> "{" <m:class_member*> "}" <r:@R> => ast::ClassSpecifierData {
+        name: i.map(|ident| ctx.add_type_name(ident)),
+        members: m,
+    }.spanned(l, r),
+};
+
 type_specifier_non_struct: ast::TypeSpecifierNonArrayData = {
     "void"                   => ast::TypeSpecifierNonArrayData::Void,
     "bool"                   => ast::TypeSpecifierNonArrayData::Bool,
@@ -256,6 +278,7 @@ type_specifier_non_struct: ast::TypeSpecifierNonArrayData = {
 type_specifier_non_array: ast::TypeSpecifierNonArray = {
     <l:@L> <t:type_specifier_non_struct> <r:@R> => t.spanned(l, r),
     <l:@L> <s:struct_specifier>          <r:@R> => ast::TypeSpecifierNonArrayData::Struct(s).spanned(l, r),
+    <l:@L> <c:class_specifier>           <r:@R> => ast::TypeSpecifierNonArrayData::Class(c).spanned(l, r),
     <l:@L> <t:type_name>                 <r:@R> => ast::TypeSpecifierNonArrayData::TypeName(t).spanned(l, r),
 };
 
@@ -1106,6 +1129,7 @@ extern {
         "discard"                => Token::Discard,
         "return"                 => Token::Return,
         "struct"                 => Token::Struct,
+        "class"                  => Token::Class,
         "#define"                => Token::PpDefine,
         "#else"                  => Token::PpElse,
         "#elif"                  => Token::PpElif,

@@ -3287,3 +3287,58 @@ fn parse_dangling_else() {
         .into())
     );
 }
+
+#[test]
+fn parse_class_with_method() {
+    let field = ast::StructFieldSpecifierData {
+        qualifier: None,
+        ty: ast::TypeSpecifierData {
+            ty: ast::TypeSpecifierNonArrayData::Float.into(),
+            array_specifier: None,
+        }
+        .into(),
+        identifiers: vec!["value".into_node()],
+    };
+
+    let method_prototype = ast::FunctionPrototypeData {
+        ty: ast::FullySpecifiedTypeData {
+            qualifier: None,
+            ty: ast::TypeSpecifierData {
+                ty: ast::TypeSpecifierNonArrayData::Float.into(),
+                array_specifier: None,
+            }
+            .into(),
+        }
+        .into(),
+        name: "getValue".into_node(),
+        parameters: vec![],
+    };
+
+    let method_body = ast::CompoundStatementData {
+        statement_list: vec![ast::StatementData::Simple(Box::new(
+            ast::SimpleStatementData::Jump(ast::JumpStatementData::Return(Some(
+                ast::ExprData::Variable("value".into_node()).into(),
+            ))),
+        ))
+        .into()],
+    };
+
+    let method = ast::FunctionDefinitionData {
+        prototype: method_prototype.into(),
+        statement: method_body.into(),
+    };
+
+    let expected: ast::ClassSpecifier = ast::ClassSpecifierData {
+        name: Some("MyClass".into_node()),
+        members: vec![
+            ast::ClassMemberData::Field(field.into()).into(),
+            ast::ClassMemberData::Method(method.into()).into(),
+        ],
+    }
+    .into();
+
+    assert_eq!(
+        ast::ClassSpecifier::parse("class MyClass { float value; float getValue() { return value; } }"),
+        Ok(expected)
+    );
+}
