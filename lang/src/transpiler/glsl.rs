@@ -17,13 +17,13 @@
 //!
 //! The second solution is better because it lets the user handle the memory the way they want:
 //! they might just use a dynamic buffer that implements [`Write`] or simply pass a `&mut`
-//! [`String`]. It’s up to you.
+//! [`String`]. It's up to you.
 //!
 //! # How to use this module
 //!
 //! First, head over to the [`ast`] module. That module defines the AST items defined by GLSL. This
 //! very module provides you with functions like `show_*` taking the AST item and writing it to a
-//! [`Write`] object. You’re likely to be interested in [`show_translation_unit`] to start with.
+//! [`Write`] object. You're likely to be interested in [`show_translation_unit`] to start with.
 //!
 //! [`Cow<str>`]: std::borrow::Cow
 //! [`Write`]: std::fmt::Write
@@ -857,6 +857,7 @@ where
         ast::TypeSpecifierNonArrayData::ISubpassInputMs => f.write_str("isubpassInputMS"),
         ast::TypeSpecifierNonArrayData::USubpassInputMs => f.write_str("usubpassInputMS"),
         ast::TypeSpecifierNonArrayData::Struct(ref st) => show_struct_non_declaration(f, st, state),
+        ast::TypeSpecifierNonArrayData::Class(ref cl) => show_class_non_declaration(f, cl, state),
         ast::TypeSpecifierNonArrayData::TypeName(ref tn) => show_type_name(f, tn, state),
     }
 }
@@ -913,17 +914,10 @@ where
 
     state.enter_block(f)?;
 
-    for member in &st.members {
+    for field in &st.fields {
         state.flush_line(f)?;
-        match &member.content {
-            ast::StructMemberData::Field(field) => {
-                show_struct_field(f, field, state)?;
-                state.write_struct_field_separator(f)?;
-            },
-            ast::StructMemberData::Method(method) => {
-                show_function_definition(f, method, state)?;
-            },
-        }
+        show_struct_field(f, field, state)?;
+        state.write_struct_field_separator(f)?;
     }
 
     state.exit_block(f)?;
@@ -961,7 +955,7 @@ where
     show_type_specifier(f, &field.ty, state)?;
     f.write_char(' ')?;
 
-    // there’s at least one identifier
+    // there's at least one identifier
     let mut identifiers = field.identifiers.iter();
     let identifier = identifiers.next().unwrap();
 
@@ -974,6 +968,58 @@ where
     }
 
     Ok(())
+}
+
+/// Transpile a class (without declaration terminator) to GLSL
+pub fn show_class_non_declaration<F>(
+    f: &mut F,
+    cl: &ast::ClassSpecifier,
+    state: &mut FormattingState<'_>,
+) -> std::fmt::Result
+where
+    F: Write + ?Sized,
+{
+    f.write_str("class")?;
+
+    if let Some(name) = &cl.name {
+        f.write_char(' ')?;
+        show_type_name(f, name, state)?;
+    }
+
+    f.write_char(' ')?;
+
+    state.enter_block(f)?;
+
+    for member in &cl.members {
+        state.flush_line(f)?;
+        match &member.content {
+            ast::ClassMemberData::Field(field) => {
+                show_struct_field(f, field, state)?;
+                state.write_struct_field_separator(f)?;
+            },
+            ast::ClassMemberData::Method(method) => {
+                show_function_definition(f, method, state)?;
+                state.flush_line(f)?;
+            },
+        }
+    }
+
+    state.exit_block(f)?;
+
+    Ok(())
+}
+
+/// Transpile a class to GLSL
+pub fn show_class<F>(
+    f: &mut F,
+    cl: &ast::ClassSpecifier,
+    state: &mut FormattingState<'_>,
+) -> std::fmt::Result
+where
+    F: Write + ?Sized,
+{
+    show_class_non_declaration(f, cl, state)?;
+    state.write_struct_declaration_terminator(f)
 }
 
 /// Transpile an array_spec to GLSL

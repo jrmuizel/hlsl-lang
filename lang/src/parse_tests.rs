@@ -414,7 +414,7 @@ fn parse_struct_specifier_one_field() {
     };
     let expected: ast::StructSpecifier = ast::StructSpecifierData {
         name: Some("TestStruct".into_node()),
-        members: vec![ast::StructMemberData::Field(field.into()).into()],
+        fields: vec![field.into()],
     }
     .into();
 
@@ -483,12 +483,12 @@ fn parse_struct_specifier_multi_fields() {
     };
     let expected: ast::StructSpecifier = ast::StructSpecifierData {
         name: Some("_TestStruct_934i".into_node()),
-        members: vec![
-            ast::StructMemberData::Field(foo_field.into()).into(),
-            ast::StructMemberData::Field(bar.into()).into(),
-            ast::StructMemberData::Field(zoo.into()).into(),
-            ast::StructMemberData::Field(foobar.into()).into(),
-            ast::StructMemberData::Field(s.into()).into(),
+        fields: vec![
+            foo_field.into(),
+            bar.into(),
+            zoo.into(),
+            foobar.into(),
+            s.into(),
         ],
     }
     .into();
@@ -3289,7 +3289,7 @@ fn parse_dangling_else() {
 }
 
 #[test]
-fn parse_struct_with_method() {
+fn parse_class_with_method() {
     let field = ast::StructFieldSpecifierData {
         qualifier: None,
         ty: ast::TypeSpecifierData {
@@ -3328,17 +3328,17 @@ fn parse_struct_with_method() {
         statement: method_body.into(),
     };
 
-    let expected: ast::StructSpecifier = ast::StructSpecifierData {
-        name: Some("MyStruct".into_node()),
+    let expected: ast::ClassSpecifier = ast::ClassSpecifierData {
+        name: Some("MyClass".into_node()),
         members: vec![
-            ast::StructMemberData::Field(field.into()).into(),
-            ast::StructMemberData::Method(method.into()).into(),
+            ast::ClassMemberData::Field(field.into()).into(),
+            ast::ClassMemberData::Method(method.into()).into(),
         ],
     }
     .into();
 
     assert_eq!(
-        ast::StructSpecifier::parse("struct MyStruct { float value; float getValue() { return value; } }"),
+        ast::ClassSpecifier::parse("class MyClass { float value; float getValue() { return value; } }"),
         Ok(expected)
     );
 }

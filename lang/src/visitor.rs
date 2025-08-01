@@ -240,11 +240,17 @@ macro_rules! make_visitor_trait {
         Visit::Children
       }
 
-      fn visit_struct_member(&mut self, _: $($ref)* ast::StructMember) -> Visit {
+      
+
+      fn visit_struct_specifier(&mut self, _: $($ref)* ast::StructSpecifier) -> Visit {
         Visit::Children
       }
 
-      fn visit_struct_specifier(&mut self, _: $($ref)* ast::StructSpecifier) -> Visit {
+      fn visit_class_specifier(&mut self, _: $($ref)* ast::ClassSpecifier) -> Visit {
+        Visit::Children
+      }
+
+      fn visit_class_member(&mut self, _: $($ref)* ast::ClassMember) -> Visit {
         Visit::Children
       }
 
@@ -856,6 +862,7 @@ macro_rules! make_host_trait {
         if visit == Visit::Children {
           match $($ref)* **self {
             ast::TypeSpecifierNonArrayData::Struct(ss) => ss.$mthd_name(visitor),
+            ast::TypeSpecifierNonArrayData::Class(cs) => cs.$mthd_name(visitor),
             ast::TypeSpecifierNonArrayData::TypeName(tn) => tn.$mthd_name(visitor),
             _ => (),
           }
@@ -1148,28 +1155,14 @@ macro_rules! make_host_trait {
         if visit == Visit::Children {
           self.name.$mthd_name(visitor);
 
-          for member in $($ref)* self.members {
-            member.$mthd_name(visitor);
+          for field in $($ref)* self.fields {
+            field.$mthd_name(visitor);
           }
         }
       }
     }
 
-    impl $host_ty for ast::StructMember {
-      fn $mthd_name<V>($($ref)* self, visitor: &mut V)
-      where
-          V: $visitor_ty,
-      {
-        let visit = visitor.visit_struct_member(self);
 
-        if visit == Visit::Children {
-          match $($ref)* self.content {
-            ast::StructMemberData::Field(field) => field.$mthd_name(visitor),
-            ast::StructMemberData::Method(method) => method.$mthd_name(visitor),
-          }
-        }
-      }
-    }
 
     impl $host_ty for ast::StructFieldSpecifier {
       fn $mthd_name<V>($($ref)* self, visitor: &mut V)
@@ -1184,6 +1177,39 @@ macro_rules! make_host_trait {
 
           for identifier in $($ref)* self.identifiers {
             identifier.$mthd_name(visitor);
+          }
+        }
+      }
+    }
+
+    impl $host_ty for ast::ClassSpecifier {
+      fn $mthd_name<V>($($ref)* self, visitor: &mut V)
+      where
+          V: $visitor_ty,
+      {
+        let visit = visitor.visit_class_specifier(self);
+
+        if visit == Visit::Children {
+          self.name.$mthd_name(visitor);
+
+          for member in $($ref)* self.members {
+            member.$mthd_name(visitor);
+          }
+        }
+      }
+    }
+
+    impl $host_ty for ast::ClassMember {
+      fn $mthd_name<V>($($ref)* self, visitor: &mut V)
+      where
+          V: $visitor_ty,
+      {
+        let visit = visitor.visit_class_member(self);
+
+        if visit == Visit::Children {
+          match $($ref)* self.content {
+            ast::ClassMemberData::Field(field) => field.$mthd_name(visitor),
+            ast::ClassMemberData::Method(method) => method.$mthd_name(visitor),
           }
         }
       }

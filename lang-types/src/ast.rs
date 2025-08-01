@@ -612,6 +612,9 @@ pub enum TypeSpecifierNonArrayData {
     /// `struct` type specifier
     #[lang_util(display(extra = "struct"))]
     Struct(StructSpecifier),
+    /// `class` type specifier
+    #[lang_util(display(extra = "class"))]
+    Class(ClassSpecifier),
     /// Raw type name
     TypeName(TypeName),
 }
@@ -668,8 +671,8 @@ impl From<TypeSpecifierNonArrayData> for TypeSpecifierData {
 pub struct StructSpecifierData {
     /// Structure name
     pub name: Option<TypeName>,
-    /// Struct members (fields and methods)
-    pub members: Vec<StructMember>,
+    /// Struct fields
+    pub fields: Vec<StructFieldSpecifier>,
 }
 
 impl_node_content! {
@@ -677,11 +680,27 @@ impl_node_content! {
     pub type StructSpecifier = Node<StructSpecifierData>;
 }
 
-/// A member of a struct, which can be a field or a method.
+/// Class specifier. Used to create new, user-defined types with methods.
 #[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "serde", serde(crate = "rserde"))]
-pub enum StructMemberData {
+pub struct ClassSpecifierData {
+    /// Class name
+    pub name: Option<TypeName>,
+    /// Class members (fields and methods)
+    pub members: Vec<ClassMember>,
+}
+
+impl_node_content! {
+    /// Type alias for `Node<ClassSpecifierData>`.
+    pub type ClassSpecifier = Node<ClassSpecifierData>;
+}
+
+/// A member of a class, which can be a field or a method.
+#[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", serde(crate = "rserde"))]
+pub enum ClassMemberData {
     /// Field declaration
     Field(StructFieldSpecifier),
     /// Method definition
@@ -689,8 +708,8 @@ pub enum StructMemberData {
 }
 
 impl_node_content! {
-    /// Type alias for `Node<StructMemberData>`.
-    pub type StructMember = Node<StructMemberData>;
+    /// Type alias for `Node<ClassMemberData>`.
+    pub type ClassMember = Node<ClassMemberData>;
 }
 
 /// Struct field specifier. Used to add fields to struct specifiers.
