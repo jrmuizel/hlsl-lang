@@ -240,6 +240,10 @@ macro_rules! make_visitor_trait {
         Visit::Children
       }
 
+      fn visit_struct_member(&mut self, _: $($ref)* ast::StructMember) -> Visit {
+        Visit::Children
+      }
+
       fn visit_struct_specifier(&mut self, _: $($ref)* ast::StructSpecifier) -> Visit {
         Visit::Children
       }
@@ -1144,8 +1148,24 @@ macro_rules! make_host_trait {
         if visit == Visit::Children {
           self.name.$mthd_name(visitor);
 
-          for field in $($ref)* self.fields {
-            field.$mthd_name(visitor);
+          for member in $($ref)* self.members {
+            member.$mthd_name(visitor);
+          }
+        }
+      }
+    }
+
+    impl $host_ty for ast::StructMember {
+      fn $mthd_name<V>($($ref)* self, visitor: &mut V)
+      where
+          V: $visitor_ty,
+      {
+        let visit = visitor.visit_struct_member(self);
+
+        if visit == Visit::Children {
+          match $($ref)* self.content {
+            ast::StructMemberData::Field(field) => field.$mthd_name(visitor),
+            ast::StructMemberData::Method(method) => method.$mthd_name(visitor),
           }
         }
       }

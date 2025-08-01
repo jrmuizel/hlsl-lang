@@ -913,10 +913,17 @@ where
 
     state.enter_block(f)?;
 
-    for field in &st.fields {
+    for member in &st.members {
         state.flush_line(f)?;
-        show_struct_field(f, field, state)?;
-        state.write_struct_field_separator(f)?;
+        match &member.content {
+            ast::StructMemberData::Field(field) => {
+                show_struct_field(f, field, state)?;
+                state.write_struct_field_separator(f)?;
+            },
+            ast::StructMemberData::Method(method) => {
+                show_function_definition(f, method, state)?;
+            },
+        }
     }
 
     state.exit_block(f)?;

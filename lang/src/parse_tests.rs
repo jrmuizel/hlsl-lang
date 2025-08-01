@@ -414,7 +414,7 @@ fn parse_struct_specifier_one_field() {
     };
     let expected: ast::StructSpecifier = ast::StructSpecifierData {
         name: Some("TestStruct".into_node()),
-        fields: vec![field.into()],
+        members: vec![ast::StructMemberData::Field(field.into()).into()],
     }
     .into();
 
@@ -483,12 +483,12 @@ fn parse_struct_specifier_multi_fields() {
     };
     let expected: ast::StructSpecifier = ast::StructSpecifierData {
         name: Some("_TestStruct_934i".into_node()),
-        fields: vec![
-            foo_field.into(),
-            bar.into(),
-            zoo.into(),
-            foobar.into(),
-            s.into(),
+        members: vec![
+            ast::StructMemberData::Field(foo_field.into()).into(),
+            ast::StructMemberData::Field(bar.into()).into(),
+            ast::StructMemberData::Field(zoo.into()).into(),
+            ast::StructMemberData::Field(foobar.into()).into(),
+            ast::StructMemberData::Field(s.into()).into(),
         ],
     }
     .into();
@@ -3285,5 +3285,60 @@ fn parse_dangling_else() {
             .into()
         )
         .into())
+    );
+}
+
+#[test]
+fn parse_struct_with_method() {
+    let field = ast::StructFieldSpecifierData {
+        qualifier: None,
+        ty: ast::TypeSpecifierData {
+            ty: ast::TypeSpecifierNonArrayData::Float.into(),
+            array_specifier: None,
+        }
+        .into(),
+        identifiers: vec!["value".into_node()],
+    };
+
+    let method_prototype = ast::FunctionPrototypeData {
+        ty: ast::FullySpecifiedTypeData {
+            qualifier: None,
+            ty: ast::TypeSpecifierData {
+                ty: ast::TypeSpecifierNonArrayData::Float.into(),
+                array_specifier: None,
+            }
+            .into(),
+        }
+        .into(),
+        name: "getValue".into_node(),
+        parameters: vec![],
+    };
+
+    let method_body = ast::CompoundStatementData {
+        statement_list: vec![ast::StatementData::Simple(Box::new(
+            ast::SimpleStatementData::Jump(ast::JumpStatementData::Return(Some(
+                ast::ExprData::Variable("value".into_node()).into(),
+            ))),
+        ))
+        .into()],
+    };
+
+    let method = ast::FunctionDefinitionData {
+        prototype: method_prototype.into(),
+        statement: method_body.into(),
+    };
+
+    let expected: ast::StructSpecifier = ast::StructSpecifierData {
+        name: Some("MyStruct".into_node()),
+        members: vec![
+            ast::StructMemberData::Field(field.into()).into(),
+            ast::StructMemberData::Method(method.into()).into(),
+        ],
+    }
+    .into();
+
+    assert_eq!(
+        ast::StructSpecifier::parse("struct MyStruct { float value; float getValue() { return value; } }"),
+        Ok(expected)
     );
 }

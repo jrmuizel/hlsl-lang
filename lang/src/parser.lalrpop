@@ -93,10 +93,25 @@ struct_field_specifier: ast::StructFieldSpecifier = {
     }.spanned(l, r)
 };
 
+struct_member: ast::StructMember = {
+    // Field specification: type identifier[, identifier, ...] ;
+    <l:@L> <f:struct_field_specifier> <r:@R> => ast::StructMemberData::Field(f).spanned(l, r),
+    // Method definition: type identifier ( params ) { body }
+    <l:@L> <rt:fully_specified_type> <n:identifier> "(" <p:comma<function_parameter_declaration>> ")" <s:compound_statement> <r:@R> => 
+        ast::StructMemberData::Method(ast::FunctionDefinitionData {
+            prototype: ast::FunctionPrototypeData {
+                ty: rt,
+                name: n,
+                parameters: p,
+            }.spanned(l.clone(), s.span().start),
+            statement: s,
+        }.spanned(l, r)).spanned(l, r),
+};
+
 struct_specifier: ast::StructSpecifier = {
-    <l:@L> "struct" <i:identifier?> "{" <s:struct_field_specifier*> "}" <r:@R> => ast::StructSpecifierData {
+    <l:@L> "struct" <i:identifier?> "{" <m:struct_member*> "}" <r:@R> => ast::StructSpecifierData {
         name: i.map(|ident| ctx.add_type_name(ident)),
-        fields: s,
+        members: m,
     }.spanned(l, r),
 };
 

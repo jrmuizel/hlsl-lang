@@ -1,13 +1,13 @@
 //! HLSL abstract syntax tree and grammar.
 //!
-//! This module exports all the grammar syntax that defines GLSL. You’ll be handling ASTs
+//! This module exports all the grammar syntax that defines GLSL. You'll be handling ASTs
 //! representing your GLSL source.
 //!
 //! The most external form of an HLSL parsed AST is [`TranslationUnit`] (a shader). Some parts of the
 //! tree are *boxed*. This is due to two facts:
 //!
 //! - Recursion is used, hence we need a way to give our types a static size.
-//! - Because of some very deep variants, runtime size would explode if no indirection weren’t
+//! - Because of some very deep variants, runtime size would explode if no indirection weren't
 //!   in place.
 //!
 //! The types are commented so feel free to inspect each of theme. As a starter, you should read
@@ -668,13 +668,29 @@ impl From<TypeSpecifierNonArrayData> for TypeSpecifierData {
 pub struct StructSpecifierData {
     /// Structure name
     pub name: Option<TypeName>,
-    /// Field specifications
-    pub fields: Vec<StructFieldSpecifier>,
+    /// Struct members (fields and methods)
+    pub members: Vec<StructMember>,
 }
 
 impl_node_content! {
     /// Type alias for `Node<StructSpecifierData>`.
     pub type StructSpecifier = Node<StructSpecifierData>;
+}
+
+/// A member of a struct, which can be a field or a method.
+#[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", serde(crate = "rserde"))]
+pub enum StructMemberData {
+    /// Field declaration
+    Field(StructFieldSpecifier),
+    /// Method definition
+    Method(FunctionDefinition),
+}
+
+impl_node_content! {
+    /// Type alias for `Node<StructMemberData>`.
+    pub type StructMember = Node<StructMemberData>;
 }
 
 /// Struct field specifier. Used to add fields to struct specifiers.
@@ -1213,7 +1229,7 @@ impl From<Expr> for InitializerData {
 ///
 /// As you can see if you read the variant list, in GLSL, an assignment is an expression. This is a
 /// bit silly but think of an assignment as a statement first then an expression which evaluates to
-/// what the statement “returns”.
+/// what the statement "returns".
 ///
 /// An expression is either an assignment or a list (comma) of assignments.
 #[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
@@ -1746,8 +1762,8 @@ impl_node_content! {
 
 /// Some basic preprocessor directives.
 ///
-/// As it’s important to carry them around the AST because they cannot be substituted in a normal
-/// preprocessor (they’re used by GPU’s compilers), those preprocessor directives are available for
+/// As it's important to carry them around the AST because they cannot be substituted in a normal
+/// preprocessor (they're used by GPU's compilers), those preprocessor directives are available for
 /// inspection.
 #[derive(Clone, Debug, PartialEq, Eq, NodeContentDisplay)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
