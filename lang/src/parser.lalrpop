@@ -1129,6 +1129,7 @@ extern {
         "discard"                => Token::Discard,
         "return"                 => Token::Return,
         "struct"                 => Token::Struct,
+        "class"                  => Token::Class,
         "#define"                => Token::PpDefine,
         "#else"                  => Token::PpElse,
         "#elif"                  => Token::PpElif,

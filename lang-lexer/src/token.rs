@@ -546,6 +546,8 @@ pub enum Token {
     // End Vulkan-target keywords
     #[lang_util(token = "struct", kind = "struct", kind = "keyword")]
     Struct,
+    #[lang_util(token = "class", kind = "class", kind = "keyword")]
+    Class,
     #[lang_util(token = "void", kind = "type name")]
     Void,
     #[lang_util(token = "while", kind = "keyword")]
