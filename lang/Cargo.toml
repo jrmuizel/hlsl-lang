@@ -35,6 +35,7 @@ hlsl-lang-pp = "=0.8.0"
 criterion = "0.6"
 expect-test = "1.5"
 glsl = "7"
+walkdir = "2.5"
 
 [[test]]
 name = "pos_error"
@@ -46,7 +47,7 @@ harness = false
 
 [features]
 # Default: only parse full translation units
-default = []
+default = ["lexer-full", "parser-expr", "parser-statement"]
 
 # Provide interface to lexers through the lexers module
 lexer-full = ["hlsl-lang-lexer/full"]
