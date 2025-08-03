@@ -551,17 +551,35 @@ impl TypeName {
             return VEC3.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("vec4") {
             return VEC4.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("float2") {
+            return VEC2.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("float3") {
+            return VEC3.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("float4") {
+            return VEC4.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("ivec2") {
             return IVEC2.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("ivec3") {
             return IVEC3.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("ivec4") {
             return IVEC4.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("int2") {
+            return IVEC2.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("int3") {
+            return IVEC3.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("int4") {
+            return IVEC4.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("bvec2") {
             return BVEC2.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("bvec3") {
             return BVEC3.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("bvec4") {
+            return BVEC4.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("bool2") {
+            return BVEC2.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("bool3") {
+            return BVEC3.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("bool4") {
             return BVEC4.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("mat2") {
             return MAT2.gate(version >= 100, false, type_name_atom, is_type_name);
@@ -612,6 +630,12 @@ impl TypeName {
         } else if type_name_atom == type_name!("uvec3") {
             return UVEC3.gate(version >= 130, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("uvec4") {
+            return UVEC4.gate(version >= 130, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("uint2") {
+            return UVEC2.gate(version >= 130, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("uint3") {
+            return UVEC3.gate(version >= 130, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("uint4") {
             return UVEC4.gate(version >= 130, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("isampler1D") {
             return ISAMPLER1D.gate(version >= 130, false, type_name_atom, is_type_name);
