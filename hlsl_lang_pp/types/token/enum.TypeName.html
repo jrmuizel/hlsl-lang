@@ -1,9 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `TypeName` enum in crate `hlsl_lang_pp`."><title>TypeName in hlsl_lang_pp::types::token - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="hlsl_lang_pp" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"></head><body class="rustdoc enum"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../hlsl_lang_pp/index.html">hlsl_<wbr>lang_<wbr>pp</a><span class="version">0.8.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Type<wbr>Name</a></h2><h3><a href="#variants">Variants</a></h3><ul class="block variant"><li><a href="#variant.ATOMIC_UINT" title="ATOMIC_UINT">ATOMIC_UINT</a></li><li><a href="#variant.BOOL" title="BOOL">BOOL</a></li><li><a href="#variant.BVEC2" title="BVEC2">BVEC2</a></li><li><a href="#variant.BVEC3" title="BVEC3">BVEC3</a></li><li><a href="#variant.BVEC4" title="BVEC4">BVEC4</a></li><li><a href="#variant.DMAT2" title="DMAT2">DMAT2</a></li><li><a href="#variant.DMAT3" title="DMAT3">DMAT3</a></li><li><a href="#variant.DMAT4" title="DMAT4">DMAT4</a></li><li><a href="#variant.DMAT2X2" title="DMAT2X2">DMAT2X2</a></li><li><a href="#variant.DMAT2X3" title="DMAT2X3">DMAT2X3</a></li><li><a href="#variant.DMAT2X4" title="DMAT2X4">DMAT2X4</a></li><li><a href="#variant.DMAT3X2" title="DMAT3X2">DMAT3X2</a></li><li><a href="#variant.DMAT3X3" title="DMAT3X3">DMAT3X3</a></li><li><a href="#variant.DMAT3X4" title="DMAT3X4">DMAT3X4</a></li><li><a href="#variant.DMAT4X2" title="DMAT4X2">DMAT4X2</a></li><li><a href="#variant.DMAT4X3" title="DMAT4X3">DMAT4X3</a></li><li><a href="#variant.DMAT4X4" title="DMAT4X4">DMAT4X4</a></li><li><a href="#variant.DOUBLE" title="DOUBLE">DOUBLE</a></li><li><a href="#variant.DVEC2" title="DVEC2">DVEC2</a></li><li><a href="#variant.DVEC3" title="DVEC3">DVEC3</a></li><li><a href="#variant.DVEC4" title="DVEC4">DVEC4</a></li><li><a href="#variant.FLOAT" title="FLOAT">FLOAT</a></li><li><a href="#variant.IIMAGE1D" title="IIMAGE1D">IIMAGE1D</a></li><li><a href="#variant.IIMAGE1DARRAY" title="IIMAGE1DARRAY">IIMAGE1DARRAY</a></li><li><a href="#variant.IIMAGE2D" title="IIMAGE2D">IIMAGE2D</a></li><li><a href="#variant.IIMAGE2DARRAY" title="IIMAGE2DARRAY">IIMAGE2DARRAY</a></li><li><a href="#variant.IIMAGE2DMS" title="IIMAGE2DMS">IIMAGE2DMS</a></li><li><a href="#variant.IIMAGE2DMSARRAY" title="IIMAGE2DMSARRAY">IIMAGE2DMSARRAY</a></li><li><a href="#variant.IIMAGE2DRECT" title="IIMAGE2DRECT">IIMAGE2DRECT</a></li><li><a href="#variant.IIMAGE3D" title="IIMAGE3D">IIMAGE3D</a></li><li><a href="#variant.IIMAGEBUFFER" title="IIMAGEBUFFER">IIMAGEBUFFER</a></li><li><a href="#variant.IIMAGECUBE" title="IIMAGECUBE">IIMAGECUBE</a></li><li><a href="#variant.IIMAGECUBEARRAY" title="IIMAGECUBEARRAY">IIMAGECUBEARRAY</a></li><li><a href="#variant.IMAGE1D" title="IMAGE1D">IMAGE1D</a></li><li><a href="#variant.IMAGE1DARRAY" title="IMAGE1DARRAY">IMAGE1DARRAY</a></li><li><a href="#variant.IMAGE2D" title="IMAGE2D">IMAGE2D</a></li><li><a href="#variant.IMAGE2DARRAY" title="IMAGE2DARRAY">IMAGE2DARRAY</a></li><li><a href="#variant.IMAGE2DMS" title="IMAGE2DMS">IMAGE2DMS</a></li><li><a href="#variant.IMAGE2DMSARRAY" title="IMAGE2DMSARRAY">IMAGE2DMSARRAY</a></li><li><a href="#variant.IMAGE2DRECT" title="IMAGE2DRECT">IMAGE2DRECT</a></li><li><a href="#variant.IMAGE3D" title="IMAGE3D">IMAGE3D</a></li><li><a href="#variant.IMAGEBUFFER" title="IMAGEBUFFER">IMAGEBUFFER</a></li><li><a href="#variant.IMAGECUBE" title="IMAGECUBE">IMAGECUBE</a></li><li><a href="#variant.IMAGECUBEARRAY" title="IMAGECUBEARRAY">IMAGECUBEARRAY</a></li><li><a href="#variant.INT" title="INT">INT</a></li><li><a href="#variant.ISAMPLER1D" title="ISAMPLER1D">ISAMPLER1D</a></li><li><a href="#variant.ISAMPLER1DARRAY" title="ISAMPLER1DARRAY">ISAMPLER1DARRAY</a></li><li><a href="#variant.ISAMPLER2D" title="ISAMPLER2D">ISAMPLER2D</a></li><li><a href="#variant.ISAMPLER2DARRAY" title="ISAMPLER2DARRAY">ISAMPLER2DARRAY</a></li><li><a href="#variant.ISAMPLER2DMS" title="ISAMPLER2DMS">ISAMPLER2DMS</a></li><li><a href="#variant.ISAMPLER2DMSARRAY" title="ISAMPLER2DMSARRAY">ISAMPLER2DMSARRAY</a></li><li><a href="#variant.ISAMPLER2DRECT" title="ISAMPLER2DRECT">ISAMPLER2DRECT</a></li><li><a href="#variant.ISAMPLER3D" title="ISAMPLER3D">ISAMPLER3D</a></li><li><a href="#variant.ISAMPLERBUFFER" title="ISAMPLERBUFFER">ISAMPLERBUFFER</a></li><li><a href="#variant.ISAMPLERCUBE" title="ISAMPLERCUBE">ISAMPLERCUBE</a></li><li><a href="#variant.ISAMPLERCUBEARRAY" title="ISAMPLERCUBEARRAY">ISAMPLERCUBEARRAY</a></li><li><a href="#variant.ISUBPASSINPUT" title="ISUBPASSINPUT">ISUBPASSINPUT</a></li><li><a href="#variant.ISUBPASSINPUTMS" title="ISUBPASSINPUTMS">ISUBPASSINPUTMS</a></li><li><a href="#variant.ITEXTURE1D" title="ITEXTURE1D">ITEXTURE1D</a></li><li><a href="#variant.ITEXTURE1DARRAY" title="ITEXTURE1DARRAY">ITEXTURE1DARRAY</a></li><li><a href="#variant.ITEXTURE2D" title="ITEXTURE2D">ITEXTURE2D</a></li><li><a href="#variant.ITEXTURE2DARRAY" title="ITEXTURE2DARRAY">ITEXTURE2DARRAY</a></li><li><a href="#variant.ITEXTURE2DMS" title="ITEXTURE2DMS">ITEXTURE2DMS</a></li><li><a href="#variant.ITEXTURE2DMSARRAY" title="ITEXTURE2DMSARRAY">ITEXTURE2DMSARRAY</a></li><li><a href="#variant.ITEXTURE2DRECT" title="ITEXTURE2DRECT">ITEXTURE2DRECT</a></li><li><a href="#variant.ITEXTURE3D" title="ITEXTURE3D">ITEXTURE3D</a></li><li><a href="#variant.ITEXTUREBUFFER" title="ITEXTUREBUFFER">ITEXTUREBUFFER</a></li><li><a href="#variant.ITEXTURECUBE" title="ITEXTURECUBE">ITEXTURECUBE</a></li><li><a href="#variant.ITEXTURECUBEARRAY" title="ITEXTURECUBEARRAY">ITEXTURECUBEARRAY</a></li><li><a href="#variant.IVEC2" title="IVEC2">IVEC2</a></li><li><a href="#variant.IVEC3" title="IVEC3">IVEC3</a></li><li><a href="#variant.IVEC4" title="IVEC4">IVEC4</a></li><li><a href="#variant.MAT2" title="MAT2">MAT2</a></li><li><a href="#variant.MAT3" title="MAT3">MAT3</a></li><li><a href="#variant.MAT4" title="MAT4">MAT4</a></li><li><a href="#variant.MAT2X2" title="MAT2X2">MAT2X2</a></li><li><a href="#variant.MAT2X3" title="MAT2X3">MAT2X3</a></li><li><a href="#variant.MAT2X4" title="MAT2X4">MAT2X4</a></li><li><a href="#variant.MAT3X2" title="MAT3X2">MAT3X2</a></li><li><a href="#variant.MAT3X3" title="MAT3X3">MAT3X3</a></li><li><a href="#variant.MAT3X4" title="MAT3X4">MAT3X4</a></li><li><a href="#variant.MAT4X2" title="MAT4X2">MAT4X2</a></li><li><a href="#variant.MAT4X3" title="MAT4X3">MAT4X3</a></li><li><a href="#variant.MAT4X4" title="MAT4X4">MAT4X4</a></li><li><a href="#variant.OTHER" title="OTHER">OTHER</a></li><li><a href="#variant.RESERVED" title="RESERVED">RESERVED</a></li><li><a href="#variant.SAMPLER" title="SAMPLER">SAMPLER</a></li><li><a href="#variant.SAMPLER1D" title="SAMPLER1D">SAMPLER1D</a></li><li><a href="#variant.SAMPLER1DARRAY" title="SAMPLER1DARRAY">SAMPLER1DARRAY</a></li><li><a href="#variant.SAMPLER1DARRAYSHADOW" title="SAMPLER1DARRAYSHADOW">SAMPLER1DARRAYSHADOW</a></li><li><a href="#variant.SAMPLER1DSHADOW" title="SAMPLER1DSHADOW">SAMPLER1DSHADOW</a></li><li><a href="#variant.SAMPLER2D" title="SAMPLER2D">SAMPLER2D</a></li><li><a href="#variant.SAMPLER2DARRAY" title="SAMPLER2DARRAY">SAMPLER2DARRAY</a></li><li><a href="#variant.SAMPLER2DARRAYSHADOW" title="SAMPLER2DARRAYSHADOW">SAMPLER2DARRAYSHADOW</a></li><li><a href="#variant.SAMPLER2DMS" title="SAMPLER2DMS">SAMPLER2DMS</a></li><li><a href="#variant.SAMPLER2DMSARRAY" title="SAMPLER2DMSARRAY">SAMPLER2DMSARRAY</a></li><li><a href="#variant.SAMPLER2DRECT" title="SAMPLER2DRECT">SAMPLER2DRECT</a></li><li><a href="#variant.SAMPLER2DRECTSHADOW" title="SAMPLER2DRECTSHADOW">SAMPLER2DRECTSHADOW</a></li><li><a href="#variant.SAMPLER2DSHADOW" title="SAMPLER2DSHADOW">SAMPLER2DSHADOW</a></li><li><a href="#variant.SAMPLER3D" title="SAMPLER3D">SAMPLER3D</a></li><li><a href="#variant.SAMPLERBUFFER" title="SAMPLERBUFFER">SAMPLERBUFFER</a></li><li><a href="#variant.SAMPLERCUBE" title="SAMPLERCUBE">SAMPLERCUBE</a></li><li><a href="#variant.SAMPLERCUBEARRAY" title="SAMPLERCUBEARRAY">SAMPLERCUBEARRAY</a></li><li><a href="#variant.SAMPLERCUBEARRAYSHADOW" title="SAMPLERCUBEARRAYSHADOW">SAMPLERCUBEARRAYSHADOW</a></li><li><a href="#variant.SAMPLERCUBESHADOW" title="SAMPLERCUBESHADOW">SAMPLERCUBESHADOW</a></li><li><a href="#variant.SAMPLERSHADOW" title="SAMPLERSHADOW">SAMPLERSHADOW</a></li><li><a href="#variant.SUBPASSINPUT" title="SUBPASSINPUT">SUBPASSINPUT</a></li><li><a href="#variant.SUBPASSINPUTMS" title="SUBPASSINPUTMS">SUBPASSINPUTMS</a></li><li><a href="#variant.TEXTURE1D" title="TEXTURE1D">TEXTURE1D</a></li><li><a href="#variant.TEXTURE1DARRAY" title="TEXTURE1DARRAY">TEXTURE1DARRAY</a></li><li><a href="#variant.TEXTURE2D" title="TEXTURE2D">TEXTURE2D</a></li><li><a href="#variant.TEXTURE2DARRAY" title="TEXTURE2DARRAY">TEXTURE2DARRAY</a></li><li><a href="#variant.TEXTURE2DMS" title="TEXTURE2DMS">TEXTURE2DMS</a></li><li><a href="#variant.TEXTURE2DMSARRAY" title="TEXTURE2DMSARRAY">TEXTURE2DMSARRAY</a></li><li><a href="#variant.TEXTURE2DRECT" title="TEXTURE2DRECT">TEXTURE2DRECT</a></li><li><a href="#variant.TEXTURE3D" title="TEXTURE3D">TEXTURE3D</a></li><li><a href="#variant.TEXTUREBUFFER" title="TEXTUREBUFFER">TEXTUREBUFFER</a></li><li><a href="#variant.TEXTURECUBE" title="TEXTURECUBE">TEXTURECUBE</a></li><li><a href="#variant.TEXTURECUBEARRAY" title="TEXTURECUBEARRAY">TEXTURECUBEARRAY</a></li><li><a href="#variant.UIMAGE1D" title="UIMAGE1D">UIMAGE1D</a></li><li><a href="#variant.UIMAGE1DARRAY" title="UIMAGE1DARRAY">UIMAGE1DARRAY</a></li><li><a href="#variant.UIMAGE2D" title="UIMAGE2D">UIMAGE2D</a></li><li><a href="#variant.UIMAGE2DARRAY" title="UIMAGE2DARRAY">UIMAGE2DARRAY</a></li><li><a href="#variant.UIMAGE2DMS" title="UIMAGE2DMS">UIMAGE2DMS</a></li><li><a href="#variant.UIMAGE2DMSARRAY" title="UIMAGE2DMSARRAY">UIMAGE2DMSARRAY</a></li><li><a href="#variant.UIMAGE2DRECT" title="UIMAGE2DRECT">UIMAGE2DRECT</a></li><li><a href="#variant.UIMAGE3D" title="UIMAGE3D">UIMAGE3D</a></li><li><a href="#variant.UIMAGEBUFFER" title="UIMAGEBUFFER">UIMAGEBUFFER</a></li><li><a href="#variant.UIMAGECUBE" title="UIMAGECUBE">UIMAGECUBE</a></li><li><a href="#variant.UIMAGECUBEARRAY" title="UIMAGECUBEARRAY">UIMAGECUBEARRAY</a></li><li><a href="#variant.UINT" title="UINT">UINT</a></li><li><a href="#variant.USAMPLER1D" title="USAMPLER1D">USAMPLER1D</a></li><li><a href="#variant.USAMPLER1DARRAY" title="USAMPLER1DARRAY">USAMPLER1DARRAY</a></li><li><a href="#variant.USAMPLER2D" title="USAMPLER2D">USAMPLER2D</a></li><li><a href="#variant.USAMPLER2DARRAY" title="USAMPLER2DARRAY">USAMPLER2DARRAY</a></li><li><a href="#variant.USAMPLER2DMS" title="USAMPLER2DMS">USAMPLER2DMS</a></li><li><a href="#variant.USAMPLER2DMSARRAY" title="USAMPLER2DMSARRAY">USAMPLER2DMSARRAY</a></li><li><a href="#variant.USAMPLER2DRECT" title="USAMPLER2DRECT">USAMPLER2DRECT</a></li><li><a href="#variant.USAMPLER3D" title="USAMPLER3D">USAMPLER3D</a></li><li><a href="#variant.USAMPLERBUFFER" title="USAMPLERBUFFER">USAMPLERBUFFER</a></li><li><a href="#variant.USAMPLERCUBE" title="USAMPLERCUBE">USAMPLERCUBE</a></li><li><a href="#variant.USAMPLERCUBEARRAY" title="USAMPLERCUBEARRAY">USAMPLERCUBEARRAY</a></li><li><a href="#variant.USUBPASSINPUT" title="USUBPASSINPUT">USUBPASSINPUT</a></li><li><a href="#variant.USUBPASSINPUTMS" title="USUBPASSINPUTMS">USUBPASSINPUTMS</a></li><li><a href="#variant.UTEXTURE1D" title="UTEXTURE1D">UTEXTURE1D</a></li><li><a href="#variant.UTEXTURE1DARRAY" title="UTEXTURE1DARRAY">UTEXTURE1DARRAY</a></li><li><a href="#variant.UTEXTURE2D" title="UTEXTURE2D">UTEXTURE2D</a></li><li><a href="#variant.UTEXTURE2DARRAY" title="UTEXTURE2DARRAY">UTEXTURE2DARRAY</a></li><li><a href="#variant.UTEXTURE2DMS" title="UTEXTURE2DMS">UTEXTURE2DMS</a></li><li><a href="#variant.UTEXTURE2DMSARRAY" title="UTEXTURE2DMSARRAY">UTEXTURE2DMSARRAY</a></li><li><a href="#variant.UTEXTURE2DRECT" title="UTEXTURE2DRECT">UTEXTURE2DRECT</a></li><li><a href="#variant.UTEXTURE3D" title="UTEXTURE3D">UTEXTURE3D</a></li><li><a href="#variant.UTEXTUREBUFFER" title="UTEXTUREBUFFER">UTEXTUREBUFFER</a></li><li><a href="#variant.UTEXTURECUBE" title="UTEXTURECUBE">UTEXTURECUBE</a></li><li><a href="#variant.UTEXTURECUBEARRAY" title="UTEXTURECUBEARRAY">UTEXTURECUBEARRAY</a></li><li><a href="#variant.UVEC2" title="UVEC2">UVEC2</a></li><li><a href="#variant.UVEC3" title="UVEC3">UVEC3</a></li><li><a href="#variant.UVEC4" title="UVEC4">UVEC4</a></li><li><a href="#variant.VEC2" title="VEC2">VEC2</a></li><li><a href="#variant.VEC3" title="VEC3">VEC3</a></li><li><a href="#variant.VEC4" title="VEC4">VEC4</a></li><li><a href="#variant.VOID" title="VOID">VOID</a></li></ul><h3><a href="#implementations">Methods</a></h3><ul class="block method"><li><a href="#method.gate" title="gate">gate</a></li><li><a href="#method.parse" title="parse">parse</a></li></ul><h3><a href="#trait-implementations">Trait Implementations</a></h3><ul class="block trait-implementation"><li><a href="#impl-Clone-for-TypeName" title="Clone">Clone</a></li><li><a href="#impl-Debug-for-TypeName" title="Debug">Debug</a></li><li><a href="#impl-Display-for-TypeName" title="Display">Display</a></li><li><a href="#impl-Eq-for-TypeName" title="Eq">Eq</a></li><li><a href="#impl-Hash-for-TypeName" title="Hash">Hash</a></li><li><a href="#impl-Ord-for-TypeName" title="Ord">Ord</a></li><li><a href="#impl-PartialEq-for-TypeName" title="PartialEq">PartialEq</a></li><li><a href="#impl-PartialOrd-for-TypeName" title="PartialOrd">PartialOrd</a></li><li><a href="#impl-StructuralPartialEq-for-TypeName" title="StructuralPartialEq">StructuralPartialEq</a></li></ul><h3><a href="#synthetic-implementations">Auto Trait Implementations</a></h3><ul class="block synthetic-implementation"><li><a href="#impl-Freeze-for-TypeName" title="Freeze">Freeze</a></li><li><a href="#impl-RefUnwindSafe-for-TypeName" title="RefUnwindSafe">RefUnwindSafe</a></li><li><a href="#impl-Send-for-TypeName" title="Send">Send</a></li><li><a href="#impl-Sync-for-TypeName" title="Sync">Sync</a></li><li><a href="#impl-Unpin-for-TypeName" title="Unpin">Unpin</a></li><li><a href="#impl-UnwindSafe-for-TypeName" title="UnwindSafe">UnwindSafe</a></li></ul><h3><a href="#blanket-implementations">Blanket Implementations</a></h3><ul class="block blanket-implementation"><li><a href="#impl-Any-for-T" title="Any">Any</a></li><li><a href="#impl-Borrow%3CT%3E-for-T" title="Borrow&#60;T&#62;">Borrow&#60;T&#62;</a></li><li><a href="#impl-BorrowMut%3CT%3E-for-T" title="BorrowMut&#60;T&#62;">BorrowMut&#60;T&#62;</a></li><li><a href="#impl-CloneToUninit-for-T" title="CloneToUninit">CloneToUninit</a></li><li><a href="#impl-Equivalent%3CK%3E-for-Q" title="Equivalent&#60;K&#62;">Equivalent&#60;K&#62;</a></li><li><a href="#impl-From%3CT%3E-for-T" title="From&#60;T&#62;">From&#60;T&#62;</a></li><li><a href="#impl-Into%3CU%3E-for-T" title="Into&#60;U&#62;">Into&#60;U&#62;</a></li><li><a href="#impl-IntoEither-for-T" title="IntoEither">IntoEither</a></li><li><a href="#impl-ToOwned-for-T" title="ToOwned">ToOwned</a></li><li><a href="#impl-ToSmolStr-for-T" title="ToSmolStr">ToSmolStr</a></li><li><a href="#impl-ToString-for-T" title="ToString">ToString</a></li><li><a href="#impl-TryFrom%3CU%3E-for-T" title="TryFrom&#60;U&#62;">TryFrom&#60;U&#62;</a></li><li><a href="#impl-TryInto%3CU%3E-for-T" title="TryInto&#60;U&#62;">TryInto&#60;U&#62;</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In hlsl_<wbr>lang_<wbr>pp::<wbr>types::<wbr>token</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">hlsl_lang_pp</a>::<wbr><a href="../index.html">types</a>::<wbr><a href="index.html">token</a></div><h1>Enum <span class="enum">TypeName</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/hlsl_lang_pp/types/token.rs.html#12-498">Source</a> </span></div><pre class="rust item-decl"><code>pub enum TypeName {
-<details class="toggle type-contents-toggle"><summary class="hideme"><span>Show 162 variants</span></summary>    VOID,
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `TypeName` enum in crate `hlsl_lang_pp`."><title>TypeName in hlsl_lang_pp::types::token - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="hlsl_lang_pp" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"></head><body class="rustdoc enum"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../hlsl_lang_pp/index.html">hlsl_<wbr>lang_<wbr>pp</a><span class="version">0.8.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Type<wbr>Name</a></h2><h3><a href="#variants">Variants</a></h3><ul class="block variant"><li><a href="#variant.BOOL" title="BOOL">BOOL</a></li><li><a href="#variant.BVEC2" title="BVEC2">BVEC2</a></li><li><a href="#variant.BVEC3" title="BVEC3">BVEC3</a></li><li><a href="#variant.BVEC4" title="BVEC4">BVEC4</a></li><li><a href="#variant.DOUBLE" title="DOUBLE">DOUBLE</a></li><li><a href="#variant.FLOAT" title="FLOAT">FLOAT</a></li><li><a href="#variant.INT" title="INT">INT</a></li><li><a href="#variant.IVEC2" title="IVEC2">IVEC2</a></li><li><a href="#variant.IVEC3" title="IVEC3">IVEC3</a></li><li><a href="#variant.IVEC4" title="IVEC4">IVEC4</a></li><li><a href="#variant.MAT2" title="MAT2">MAT2</a></li><li><a href="#variant.MAT3" title="MAT3">MAT3</a></li><li><a href="#variant.MAT4" title="MAT4">MAT4</a></li><li><a href="#variant.MAT1X1" title="MAT1X1">MAT1X1</a></li><li><a href="#variant.MAT1X2" title="MAT1X2">MAT1X2</a></li><li><a href="#variant.MAT1X3" title="MAT1X3">MAT1X3</a></li><li><a href="#variant.MAT1X4" title="MAT1X4">MAT1X4</a></li><li><a href="#variant.MAT2X1" title="MAT2X1">MAT2X1</a></li><li><a href="#variant.MAT2X2" title="MAT2X2">MAT2X2</a></li><li><a href="#variant.MAT2X3" title="MAT2X3">MAT2X3</a></li><li><a href="#variant.MAT2X4" title="MAT2X4">MAT2X4</a></li><li><a href="#variant.MAT3X1" title="MAT3X1">MAT3X1</a></li><li><a href="#variant.MAT3X2" title="MAT3X2">MAT3X2</a></li><li><a href="#variant.MAT3X3" title="MAT3X3">MAT3X3</a></li><li><a href="#variant.MAT3X4" title="MAT3X4">MAT3X4</a></li><li><a href="#variant.MAT4X1" title="MAT4X1">MAT4X1</a></li><li><a href="#variant.MAT4X2" title="MAT4X2">MAT4X2</a></li><li><a href="#variant.MAT4X3" title="MAT4X3">MAT4X3</a></li><li><a href="#variant.MAT4X4" title="MAT4X4">MAT4X4</a></li><li><a href="#variant.OTHER" title="OTHER">OTHER</a></li><li><a href="#variant.RESERVED" title="RESERVED">RESERVED</a></li><li><a href="#variant.SAMPLER" title="SAMPLER">SAMPLER</a></li><li><a href="#variant.UINT" title="UINT">UINT</a></li><li><a href="#variant.UVEC2" title="UVEC2">UVEC2</a></li><li><a href="#variant.UVEC3" title="UVEC3">UVEC3</a></li><li><a href="#variant.UVEC4" title="UVEC4">UVEC4</a></li><li><a href="#variant.VEC2" title="VEC2">VEC2</a></li><li><a href="#variant.VEC3" title="VEC3">VEC3</a></li><li><a href="#variant.VEC4" title="VEC4">VEC4</a></li><li><a href="#variant.VOID" title="VOID">VOID</a></li></ul><h3><a href="#implementations">Methods</a></h3><ul class="block method"><li><a href="#method.gate" title="gate">gate</a></li><li><a href="#method.parse" title="parse">parse</a></li></ul><h3><a href="#trait-implementations">Trait Implementations</a></h3><ul class="block trait-implementation"><li><a href="#impl-Clone-for-TypeName" title="Clone">Clone</a></li><li><a href="#impl-Debug-for-TypeName" title="Debug">Debug</a></li><li><a href="#impl-Display-for-TypeName" title="Display">Display</a></li><li><a href="#impl-Eq-for-TypeName" title="Eq">Eq</a></li><li><a href="#impl-Hash-for-TypeName" title="Hash">Hash</a></li><li><a href="#impl-Ord-for-TypeName" title="Ord">Ord</a></li><li><a href="#impl-PartialEq-for-TypeName" title="PartialEq">PartialEq</a></li><li><a href="#impl-PartialOrd-for-TypeName" title="PartialOrd">PartialOrd</a></li><li><a href="#impl-StructuralPartialEq-for-TypeName" title="StructuralPartialEq">StructuralPartialEq</a></li></ul><h3><a href="#synthetic-implementations">Auto Trait Implementations</a></h3><ul class="block synthetic-implementation"><li><a href="#impl-Freeze-for-TypeName" title="Freeze">Freeze</a></li><li><a href="#impl-RefUnwindSafe-for-TypeName" title="RefUnwindSafe">RefUnwindSafe</a></li><li><a href="#impl-Send-for-TypeName" title="Send">Send</a></li><li><a href="#impl-Sync-for-TypeName" title="Sync">Sync</a></li><li><a href="#impl-Unpin-for-TypeName" title="Unpin">Unpin</a></li><li><a href="#impl-UnwindSafe-for-TypeName" title="UnwindSafe">UnwindSafe</a></li></ul><h3><a href="#blanket-implementations">Blanket Implementations</a></h3><ul class="block blanket-implementation"><li><a href="#impl-Any-for-T" title="Any">Any</a></li><li><a href="#impl-Borrow%3CT%3E-for-T" title="Borrow&#60;T&#62;">Borrow&#60;T&#62;</a></li><li><a href="#impl-BorrowMut%3CT%3E-for-T" title="BorrowMut&#60;T&#62;">BorrowMut&#60;T&#62;</a></li><li><a href="#impl-CloneToUninit-for-T" title="CloneToUninit">CloneToUninit</a></li><li><a href="#impl-Equivalent%3CK%3E-for-Q" title="Equivalent&#60;K&#62;">Equivalent&#60;K&#62;</a></li><li><a href="#impl-From%3CT%3E-for-T" title="From&#60;T&#62;">From&#60;T&#62;</a></li><li><a href="#impl-Into%3CU%3E-for-T" title="Into&#60;U&#62;">Into&#60;U&#62;</a></li><li><a href="#impl-IntoEither-for-T" title="IntoEither">IntoEither</a></li><li><a href="#impl-ToOwned-for-T" title="ToOwned">ToOwned</a></li><li><a href="#impl-ToSmolStr-for-T" title="ToSmolStr">ToSmolStr</a></li><li><a href="#impl-ToString-for-T" title="ToString">ToString</a></li><li><a href="#impl-TryFrom%3CU%3E-for-T" title="TryFrom&#60;U&#62;">TryFrom&#60;U&#62;</a></li><li><a href="#impl-TryInto%3CU%3E-for-T" title="TryInto&#60;U&#62;">TryInto&#60;U&#62;</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In hlsl_<wbr>lang_<wbr>pp::<wbr>types::<wbr>token</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">hlsl_lang_pp</a>::<wbr><a href="../index.html">types</a>::<wbr><a href="index.html">token</a></div><h1>Enum <span class="enum">TypeName</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/hlsl_lang_pp/types/token.rs.html#12-131">Source</a> </span></div><pre class="rust item-decl"><code>pub enum TypeName {
+<details class="toggle type-contents-toggle"><summary class="hideme"><span>Show 40 variants</span></summary>    VOID,
     INT,
     BOOL,
     FLOAT,
     DOUBLE,
+    UINT,
     VEC2,
     VEC3,
     VEC4,
@@ -13,14 +14,9 @@
     BVEC2,
     BVEC3,
     BVEC4,
-    UINT,
-    ATOMIC_UINT,
     UVEC2,
     UVEC3,
     UVEC4,
-    DVEC2,
-    DVEC3,
-    DVEC4,
     MAT2,
     MAT3,
     MAT4,
@@ -33,132 +29,14 @@
     MAT4X2,
     MAT4X3,
     MAT4X4,
-    DMAT2,
-    DMAT3,
-    DMAT4,
-    DMAT2X2,
-    DMAT2X3,
-    DMAT2X4,
-    DMAT3X2,
-    DMAT3X3,
-    DMAT3X4,
-    DMAT4X2,
-    DMAT4X3,
-    DMAT4X4,
-    SAMPLER1D,
-    SAMPLER1DSHADOW,
-    SAMPLER1DARRAY,
-    SAMPLER1DARRAYSHADOW,
-    ISAMPLER1D,
-    ISAMPLER1DARRAY,
-    USAMPLER1D,
-    USAMPLER1DARRAY,
-    SAMPLER2D,
-    SAMPLER2DSHADOW,
-    SAMPLER2DARRAY,
-    SAMPLER2DARRAYSHADOW,
-    ISAMPLER2D,
-    ISAMPLER2DARRAY,
-    USAMPLER2D,
-    USAMPLER2DARRAY,
-    SAMPLER2DRECT,
-    SAMPLER2DRECTSHADOW,
-    ISAMPLER2DRECT,
-    USAMPLER2DRECT,
-    SAMPLER2DMS,
-    ISAMPLER2DMS,
-    USAMPLER2DMS,
-    SAMPLER2DMSARRAY,
-    ISAMPLER2DMSARRAY,
-    USAMPLER2DMSARRAY,
-    SAMPLER3D,
-    ISAMPLER3D,
-    USAMPLER3D,
-    SAMPLERCUBE,
-    SAMPLERCUBESHADOW,
-    ISAMPLERCUBE,
-    USAMPLERCUBE,
-    SAMPLERCUBEARRAY,
-    SAMPLERCUBEARRAYSHADOW,
-    ISAMPLERCUBEARRAY,
-    USAMPLERCUBEARRAY,
-    SAMPLERBUFFER,
-    ISAMPLERBUFFER,
-    USAMPLERBUFFER,
-    IMAGE1D,
-    IIMAGE1D,
-    UIMAGE1D,
-    IMAGE1DARRAY,
-    IIMAGE1DARRAY,
-    UIMAGE1DARRAY,
-    IMAGE2D,
-    IIMAGE2D,
-    UIMAGE2D,
-    IMAGE2DARRAY,
-    IIMAGE2DARRAY,
-    UIMAGE2DARRAY,
-    IMAGE2DRECT,
-    IIMAGE2DRECT,
-    UIMAGE2DRECT,
-    IMAGE2DMS,
-    IIMAGE2DMS,
-    UIMAGE2DMS,
-    IMAGE2DMSARRAY,
-    IIMAGE2DMSARRAY,
-    UIMAGE2DMSARRAY,
-    IMAGE3D,
-    IIMAGE3D,
-    UIMAGE3D,
-    IMAGECUBE,
-    IIMAGECUBE,
-    UIMAGECUBE,
-    IMAGECUBEARRAY,
-    IIMAGECUBEARRAY,
-    UIMAGECUBEARRAY,
-    IMAGEBUFFER,
-    IIMAGEBUFFER,
-    UIMAGEBUFFER,
-    TEXTURE1D,
-    TEXTURE1DARRAY,
-    ITEXTURE1D,
-    ITEXTURE1DARRAY,
-    UTEXTURE1D,
-    UTEXTURE1DARRAY,
-    TEXTURE2D,
-    TEXTURE2DARRAY,
-    ITEXTURE2D,
-    ITEXTURE2DARRAY,
-    UTEXTURE2D,
-    UTEXTURE2DARRAY,
-    TEXTURE2DRECT,
-    ITEXTURE2DRECT,
-    UTEXTURE2DRECT,
-    TEXTURE2DMS,
-    ITEXTURE2DMS,
-    UTEXTURE2DMS,
-    TEXTURE2DMSARRAY,
-    ITEXTURE2DMSARRAY,
-    UTEXTURE2DMSARRAY,
-    TEXTURE3D,
-    ITEXTURE3D,
-    UTEXTURE3D,
-    TEXTURECUBE,
-    ITEXTURECUBE,
-    UTEXTURECUBE,
-    TEXTURECUBEARRAY,
-    ITEXTURECUBEARRAY,
-    UTEXTURECUBEARRAY,
-    TEXTUREBUFFER,
-    ITEXTUREBUFFER,
-    UTEXTUREBUFFER,
+    MAT1X1,
+    MAT1X2,
+    MAT1X3,
+    MAT1X4,
+    MAT2X1,
+    MAT3X1,
+    MAT4X1,
     SAMPLER,
-    SAMPLERSHADOW,
-    SUBPASSINPUT,
-    ISUBPASSINPUT,
-    USUBPASSINPUT,
-    SUBPASSINPUTMS,
-    ISUBPASSINPUTMS,
-    USUBPASSINPUTMS,
     RESERVED(<a class="type" href="../type_names/type.TypeNameAtom.html" title="type hlsl_lang_pp::types::type_names::TypeNameAtom">TypeNameAtom</a>),
     OTHER(<a class="type" href="../type_names/type.TypeNameAtom.html" title="type hlsl_lang_pp::types::type_names::TypeNameAtom">TypeNameAtom</a>),
 </details>}</code></pre><h2 id="variants" class="variants section-header">Variants<a href="#variants" class="anchor">§</a></h2><div class="variants"><section id="variant.VOID" class="variant"><a href="#variant.VOID" class="anchor">§</a><h3 class="code-header">VOID</h3></section><div class="docblock"><p>“void”</p>
@@ -166,170 +44,48 @@
 </div><section id="variant.BOOL" class="variant"><a href="#variant.BOOL" class="anchor">§</a><h3 class="code-header">BOOL</h3></section><div class="docblock"><p>“bool”</p>
 </div><section id="variant.FLOAT" class="variant"><a href="#variant.FLOAT" class="anchor">§</a><h3 class="code-header">FLOAT</h3></section><div class="docblock"><p>“float”</p>
 </div><section id="variant.DOUBLE" class="variant"><a href="#variant.DOUBLE" class="anchor">§</a><h3 class="code-header">DOUBLE</h3></section><div class="docblock"><p>“double”</p>
-</div><section id="variant.VEC2" class="variant"><a href="#variant.VEC2" class="anchor">§</a><h3 class="code-header">VEC2</h3></section><div class="docblock"><p>“vec2”</p>
-</div><section id="variant.VEC3" class="variant"><a href="#variant.VEC3" class="anchor">§</a><h3 class="code-header">VEC3</h3></section><div class="docblock"><p>“vec3”</p>
-</div><section id="variant.VEC4" class="variant"><a href="#variant.VEC4" class="anchor">§</a><h3 class="code-header">VEC4</h3></section><div class="docblock"><p>“vec4”</p>
-</div><section id="variant.IVEC2" class="variant"><a href="#variant.IVEC2" class="anchor">§</a><h3 class="code-header">IVEC2</h3></section><div class="docblock"><p>“ivec2”</p>
-</div><section id="variant.IVEC3" class="variant"><a href="#variant.IVEC3" class="anchor">§</a><h3 class="code-header">IVEC3</h3></section><div class="docblock"><p>“ivec3”</p>
-</div><section id="variant.IVEC4" class="variant"><a href="#variant.IVEC4" class="anchor">§</a><h3 class="code-header">IVEC4</h3></section><div class="docblock"><p>“ivec4”</p>
-</div><section id="variant.BVEC2" class="variant"><a href="#variant.BVEC2" class="anchor">§</a><h3 class="code-header">BVEC2</h3></section><div class="docblock"><p>“bvec2”</p>
-</div><section id="variant.BVEC3" class="variant"><a href="#variant.BVEC3" class="anchor">§</a><h3 class="code-header">BVEC3</h3></section><div class="docblock"><p>“bvec3”</p>
-</div><section id="variant.BVEC4" class="variant"><a href="#variant.BVEC4" class="anchor">§</a><h3 class="code-header">BVEC4</h3></section><div class="docblock"><p>“bvec4”</p>
 </div><section id="variant.UINT" class="variant"><a href="#variant.UINT" class="anchor">§</a><h3 class="code-header">UINT</h3></section><div class="docblock"><p>“uint”</p>
-</div><section id="variant.ATOMIC_UINT" class="variant"><a href="#variant.ATOMIC_UINT" class="anchor">§</a><h3 class="code-header">ATOMIC_UINT</h3></section><div class="docblock"><p>“atomic_uint”</p>
-</div><section id="variant.UVEC2" class="variant"><a href="#variant.UVEC2" class="anchor">§</a><h3 class="code-header">UVEC2</h3></section><div class="docblock"><p>“uvec2”</p>
-</div><section id="variant.UVEC3" class="variant"><a href="#variant.UVEC3" class="anchor">§</a><h3 class="code-header">UVEC3</h3></section><div class="docblock"><p>“uvec3”</p>
-</div><section id="variant.UVEC4" class="variant"><a href="#variant.UVEC4" class="anchor">§</a><h3 class="code-header">UVEC4</h3></section><div class="docblock"><p>“uvec4”</p>
-</div><section id="variant.DVEC2" class="variant"><a href="#variant.DVEC2" class="anchor">§</a><h3 class="code-header">DVEC2</h3></section><div class="docblock"><p>“dvec2”</p>
-</div><section id="variant.DVEC3" class="variant"><a href="#variant.DVEC3" class="anchor">§</a><h3 class="code-header">DVEC3</h3></section><div class="docblock"><p>“dvec3”</p>
-</div><section id="variant.DVEC4" class="variant"><a href="#variant.DVEC4" class="anchor">§</a><h3 class="code-header">DVEC4</h3></section><div class="docblock"><p>“dvec4”</p>
-</div><section id="variant.MAT2" class="variant"><a href="#variant.MAT2" class="anchor">§</a><h3 class="code-header">MAT2</h3></section><div class="docblock"><p>“mat2”</p>
-</div><section id="variant.MAT3" class="variant"><a href="#variant.MAT3" class="anchor">§</a><h3 class="code-header">MAT3</h3></section><div class="docblock"><p>“mat3”</p>
-</div><section id="variant.MAT4" class="variant"><a href="#variant.MAT4" class="anchor">§</a><h3 class="code-header">MAT4</h3></section><div class="docblock"><p>“mat4”</p>
-</div><section id="variant.MAT2X2" class="variant"><a href="#variant.MAT2X2" class="anchor">§</a><h3 class="code-header">MAT2X2</h3></section><div class="docblock"><p>“mat2x2”</p>
-</div><section id="variant.MAT2X3" class="variant"><a href="#variant.MAT2X3" class="anchor">§</a><h3 class="code-header">MAT2X3</h3></section><div class="docblock"><p>“mat2x3”</p>
-</div><section id="variant.MAT2X4" class="variant"><a href="#variant.MAT2X4" class="anchor">§</a><h3 class="code-header">MAT2X4</h3></section><div class="docblock"><p>“mat2x4”</p>
-</div><section id="variant.MAT3X2" class="variant"><a href="#variant.MAT3X2" class="anchor">§</a><h3 class="code-header">MAT3X2</h3></section><div class="docblock"><p>“mat3x2”</p>
-</div><section id="variant.MAT3X3" class="variant"><a href="#variant.MAT3X3" class="anchor">§</a><h3 class="code-header">MAT3X3</h3></section><div class="docblock"><p>“mat3x3”</p>
-</div><section id="variant.MAT3X4" class="variant"><a href="#variant.MAT3X4" class="anchor">§</a><h3 class="code-header">MAT3X4</h3></section><div class="docblock"><p>“mat3x4”</p>
-</div><section id="variant.MAT4X2" class="variant"><a href="#variant.MAT4X2" class="anchor">§</a><h3 class="code-header">MAT4X2</h3></section><div class="docblock"><p>“mat4x2”</p>
-</div><section id="variant.MAT4X3" class="variant"><a href="#variant.MAT4X3" class="anchor">§</a><h3 class="code-header">MAT4X3</h3></section><div class="docblock"><p>“mat4x3”</p>
-</div><section id="variant.MAT4X4" class="variant"><a href="#variant.MAT4X4" class="anchor">§</a><h3 class="code-header">MAT4X4</h3></section><div class="docblock"><p>“mat4x4”</p>
-</div><section id="variant.DMAT2" class="variant"><a href="#variant.DMAT2" class="anchor">§</a><h3 class="code-header">DMAT2</h3></section><div class="docblock"><p>“dmat2”</p>
-</div><section id="variant.DMAT3" class="variant"><a href="#variant.DMAT3" class="anchor">§</a><h3 class="code-header">DMAT3</h3></section><div class="docblock"><p>“dmat3”</p>
-</div><section id="variant.DMAT4" class="variant"><a href="#variant.DMAT4" class="anchor">§</a><h3 class="code-header">DMAT4</h3></section><div class="docblock"><p>“dmat4”</p>
-</div><section id="variant.DMAT2X2" class="variant"><a href="#variant.DMAT2X2" class="anchor">§</a><h3 class="code-header">DMAT2X2</h3></section><div class="docblock"><p>“dmat2x2”</p>
-</div><section id="variant.DMAT2X3" class="variant"><a href="#variant.DMAT2X3" class="anchor">§</a><h3 class="code-header">DMAT2X3</h3></section><div class="docblock"><p>“dmat2x3”</p>
-</div><section id="variant.DMAT2X4" class="variant"><a href="#variant.DMAT2X4" class="anchor">§</a><h3 class="code-header">DMAT2X4</h3></section><div class="docblock"><p>“dmat2x4”</p>
-</div><section id="variant.DMAT3X2" class="variant"><a href="#variant.DMAT3X2" class="anchor">§</a><h3 class="code-header">DMAT3X2</h3></section><div class="docblock"><p>“dmat3x2”</p>
-</div><section id="variant.DMAT3X3" class="variant"><a href="#variant.DMAT3X3" class="anchor">§</a><h3 class="code-header">DMAT3X3</h3></section><div class="docblock"><p>“dmat3x3”</p>
-</div><section id="variant.DMAT3X4" class="variant"><a href="#variant.DMAT3X4" class="anchor">§</a><h3 class="code-header">DMAT3X4</h3></section><div class="docblock"><p>“dmat3x4”</p>
-</div><section id="variant.DMAT4X2" class="variant"><a href="#variant.DMAT4X2" class="anchor">§</a><h3 class="code-header">DMAT4X2</h3></section><div class="docblock"><p>“dmat4x2”</p>
-</div><section id="variant.DMAT4X3" class="variant"><a href="#variant.DMAT4X3" class="anchor">§</a><h3 class="code-header">DMAT4X3</h3></section><div class="docblock"><p>“dmat4x3”</p>
-</div><section id="variant.DMAT4X4" class="variant"><a href="#variant.DMAT4X4" class="anchor">§</a><h3 class="code-header">DMAT4X4</h3></section><div class="docblock"><p>“dmat4x4”</p>
-</div><section id="variant.SAMPLER1D" class="variant"><a href="#variant.SAMPLER1D" class="anchor">§</a><h3 class="code-header">SAMPLER1D</h3></section><div class="docblock"><p>“sampler1D”</p>
-</div><section id="variant.SAMPLER1DSHADOW" class="variant"><a href="#variant.SAMPLER1DSHADOW" class="anchor">§</a><h3 class="code-header">SAMPLER1DSHADOW</h3></section><div class="docblock"><p>“sampler1DShadow”</p>
-</div><section id="variant.SAMPLER1DARRAY" class="variant"><a href="#variant.SAMPLER1DARRAY" class="anchor">§</a><h3 class="code-header">SAMPLER1DARRAY</h3></section><div class="docblock"><p>“sampler1DArray”</p>
-</div><section id="variant.SAMPLER1DARRAYSHADOW" class="variant"><a href="#variant.SAMPLER1DARRAYSHADOW" class="anchor">§</a><h3 class="code-header">SAMPLER1DARRAYSHADOW</h3></section><div class="docblock"><p>“sampler1DArrayShadow”</p>
-</div><section id="variant.ISAMPLER1D" class="variant"><a href="#variant.ISAMPLER1D" class="anchor">§</a><h3 class="code-header">ISAMPLER1D</h3></section><div class="docblock"><p>“isampler1D”</p>
-</div><section id="variant.ISAMPLER1DARRAY" class="variant"><a href="#variant.ISAMPLER1DARRAY" class="anchor">§</a><h3 class="code-header">ISAMPLER1DARRAY</h3></section><div class="docblock"><p>“isampler1DArray”</p>
-</div><section id="variant.USAMPLER1D" class="variant"><a href="#variant.USAMPLER1D" class="anchor">§</a><h3 class="code-header">USAMPLER1D</h3></section><div class="docblock"><p>“usampler1D”</p>
-</div><section id="variant.USAMPLER1DARRAY" class="variant"><a href="#variant.USAMPLER1DARRAY" class="anchor">§</a><h3 class="code-header">USAMPLER1DARRAY</h3></section><div class="docblock"><p>“usampler1DArray”</p>
-</div><section id="variant.SAMPLER2D" class="variant"><a href="#variant.SAMPLER2D" class="anchor">§</a><h3 class="code-header">SAMPLER2D</h3></section><div class="docblock"><p>“sampler2D”</p>
-</div><section id="variant.SAMPLER2DSHADOW" class="variant"><a href="#variant.SAMPLER2DSHADOW" class="anchor">§</a><h3 class="code-header">SAMPLER2DSHADOW</h3></section><div class="docblock"><p>“sampler2DShadow”</p>
-</div><section id="variant.SAMPLER2DARRAY" class="variant"><a href="#variant.SAMPLER2DARRAY" class="anchor">§</a><h3 class="code-header">SAMPLER2DARRAY</h3></section><div class="docblock"><p>“sampler2DArray”</p>
-</div><section id="variant.SAMPLER2DARRAYSHADOW" class="variant"><a href="#variant.SAMPLER2DARRAYSHADOW" class="anchor">§</a><h3 class="code-header">SAMPLER2DARRAYSHADOW</h3></section><div class="docblock"><p>“sampler2DArrayShadow”</p>
-</div><section id="variant.ISAMPLER2D" class="variant"><a href="#variant.ISAMPLER2D" class="anchor">§</a><h3 class="code-header">ISAMPLER2D</h3></section><div class="docblock"><p>“isampler2D”</p>
-</div><section id="variant.ISAMPLER2DARRAY" class="variant"><a href="#variant.ISAMPLER2DARRAY" class="anchor">§</a><h3 class="code-header">ISAMPLER2DARRAY</h3></section><div class="docblock"><p>“isampler2DArray”</p>
-</div><section id="variant.USAMPLER2D" class="variant"><a href="#variant.USAMPLER2D" class="anchor">§</a><h3 class="code-header">USAMPLER2D</h3></section><div class="docblock"><p>“usampler2D”</p>
-</div><section id="variant.USAMPLER2DARRAY" class="variant"><a href="#variant.USAMPLER2DARRAY" class="anchor">§</a><h3 class="code-header">USAMPLER2DARRAY</h3></section><div class="docblock"><p>“usampler2DArray”</p>
-</div><section id="variant.SAMPLER2DRECT" class="variant"><a href="#variant.SAMPLER2DRECT" class="anchor">§</a><h3 class="code-header">SAMPLER2DRECT</h3></section><div class="docblock"><p>“sampler2DRect”</p>
-</div><section id="variant.SAMPLER2DRECTSHADOW" class="variant"><a href="#variant.SAMPLER2DRECTSHADOW" class="anchor">§</a><h3 class="code-header">SAMPLER2DRECTSHADOW</h3></section><div class="docblock"><p>“sampler2DRectShadow”</p>
-</div><section id="variant.ISAMPLER2DRECT" class="variant"><a href="#variant.ISAMPLER2DRECT" class="anchor">§</a><h3 class="code-header">ISAMPLER2DRECT</h3></section><div class="docblock"><p>“isampler2DRect”</p>
-</div><section id="variant.USAMPLER2DRECT" class="variant"><a href="#variant.USAMPLER2DRECT" class="anchor">§</a><h3 class="code-header">USAMPLER2DRECT</h3></section><div class="docblock"><p>“usampler2DRect”</p>
-</div><section id="variant.SAMPLER2DMS" class="variant"><a href="#variant.SAMPLER2DMS" class="anchor">§</a><h3 class="code-header">SAMPLER2DMS</h3></section><div class="docblock"><p>“sampler2DMS”</p>
-</div><section id="variant.ISAMPLER2DMS" class="variant"><a href="#variant.ISAMPLER2DMS" class="anchor">§</a><h3 class="code-header">ISAMPLER2DMS</h3></section><div class="docblock"><p>“isampler2DMS”</p>
-</div><section id="variant.USAMPLER2DMS" class="variant"><a href="#variant.USAMPLER2DMS" class="anchor">§</a><h3 class="code-header">USAMPLER2DMS</h3></section><div class="docblock"><p>“usampler2DMS”</p>
-</div><section id="variant.SAMPLER2DMSARRAY" class="variant"><a href="#variant.SAMPLER2DMSARRAY" class="anchor">§</a><h3 class="code-header">SAMPLER2DMSARRAY</h3></section><div class="docblock"><p>“sampler2DMSArray”</p>
-</div><section id="variant.ISAMPLER2DMSARRAY" class="variant"><a href="#variant.ISAMPLER2DMSARRAY" class="anchor">§</a><h3 class="code-header">ISAMPLER2DMSARRAY</h3></section><div class="docblock"><p>“isampler2DMSArray”</p>
-</div><section id="variant.USAMPLER2DMSARRAY" class="variant"><a href="#variant.USAMPLER2DMSARRAY" class="anchor">§</a><h3 class="code-header">USAMPLER2DMSARRAY</h3></section><div class="docblock"><p>“usampler2DMSArray”</p>
-</div><section id="variant.SAMPLER3D" class="variant"><a href="#variant.SAMPLER3D" class="anchor">§</a><h3 class="code-header">SAMPLER3D</h3></section><div class="docblock"><p>“sampler3D”</p>
-</div><section id="variant.ISAMPLER3D" class="variant"><a href="#variant.ISAMPLER3D" class="anchor">§</a><h3 class="code-header">ISAMPLER3D</h3></section><div class="docblock"><p>“isampler3D”</p>
-</div><section id="variant.USAMPLER3D" class="variant"><a href="#variant.USAMPLER3D" class="anchor">§</a><h3 class="code-header">USAMPLER3D</h3></section><div class="docblock"><p>“usampler3D”</p>
-</div><section id="variant.SAMPLERCUBE" class="variant"><a href="#variant.SAMPLERCUBE" class="anchor">§</a><h3 class="code-header">SAMPLERCUBE</h3></section><div class="docblock"><p>“samplerCube”</p>
-</div><section id="variant.SAMPLERCUBESHADOW" class="variant"><a href="#variant.SAMPLERCUBESHADOW" class="anchor">§</a><h3 class="code-header">SAMPLERCUBESHADOW</h3></section><div class="docblock"><p>“samplerCubeShadow”</p>
-</div><section id="variant.ISAMPLERCUBE" class="variant"><a href="#variant.ISAMPLERCUBE" class="anchor">§</a><h3 class="code-header">ISAMPLERCUBE</h3></section><div class="docblock"><p>“isamplerCube”</p>
-</div><section id="variant.USAMPLERCUBE" class="variant"><a href="#variant.USAMPLERCUBE" class="anchor">§</a><h3 class="code-header">USAMPLERCUBE</h3></section><div class="docblock"><p>“usamplerCube”</p>
-</div><section id="variant.SAMPLERCUBEARRAY" class="variant"><a href="#variant.SAMPLERCUBEARRAY" class="anchor">§</a><h3 class="code-header">SAMPLERCUBEARRAY</h3></section><div class="docblock"><p>“samplerCubeArray”</p>
-</div><section id="variant.SAMPLERCUBEARRAYSHADOW" class="variant"><a href="#variant.SAMPLERCUBEARRAYSHADOW" class="anchor">§</a><h3 class="code-header">SAMPLERCUBEARRAYSHADOW</h3></section><div class="docblock"><p>“samplerCubeArrayShadow”</p>
-</div><section id="variant.ISAMPLERCUBEARRAY" class="variant"><a href="#variant.ISAMPLERCUBEARRAY" class="anchor">§</a><h3 class="code-header">ISAMPLERCUBEARRAY</h3></section><div class="docblock"><p>“isamplerCubeArray”</p>
-</div><section id="variant.USAMPLERCUBEARRAY" class="variant"><a href="#variant.USAMPLERCUBEARRAY" class="anchor">§</a><h3 class="code-header">USAMPLERCUBEARRAY</h3></section><div class="docblock"><p>“usamplerCubeArray”</p>
-</div><section id="variant.SAMPLERBUFFER" class="variant"><a href="#variant.SAMPLERBUFFER" class="anchor">§</a><h3 class="code-header">SAMPLERBUFFER</h3></section><div class="docblock"><p>“samplerBuffer”</p>
-</div><section id="variant.ISAMPLERBUFFER" class="variant"><a href="#variant.ISAMPLERBUFFER" class="anchor">§</a><h3 class="code-header">ISAMPLERBUFFER</h3></section><div class="docblock"><p>“isamplerBuffer”</p>
-</div><section id="variant.USAMPLERBUFFER" class="variant"><a href="#variant.USAMPLERBUFFER" class="anchor">§</a><h3 class="code-header">USAMPLERBUFFER</h3></section><div class="docblock"><p>“usamplerBuffer”</p>
-</div><section id="variant.IMAGE1D" class="variant"><a href="#variant.IMAGE1D" class="anchor">§</a><h3 class="code-header">IMAGE1D</h3></section><div class="docblock"><p>“image1D”</p>
-</div><section id="variant.IIMAGE1D" class="variant"><a href="#variant.IIMAGE1D" class="anchor">§</a><h3 class="code-header">IIMAGE1D</h3></section><div class="docblock"><p>“iimage1D”</p>
-</div><section id="variant.UIMAGE1D" class="variant"><a href="#variant.UIMAGE1D" class="anchor">§</a><h3 class="code-header">UIMAGE1D</h3></section><div class="docblock"><p>“uimage1D”</p>
-</div><section id="variant.IMAGE1DARRAY" class="variant"><a href="#variant.IMAGE1DARRAY" class="anchor">§</a><h3 class="code-header">IMAGE1DARRAY</h3></section><div class="docblock"><p>“image1DArray”</p>
-</div><section id="variant.IIMAGE1DARRAY" class="variant"><a href="#variant.IIMAGE1DARRAY" class="anchor">§</a><h3 class="code-header">IIMAGE1DARRAY</h3></section><div class="docblock"><p>“iimage1DArray”</p>
-</div><section id="variant.UIMAGE1DARRAY" class="variant"><a href="#variant.UIMAGE1DARRAY" class="anchor">§</a><h3 class="code-header">UIMAGE1DARRAY</h3></section><div class="docblock"><p>“uimage1DArray”</p>
-</div><section id="variant.IMAGE2D" class="variant"><a href="#variant.IMAGE2D" class="anchor">§</a><h3 class="code-header">IMAGE2D</h3></section><div class="docblock"><p>“image2D”</p>
-</div><section id="variant.IIMAGE2D" class="variant"><a href="#variant.IIMAGE2D" class="anchor">§</a><h3 class="code-header">IIMAGE2D</h3></section><div class="docblock"><p>“iimage2D”</p>
-</div><section id="variant.UIMAGE2D" class="variant"><a href="#variant.UIMAGE2D" class="anchor">§</a><h3 class="code-header">UIMAGE2D</h3></section><div class="docblock"><p>“uimage2D”</p>
-</div><section id="variant.IMAGE2DARRAY" class="variant"><a href="#variant.IMAGE2DARRAY" class="anchor">§</a><h3 class="code-header">IMAGE2DARRAY</h3></section><div class="docblock"><p>“image2DArray”</p>
-</div><section id="variant.IIMAGE2DARRAY" class="variant"><a href="#variant.IIMAGE2DARRAY" class="anchor">§</a><h3 class="code-header">IIMAGE2DARRAY</h3></section><div class="docblock"><p>“iimage2DArray”</p>
-</div><section id="variant.UIMAGE2DARRAY" class="variant"><a href="#variant.UIMAGE2DARRAY" class="anchor">§</a><h3 class="code-header">UIMAGE2DARRAY</h3></section><div class="docblock"><p>“uimage2DArray”</p>
-</div><section id="variant.IMAGE2DRECT" class="variant"><a href="#variant.IMAGE2DRECT" class="anchor">§</a><h3 class="code-header">IMAGE2DRECT</h3></section><div class="docblock"><p>“image2DRect”</p>
-</div><section id="variant.IIMAGE2DRECT" class="variant"><a href="#variant.IIMAGE2DRECT" class="anchor">§</a><h3 class="code-header">IIMAGE2DRECT</h3></section><div class="docblock"><p>“iimage2DRect”</p>
-</div><section id="variant.UIMAGE2DRECT" class="variant"><a href="#variant.UIMAGE2DRECT" class="anchor">§</a><h3 class="code-header">UIMAGE2DRECT</h3></section><div class="docblock"><p>“uimage2DRect”</p>
-</div><section id="variant.IMAGE2DMS" class="variant"><a href="#variant.IMAGE2DMS" class="anchor">§</a><h3 class="code-header">IMAGE2DMS</h3></section><div class="docblock"><p>“image2DMS”</p>
-</div><section id="variant.IIMAGE2DMS" class="variant"><a href="#variant.IIMAGE2DMS" class="anchor">§</a><h3 class="code-header">IIMAGE2DMS</h3></section><div class="docblock"><p>“iimage2DMS”</p>
-</div><section id="variant.UIMAGE2DMS" class="variant"><a href="#variant.UIMAGE2DMS" class="anchor">§</a><h3 class="code-header">UIMAGE2DMS</h3></section><div class="docblock"><p>“uimage2DMS”</p>
-</div><section id="variant.IMAGE2DMSARRAY" class="variant"><a href="#variant.IMAGE2DMSARRAY" class="anchor">§</a><h3 class="code-header">IMAGE2DMSARRAY</h3></section><div class="docblock"><p>“image2DMSArray”</p>
-</div><section id="variant.IIMAGE2DMSARRAY" class="variant"><a href="#variant.IIMAGE2DMSARRAY" class="anchor">§</a><h3 class="code-header">IIMAGE2DMSARRAY</h3></section><div class="docblock"><p>“iimage2DMSArray”</p>
-</div><section id="variant.UIMAGE2DMSARRAY" class="variant"><a href="#variant.UIMAGE2DMSARRAY" class="anchor">§</a><h3 class="code-header">UIMAGE2DMSARRAY</h3></section><div class="docblock"><p>“uimage2DMSArray”</p>
-</div><section id="variant.IMAGE3D" class="variant"><a href="#variant.IMAGE3D" class="anchor">§</a><h3 class="code-header">IMAGE3D</h3></section><div class="docblock"><p>“image3D”</p>
-</div><section id="variant.IIMAGE3D" class="variant"><a href="#variant.IIMAGE3D" class="anchor">§</a><h3 class="code-header">IIMAGE3D</h3></section><div class="docblock"><p>“iimage3D”</p>
-</div><section id="variant.UIMAGE3D" class="variant"><a href="#variant.UIMAGE3D" class="anchor">§</a><h3 class="code-header">UIMAGE3D</h3></section><div class="docblock"><p>“uimage3D”</p>
-</div><section id="variant.IMAGECUBE" class="variant"><a href="#variant.IMAGECUBE" class="anchor">§</a><h3 class="code-header">IMAGECUBE</h3></section><div class="docblock"><p>“imageCube”</p>
-</div><section id="variant.IIMAGECUBE" class="variant"><a href="#variant.IIMAGECUBE" class="anchor">§</a><h3 class="code-header">IIMAGECUBE</h3></section><div class="docblock"><p>“iimageCube”</p>
-</div><section id="variant.UIMAGECUBE" class="variant"><a href="#variant.UIMAGECUBE" class="anchor">§</a><h3 class="code-header">UIMAGECUBE</h3></section><div class="docblock"><p>“uimageCube”</p>
-</div><section id="variant.IMAGECUBEARRAY" class="variant"><a href="#variant.IMAGECUBEARRAY" class="anchor">§</a><h3 class="code-header">IMAGECUBEARRAY</h3></section><div class="docblock"><p>“imageCubeArray”</p>
-</div><section id="variant.IIMAGECUBEARRAY" class="variant"><a href="#variant.IIMAGECUBEARRAY" class="anchor">§</a><h3 class="code-header">IIMAGECUBEARRAY</h3></section><div class="docblock"><p>“iimageCubeArray”</p>
-</div><section id="variant.UIMAGECUBEARRAY" class="variant"><a href="#variant.UIMAGECUBEARRAY" class="anchor">§</a><h3 class="code-header">UIMAGECUBEARRAY</h3></section><div class="docblock"><p>“uimageCubeArray”</p>
-</div><section id="variant.IMAGEBUFFER" class="variant"><a href="#variant.IMAGEBUFFER" class="anchor">§</a><h3 class="code-header">IMAGEBUFFER</h3></section><div class="docblock"><p>“imageBuffer”</p>
-</div><section id="variant.IIMAGEBUFFER" class="variant"><a href="#variant.IIMAGEBUFFER" class="anchor">§</a><h3 class="code-header">IIMAGEBUFFER</h3></section><div class="docblock"><p>“iimageBuffer”</p>
-</div><section id="variant.UIMAGEBUFFER" class="variant"><a href="#variant.UIMAGEBUFFER" class="anchor">§</a><h3 class="code-header">UIMAGEBUFFER</h3></section><div class="docblock"><p>“uimageBuffer”</p>
-</div><section id="variant.TEXTURE1D" class="variant"><a href="#variant.TEXTURE1D" class="anchor">§</a><h3 class="code-header">TEXTURE1D</h3></section><div class="docblock"><p>“texture1D”</p>
-</div><section id="variant.TEXTURE1DARRAY" class="variant"><a href="#variant.TEXTURE1DARRAY" class="anchor">§</a><h3 class="code-header">TEXTURE1DARRAY</h3></section><div class="docblock"><p>“texture1DArray”</p>
-</div><section id="variant.ITEXTURE1D" class="variant"><a href="#variant.ITEXTURE1D" class="anchor">§</a><h3 class="code-header">ITEXTURE1D</h3></section><div class="docblock"><p>“itexture1D”</p>
-</div><section id="variant.ITEXTURE1DARRAY" class="variant"><a href="#variant.ITEXTURE1DARRAY" class="anchor">§</a><h3 class="code-header">ITEXTURE1DARRAY</h3></section><div class="docblock"><p>“itexture1DArray”</p>
-</div><section id="variant.UTEXTURE1D" class="variant"><a href="#variant.UTEXTURE1D" class="anchor">§</a><h3 class="code-header">UTEXTURE1D</h3></section><div class="docblock"><p>“utexture1D”</p>
-</div><section id="variant.UTEXTURE1DARRAY" class="variant"><a href="#variant.UTEXTURE1DARRAY" class="anchor">§</a><h3 class="code-header">UTEXTURE1DARRAY</h3></section><div class="docblock"><p>“utexture1DArray”</p>
-</div><section id="variant.TEXTURE2D" class="variant"><a href="#variant.TEXTURE2D" class="anchor">§</a><h3 class="code-header">TEXTURE2D</h3></section><div class="docblock"><p>“texture2D”</p>
-</div><section id="variant.TEXTURE2DARRAY" class="variant"><a href="#variant.TEXTURE2DARRAY" class="anchor">§</a><h3 class="code-header">TEXTURE2DARRAY</h3></section><div class="docblock"><p>“texture2DArray”</p>
-</div><section id="variant.ITEXTURE2D" class="variant"><a href="#variant.ITEXTURE2D" class="anchor">§</a><h3 class="code-header">ITEXTURE2D</h3></section><div class="docblock"><p>“itexture2D”</p>
-</div><section id="variant.ITEXTURE2DARRAY" class="variant"><a href="#variant.ITEXTURE2DARRAY" class="anchor">§</a><h3 class="code-header">ITEXTURE2DARRAY</h3></section><div class="docblock"><p>“itexture2DArray”</p>
-</div><section id="variant.UTEXTURE2D" class="variant"><a href="#variant.UTEXTURE2D" class="anchor">§</a><h3 class="code-header">UTEXTURE2D</h3></section><div class="docblock"><p>“utexture2D”</p>
-</div><section id="variant.UTEXTURE2DARRAY" class="variant"><a href="#variant.UTEXTURE2DARRAY" class="anchor">§</a><h3 class="code-header">UTEXTURE2DARRAY</h3></section><div class="docblock"><p>“utexture2DArray”</p>
-</div><section id="variant.TEXTURE2DRECT" class="variant"><a href="#variant.TEXTURE2DRECT" class="anchor">§</a><h3 class="code-header">TEXTURE2DRECT</h3></section><div class="docblock"><p>“texture2DRect”</p>
-</div><section id="variant.ITEXTURE2DRECT" class="variant"><a href="#variant.ITEXTURE2DRECT" class="anchor">§</a><h3 class="code-header">ITEXTURE2DRECT</h3></section><div class="docblock"><p>“itexture2DRect”</p>
-</div><section id="variant.UTEXTURE2DRECT" class="variant"><a href="#variant.UTEXTURE2DRECT" class="anchor">§</a><h3 class="code-header">UTEXTURE2DRECT</h3></section><div class="docblock"><p>“utexture2DRect”</p>
-</div><section id="variant.TEXTURE2DMS" class="variant"><a href="#variant.TEXTURE2DMS" class="anchor">§</a><h3 class="code-header">TEXTURE2DMS</h3></section><div class="docblock"><p>“texture2DMS”</p>
-</div><section id="variant.ITEXTURE2DMS" class="variant"><a href="#variant.ITEXTURE2DMS" class="anchor">§</a><h3 class="code-header">ITEXTURE2DMS</h3></section><div class="docblock"><p>“itexture2DMS”</p>
-</div><section id="variant.UTEXTURE2DMS" class="variant"><a href="#variant.UTEXTURE2DMS" class="anchor">§</a><h3 class="code-header">UTEXTURE2DMS</h3></section><div class="docblock"><p>“utexture2DMS”</p>
-</div><section id="variant.TEXTURE2DMSARRAY" class="variant"><a href="#variant.TEXTURE2DMSARRAY" class="anchor">§</a><h3 class="code-header">TEXTURE2DMSARRAY</h3></section><div class="docblock"><p>“texture2DMSArray”</p>
-</div><section id="variant.ITEXTURE2DMSARRAY" class="variant"><a href="#variant.ITEXTURE2DMSARRAY" class="anchor">§</a><h3 class="code-header">ITEXTURE2DMSARRAY</h3></section><div class="docblock"><p>“itexture2DMSArray”</p>
-</div><section id="variant.UTEXTURE2DMSARRAY" class="variant"><a href="#variant.UTEXTURE2DMSARRAY" class="anchor">§</a><h3 class="code-header">UTEXTURE2DMSARRAY</h3></section><div class="docblock"><p>“utexture2DMSArray”</p>
-</div><section id="variant.TEXTURE3D" class="variant"><a href="#variant.TEXTURE3D" class="anchor">§</a><h3 class="code-header">TEXTURE3D</h3></section><div class="docblock"><p>“texture3D”</p>
-</div><section id="variant.ITEXTURE3D" class="variant"><a href="#variant.ITEXTURE3D" class="anchor">§</a><h3 class="code-header">ITEXTURE3D</h3></section><div class="docblock"><p>“itexture3D”</p>
-</div><section id="variant.UTEXTURE3D" class="variant"><a href="#variant.UTEXTURE3D" class="anchor">§</a><h3 class="code-header">UTEXTURE3D</h3></section><div class="docblock"><p>“utexture3D”</p>
-</div><section id="variant.TEXTURECUBE" class="variant"><a href="#variant.TEXTURECUBE" class="anchor">§</a><h3 class="code-header">TEXTURECUBE</h3></section><div class="docblock"><p>“textureCube”</p>
-</div><section id="variant.ITEXTURECUBE" class="variant"><a href="#variant.ITEXTURECUBE" class="anchor">§</a><h3 class="code-header">ITEXTURECUBE</h3></section><div class="docblock"><p>“itextureCube”</p>
-</div><section id="variant.UTEXTURECUBE" class="variant"><a href="#variant.UTEXTURECUBE" class="anchor">§</a><h3 class="code-header">UTEXTURECUBE</h3></section><div class="docblock"><p>“utextureCube”</p>
-</div><section id="variant.TEXTURECUBEARRAY" class="variant"><a href="#variant.TEXTURECUBEARRAY" class="anchor">§</a><h3 class="code-header">TEXTURECUBEARRAY</h3></section><div class="docblock"><p>“textureCubeArray”</p>
-</div><section id="variant.ITEXTURECUBEARRAY" class="variant"><a href="#variant.ITEXTURECUBEARRAY" class="anchor">§</a><h3 class="code-header">ITEXTURECUBEARRAY</h3></section><div class="docblock"><p>“itextureCubeArray”</p>
-</div><section id="variant.UTEXTURECUBEARRAY" class="variant"><a href="#variant.UTEXTURECUBEARRAY" class="anchor">§</a><h3 class="code-header">UTEXTURECUBEARRAY</h3></section><div class="docblock"><p>“utextureCubeArray”</p>
-</div><section id="variant.TEXTUREBUFFER" class="variant"><a href="#variant.TEXTUREBUFFER" class="anchor">§</a><h3 class="code-header">TEXTUREBUFFER</h3></section><div class="docblock"><p>“textureBuffer”</p>
-</div><section id="variant.ITEXTUREBUFFER" class="variant"><a href="#variant.ITEXTUREBUFFER" class="anchor">§</a><h3 class="code-header">ITEXTUREBUFFER</h3></section><div class="docblock"><p>“itextureBuffer”</p>
-</div><section id="variant.UTEXTUREBUFFER" class="variant"><a href="#variant.UTEXTUREBUFFER" class="anchor">§</a><h3 class="code-header">UTEXTUREBUFFER</h3></section><div class="docblock"><p>“utextureBuffer”</p>
-</div><section id="variant.SAMPLER" class="variant"><a href="#variant.SAMPLER" class="anchor">§</a><h3 class="code-header">SAMPLER</h3></section><div class="docblock"><p>“sampler”</p>
-</div><section id="variant.SAMPLERSHADOW" class="variant"><a href="#variant.SAMPLERSHADOW" class="anchor">§</a><h3 class="code-header">SAMPLERSHADOW</h3></section><div class="docblock"><p>“samplerShadow”</p>
-</div><section id="variant.SUBPASSINPUT" class="variant"><a href="#variant.SUBPASSINPUT" class="anchor">§</a><h3 class="code-header">SUBPASSINPUT</h3></section><div class="docblock"><p>“subpassInput”</p>
-</div><section id="variant.ISUBPASSINPUT" class="variant"><a href="#variant.ISUBPASSINPUT" class="anchor">§</a><h3 class="code-header">ISUBPASSINPUT</h3></section><div class="docblock"><p>“isubpassInput”</p>
-</div><section id="variant.USUBPASSINPUT" class="variant"><a href="#variant.USUBPASSINPUT" class="anchor">§</a><h3 class="code-header">USUBPASSINPUT</h3></section><div class="docblock"><p>“usubpassInput”</p>
-</div><section id="variant.SUBPASSINPUTMS" class="variant"><a href="#variant.SUBPASSINPUTMS" class="anchor">§</a><h3 class="code-header">SUBPASSINPUTMS</h3></section><div class="docblock"><p>“subpassInputMS”</p>
-</div><section id="variant.ISUBPASSINPUTMS" class="variant"><a href="#variant.ISUBPASSINPUTMS" class="anchor">§</a><h3 class="code-header">ISUBPASSINPUTMS</h3></section><div class="docblock"><p>“isubpassInputMS”</p>
-</div><section id="variant.USUBPASSINPUTMS" class="variant"><a href="#variant.USUBPASSINPUTMS" class="anchor">§</a><h3 class="code-header">USUBPASSINPUTMS</h3></section><div class="docblock"><p>“usubpassInputMS”</p>
+</div><section id="variant.VEC2" class="variant"><a href="#variant.VEC2" class="anchor">§</a><h3 class="code-header">VEC2</h3></section><div class="docblock"><p>“float2” (HLSL vector type)</p>
+</div><section id="variant.VEC3" class="variant"><a href="#variant.VEC3" class="anchor">§</a><h3 class="code-header">VEC3</h3></section><div class="docblock"><p>“float3” (HLSL vector type)</p>
+</div><section id="variant.VEC4" class="variant"><a href="#variant.VEC4" class="anchor">§</a><h3 class="code-header">VEC4</h3></section><div class="docblock"><p>“float4” (HLSL vector type)</p>
+</div><section id="variant.IVEC2" class="variant"><a href="#variant.IVEC2" class="anchor">§</a><h3 class="code-header">IVEC2</h3></section><div class="docblock"><p>“int2” (HLSL vector type)</p>
+</div><section id="variant.IVEC3" class="variant"><a href="#variant.IVEC3" class="anchor">§</a><h3 class="code-header">IVEC3</h3></section><div class="docblock"><p>“int3” (HLSL vector type)</p>
+</div><section id="variant.IVEC4" class="variant"><a href="#variant.IVEC4" class="anchor">§</a><h3 class="code-header">IVEC4</h3></section><div class="docblock"><p>“int4” (HLSL vector type)</p>
+</div><section id="variant.BVEC2" class="variant"><a href="#variant.BVEC2" class="anchor">§</a><h3 class="code-header">BVEC2</h3></section><div class="docblock"><p>“bool2” (HLSL vector type)</p>
+</div><section id="variant.BVEC3" class="variant"><a href="#variant.BVEC3" class="anchor">§</a><h3 class="code-header">BVEC3</h3></section><div class="docblock"><p>“bool3” (HLSL vector type)</p>
+</div><section id="variant.BVEC4" class="variant"><a href="#variant.BVEC4" class="anchor">§</a><h3 class="code-header">BVEC4</h3></section><div class="docblock"><p>“bool4” (HLSL vector type)</p>
+</div><section id="variant.UVEC2" class="variant"><a href="#variant.UVEC2" class="anchor">§</a><h3 class="code-header">UVEC2</h3></section><div class="docblock"><p>“uint2” (HLSL vector type)</p>
+</div><section id="variant.UVEC3" class="variant"><a href="#variant.UVEC3" class="anchor">§</a><h3 class="code-header">UVEC3</h3></section><div class="docblock"><p>“uint3” (HLSL vector type)</p>
+</div><section id="variant.UVEC4" class="variant"><a href="#variant.UVEC4" class="anchor">§</a><h3 class="code-header">UVEC4</h3></section><div class="docblock"><p>“uint4” (HLSL vector type)</p>
+</div><section id="variant.MAT2" class="variant"><a href="#variant.MAT2" class="anchor">§</a><h3 class="code-header">MAT2</h3></section><div class="docblock"><p>“float2x2” (HLSL matrix type)</p>
+</div><section id="variant.MAT3" class="variant"><a href="#variant.MAT3" class="anchor">§</a><h3 class="code-header">MAT3</h3></section><div class="docblock"><p>“float3x3” (HLSL matrix type)</p>
+</div><section id="variant.MAT4" class="variant"><a href="#variant.MAT4" class="anchor">§</a><h3 class="code-header">MAT4</h3></section><div class="docblock"><p>“float4x4” (HLSL matrix type)</p>
+</div><section id="variant.MAT2X2" class="variant"><a href="#variant.MAT2X2" class="anchor">§</a><h3 class="code-header">MAT2X2</h3></section><div class="docblock"><p>“float2x2” (HLSL matrix type)</p>
+</div><section id="variant.MAT2X3" class="variant"><a href="#variant.MAT2X3" class="anchor">§</a><h3 class="code-header">MAT2X3</h3></section><div class="docblock"><p>“float2x3” (HLSL matrix type)</p>
+</div><section id="variant.MAT2X4" class="variant"><a href="#variant.MAT2X4" class="anchor">§</a><h3 class="code-header">MAT2X4</h3></section><div class="docblock"><p>“float2x4” (HLSL matrix type)</p>
+</div><section id="variant.MAT3X2" class="variant"><a href="#variant.MAT3X2" class="anchor">§</a><h3 class="code-header">MAT3X2</h3></section><div class="docblock"><p>“float3x2” (HLSL matrix type)</p>
+</div><section id="variant.MAT3X3" class="variant"><a href="#variant.MAT3X3" class="anchor">§</a><h3 class="code-header">MAT3X3</h3></section><div class="docblock"><p>“float3x3” (HLSL matrix type)</p>
+</div><section id="variant.MAT3X4" class="variant"><a href="#variant.MAT3X4" class="anchor">§</a><h3 class="code-header">MAT3X4</h3></section><div class="docblock"><p>“float3x4” (HLSL matrix type)</p>
+</div><section id="variant.MAT4X2" class="variant"><a href="#variant.MAT4X2" class="anchor">§</a><h3 class="code-header">MAT4X2</h3></section><div class="docblock"><p>“float4x2” (HLSL matrix type)</p>
+</div><section id="variant.MAT4X3" class="variant"><a href="#variant.MAT4X3" class="anchor">§</a><h3 class="code-header">MAT4X3</h3></section><div class="docblock"><p>“float4x3” (HLSL matrix type)</p>
+</div><section id="variant.MAT4X4" class="variant"><a href="#variant.MAT4X4" class="anchor">§</a><h3 class="code-header">MAT4X4</h3></section><div class="docblock"><p>“float4x4” (HLSL matrix type)</p>
+</div><section id="variant.MAT1X1" class="variant"><a href="#variant.MAT1X1" class="anchor">§</a><h3 class="code-header">MAT1X1</h3></section><div class="docblock"><p>“float1x1” through “float4x4” (HLSL matrix types)</p>
+</div><section id="variant.MAT1X2" class="variant"><a href="#variant.MAT1X2" class="anchor">§</a><h3 class="code-header">MAT1X2</h3></section><div class="docblock"><p>“float1x2” (HLSL matrix type)</p>
+</div><section id="variant.MAT1X3" class="variant"><a href="#variant.MAT1X3" class="anchor">§</a><h3 class="code-header">MAT1X3</h3></section><div class="docblock"><p>“float1x3” (HLSL matrix type)</p>
+</div><section id="variant.MAT1X4" class="variant"><a href="#variant.MAT1X4" class="anchor">§</a><h3 class="code-header">MAT1X4</h3></section><div class="docblock"><p>“float1x4” (HLSL matrix type)</p>
+</div><section id="variant.MAT2X1" class="variant"><a href="#variant.MAT2X1" class="anchor">§</a><h3 class="code-header">MAT2X1</h3></section><div class="docblock"><p>“float2x1” (HLSL matrix type)</p>
+</div><section id="variant.MAT3X1" class="variant"><a href="#variant.MAT3X1" class="anchor">§</a><h3 class="code-header">MAT3X1</h3></section><div class="docblock"><p>“float3x1” (HLSL matrix type)</p>
+</div><section id="variant.MAT4X1" class="variant"><a href="#variant.MAT4X1" class="anchor">§</a><h3 class="code-header">MAT4X1</h3></section><div class="docblock"><p>“float4x1” (HLSL matrix type)</p>
+</div><section id="variant.SAMPLER" class="variant"><a href="#variant.SAMPLER" class="anchor">§</a><h3 class="code-header">SAMPLER</h3></section><div class="docblock"><p>“sampler” (HLSL sampler type)</p>
 </div><section id="variant.RESERVED" class="variant"><a href="#variant.RESERVED" class="anchor">§</a><h3 class="code-header">RESERVED(<a class="type" href="../type_names/type.TypeNameAtom.html" title="type hlsl_lang_pp::types::type_names::TypeNameAtom">TypeNameAtom</a>)</h3></section><div class="docblock"><p>Reserved for future use</p>
 </div><section id="variant.OTHER" class="variant"><a href="#variant.OTHER" class="anchor">§</a><h3 class="code-header">OTHER(<a class="type" href="../type_names/type.TypeNameAtom.html" title="type hlsl_lang_pp::types::type_names::TypeNameAtom">TypeNameAtom</a>)</h3></section><div class="docblock"><p>Generic type name</p>
-</div></div><h2 id="implementations" class="section-header">Implementations<a href="#implementations" class="anchor">§</a></h2><div id="implementations-list"><details class="toggle implementors-toggle" open><summary><section id="impl-TypeName" class="impl"><a class="src rightside" href="../../../src/hlsl_lang_pp/types/token.rs.html#500-1157">Source</a><a href="#impl-TypeName" class="anchor">§</a><h3 class="code-header">impl <a class="enum" href="enum.TypeName.html" title="enum hlsl_lang_pp::types::token::TypeName">TypeName</a></h3></section></summary><div class="impl-items"><section id="method.gate" class="method"><a class="src rightside" href="../../../src/hlsl_lang_pp/types/token.rs.html#501-526">Source</a><h4 class="code-header">fn <a href="#method.gate" class="fn">gate</a>(
+</div></div><h2 id="implementations" class="section-header">Implementations<a href="#implementations" class="anchor">§</a></h2><div id="implementations-list"><details class="toggle implementors-toggle" open><summary><section id="impl-TypeName" class="impl"><a class="src rightside" href="../../../src/hlsl_lang_pp/types/token.rs.html#133-255">Source</a><a href="#impl-TypeName" class="anchor">§</a><h3 class="code-header">impl <a class="enum" href="enum.TypeName.html" title="enum hlsl_lang_pp::types::token::TypeName">TypeName</a></h3></section></summary><div class="impl-items"><section id="method.gate" class="method"><a class="src rightside" href="../../../src/hlsl_lang_pp/types/token.rs.html#134-159">Source</a><h4 class="code-header">fn <a href="#method.gate" class="fn">gate</a>(
     self,
     version_gate: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>,
     reserved_gate: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>,
     atom: <a class="type" href="../type_names/type.TypeNameAtom.html" title="type hlsl_lang_pp::types::type_names::TypeNameAtom">TypeNameAtom</a>,
     is_type_name: impl <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(&amp;<a class="type" href="../type_names/type.TypeNameAtom.html" title="type hlsl_lang_pp::types::type_names::TypeNameAtom">TypeNameAtom</a>) -&gt; <a class="enum" href="../type_names/enum.TypeNameState.html" title="enum hlsl_lang_pp::types::type_names::TypeNameState">TypeNameState</a>,
-) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;(Self, <a class="enum" href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="enum" href="../type_names/enum.TypeNameState.html" title="enum hlsl_lang_pp::types::type_names::TypeNameState">TypeNameState</a>&gt;)&gt;</h4></section><section id="method.parse" class="method"><a class="src rightside" href="../../../src/hlsl_lang_pp/types/token.rs.html#528-1156">Source</a><h4 class="code-header">pub(crate) fn <a href="#method.parse" class="fn">parse</a>(
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;(Self, <a class="enum" href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="enum" href="../type_names/enum.TypeNameState.html" title="enum hlsl_lang_pp::types::type_names::TypeNameState">TypeNameState</a>&gt;)&gt;</h4></section><section id="method.parse" class="method"><a class="src rightside" href="../../../src/hlsl_lang_pp/types/token.rs.html#161-254">Source</a><h4 class="code-header">pub(crate) fn <a href="#method.parse" class="fn">parse</a>(
     name: &amp;<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.str.html">str</a>,
     version: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.u16.html">u16</a>,
     target_vulkan: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>,

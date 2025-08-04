@@ -1,9 +1,9 @@
 (function() {
-    var implementors = Object.fromEntries([["hlsl_lang_lexer",[["impl Token for <a class=\"enum\" href=\"hlsl_lang_lexer/enum.Token.html\" title=\"enum hlsl_lang_lexer::Token\">Token</a>"]]],["hlsl_lang_pp",[["impl Token for <a class=\"enum\" href=\"hlsl_lang_pp/types/token/enum.Token.html\" title=\"enum hlsl_lang_pp::types::token::Token\">Token</a>"]]]]);
+    var implementors = Object.fromEntries([["hlsl_lang_lexer",[["impl Token for <a class=\"enum\" href=\"hlsl_lang_lexer/enum.Token.html\" title=\"enum hlsl_lang_lexer::Token\">Token</a>"]]],["hlsl_lang_pp",[["impl <a class=\"trait\" href=\"lang_util/token/trait.Token.html\" title=\"trait lang_util::token::Token\">Token</a> for <a class=\"enum\" href=\"hlsl_lang_pp/types/token/enum.Token.html\" title=\"enum hlsl_lang_pp::types::token::Token\">Token</a>"]]]]);
     if (window.register_implementors) {
         window.register_implementors(implementors);
     } else {
         window.pending_implementors = implementors;
     }
 })()
-//{"start":57,"fragment_lengths":[147,165]}
+//{"start":57,"fragment_lengths":[147,270]}
