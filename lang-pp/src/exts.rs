@@ -85,21 +85,7 @@ impl Default for Registry {
                     ExtNameAtom::from("GL_ARB_gpu_shader_fp64"),
                     vec![
                         type_name!("double"),
-                        type_name!("dvec2"),
-                        type_name!("dvec3"),
-                        type_name!("dvec4"),
-                        type_name!("dmat2"),
-                        type_name!("dmat3"),
-                        type_name!("dmat4"),
-                        type_name!("dmat2x2"),
-                        type_name!("dmat2x3"),
-                        type_name!("dmat2x4"),
-                        type_name!("dmat3x2"),
-                        type_name!("dmat3x3"),
-                        type_name!("dmat3x4"),
-                        type_name!("dmat4x2"),
-                        type_name!("dmat4x3"),
-                        type_name!("dmat4x4"),
+                        // GLSL-specific double vector and matrix types removed for HLSL
                     ],
                 ),
                 ExtensionSpec::new(
@@ -122,39 +108,7 @@ impl Default for Registry {
                 ExtensionSpec::new(
                     ExtNameAtom::from("GL_ARB_shader_image_load_store"),
                     vec![
-                        type_name!("image1D"),
-                        type_name!("iimage1D"),
-                        type_name!("uimage1D"),
-                        type_name!("image2D"),
-                        type_name!("iimage2D"),
-                        type_name!("uimage2D"),
-                        type_name!("image3D"),
-                        type_name!("iimage3D"),
-                        type_name!("uimage3D"),
-                        type_name!("image2DRect"),
-                        type_name!("iimage2DRect"),
-                        type_name!("uimage2DRect"),
-                        type_name!("imageCube"),
-                        type_name!("iimageCube"),
-                        type_name!("uimageCube"),
-                        type_name!("imageBuffer"),
-                        type_name!("iimageBuffer"),
-                        type_name!("uimageBuffer"),
-                        type_name!("image1DArray"),
-                        type_name!("iimage1DArray"),
-                        type_name!("uimage1DArray"),
-                        type_name!("image2DArray"),
-                        type_name!("iimage2DArray"),
-                        type_name!("uimage2DArray"),
-                        type_name!("imageCubeArray"),
-                        type_name!("iimageCubeArray"),
-                        type_name!("uimageCubeArray"),
-                        type_name!("image2DMS"),
-                        type_name!("iimage2DMS"),
-                        type_name!("uimage2DMS"),
-                        type_name!("image2DMSArray"),
-                        type_name!("iimage2DMSArray"),
-                        type_name!("uimage2DMSArray"),
+                        // GLSL-specific image types not applicable to HLSL
                     ],
                 ),
                 ExtensionSpec::new(ExtNameAtom::from("GL_ARB_shader_image_size"), vec![]),
@@ -175,30 +129,21 @@ impl Default for Registry {
                 ExtensionSpec::new(
                     ExtNameAtom::from("GL_ARB_texture_cube_map_array"),
                     vec![
-                        type_name!("samplerCubeArray"),
-                        type_name!("samplerCubeArrayShadow"),
-                        type_name!("isamplerCubeArray"),
-                        type_name!("usamplerCubeArray"),
+                        // GLSL-specific sampler types not applicable to HLSL
                     ],
                 ),
                 ExtensionSpec::new(ExtNameAtom::from("GL_ARB_texture_gather"), vec![]),
                 ExtensionSpec::new(
                     ExtNameAtom::from("GL_ARB_texture_multisample"),
                     vec![
-                        type_name!("sampler2DMS"),
-                        type_name!("isampler2DMS"),
-                        type_name!("usampler2DMS"),
-                        type_name!("sampler2DMSArray"),
-                        type_name!("isampler2DMSArray"),
-                        type_name!("usampler2DMSArray"),
+                        // GLSL-specific multisample sampler types not applicable to HLSL
                     ],
                 ),
                 ExtensionSpec::new(ExtNameAtom::from("GL_ARB_texture_query_lod"), vec![]),
                 ExtensionSpec::new(
                     ExtNameAtom::from("GL_ARB_texture_rectangle"),
                     vec![
-                        type_name!("sampler2DRect"),
-                        type_name!("sampler2DRectShadow"),
+                        // GLSL-specific rectangle sampler types not applicable to HLSL
                     ],
                 ),
                 ExtensionSpec::new(ExtNameAtom::from("GL_ARB_uniform_buffer_object"), vec![]),
@@ -453,24 +398,13 @@ impl Default for Registry {
                 ExtensionSpec::new(
                     ExtNameAtom::from("GL_EXT_texture_buffer"),
                     vec![
-                        type_name!("samplerBuffer"),
-                        type_name!("isamplerBuffer"),
-                        type_name!("usamplerBuffer"),
-                        type_name!("imageBuffer"),
-                        type_name!("iimageBuffer"),
-                        type_name!("uimageBuffer"),
+                        // GLSL-specific buffer sampler and image types not applicable to HLSL
                     ],
                 ),
                 ExtensionSpec::new(
                     ExtNameAtom::from("GL_EXT_texture_cube_map_array"),
                     vec![
-                        type_name!("samplerCubeArray"),
-                        type_name!("samplerCubeArrayShadow"),
-                        type_name!("isamplerCubeArray"),
-                        type_name!("usamplerCubeArray"),
-                        type_name!("imageCubeArray"),
-                        type_name!("iimageCubeArray"),
-                        type_name!("uimageCubeArray"),
+                        // GLSL-specific cube array sampler and image types not applicable to HLSL
                     ],
                 ),
                 ExtensionSpec::new(ext_name!("GL_GOOGLE_include_directive"), vec![]),
@@ -539,36 +473,25 @@ impl Default for Registry {
                 ExtensionSpec::new(
                     ExtNameAtom::from("GL_OES_texture_buffer"),
                     vec![
-                        type_name!("samplerBuffer"),
-                        type_name!("isamplerBuffer"),
-                        type_name!("usamplerBuffer"),
-                        type_name!("imageBuffer"),
-                        type_name!("iimageBuffer"),
-                        type_name!("uimageBuffer"),
+                        // GLSL-specific buffer sampler and image types not applicable to HLSL
                     ],
                 ),
                 ExtensionSpec::new(
                     ExtNameAtom::from("GL_OES_texture_cube_map_array"),
                     vec![
-                        type_name!("samplerCubeArray"),
-                        type_name!("samplerCubeArrayShadow"),
-                        type_name!("isamplerCubeArray"),
-                        type_name!("usamplerCubeArray"),
-                        type_name!("imageCubeArray"),
-                        type_name!("iimageCubeArray"),
-                        type_name!("uimageCubeArray"),
+                        // GLSL-specific cube array sampler and image types not applicable to HLSL
                     ],
                 ),
                 ExtensionSpec::new(
                     ExtNameAtom::from("GL_OES_texture_3D"),
-                    vec![type_name!("sampler3D")],
+                    vec![
+                        // GLSL-specific 3D sampler type not applicable to HLSL
+                    ],
                 ),
                 ExtensionSpec::new(
                     ExtNameAtom::from("GL_OES_texture_storage_multisample_2d_array"),
                     vec![
-                        type_name!("sampler2DMSArray"),
-                        type_name!("isampler2DMSArray"),
-                        type_name!("usampler2DMSArray"),
+                        // GLSL-specific multisample array sampler types not applicable to HLSL
                     ],
                 ),
                 ExtensionSpec::new(ExtNameAtom::from("GL_OVR_multiview"), vec![]),
