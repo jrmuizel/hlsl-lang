@@ -197,11 +197,11 @@ impl TypeName {
         } else if type_name_atom == type_name!("bool4") {
             return BVEC4.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("float2x2") {
-            return MAT2.gate(version >= 100, false, type_name_atom, is_type_name);
+            return MAT2X2.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("float3x3") {
-            return MAT3.gate(version >= 100, false, type_name_atom, is_type_name);
+            return MAT3X3.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("float4x4") {
-            return MAT4.gate(version >= 100, false, type_name_atom, is_type_name);
+            return MAT4X4.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("sampler") {
             return SAMPLER.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("uint") {
