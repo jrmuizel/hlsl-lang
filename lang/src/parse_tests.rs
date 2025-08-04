@@ -1150,8 +1150,8 @@ fn parse_function_identifier_cast() {
         ast::TypeSpecifierData::from(ast::TypeSpecifierNonArrayData::Vec3).into(),
     ))
     .into();
-    assert_eq!(ast::FunIdentifier::parse("vec3"), Ok(expected.clone()));
-    assert_eq!(ast::FunIdentifier::parse("vec3\t\n\n \t"), Ok(expected));
+    assert_eq!(ast::FunIdentifier::parse("float3"), Ok(expected.clone()));
+    assert_eq!(ast::FunIdentifier::parse("float3\t\n\n \t"), Ok(expected));
 }
 
 #[test]
@@ -1170,8 +1170,8 @@ fn parse_function_identifier_cast_array_unsized() {
     ))
     .into();
 
-    assert_eq!(ast::FunIdentifier::parse("vec3[]"), Ok(expected.clone()));
-    assert_eq!(ast::FunIdentifier::parse("vec3  [\t\n]"), Ok(expected));
+    assert_eq!(ast::FunIdentifier::parse("float3[]"), Ok(expected.clone()));
+    assert_eq!(ast::FunIdentifier::parse("float3  [\t\n]"), Ok(expected));
 }
 
 #[test]
@@ -1193,8 +1193,8 @@ fn parse_function_identifier_cast_array_sized() {
     ))
     .into();
 
-    assert_eq!(ast::FunIdentifier::parse("vec3[12]"), Ok(expected.clone()));
-    assert_eq!(ast::FunIdentifier::parse("vec3  [\t 12\n]"), Ok(expected));
+    assert_eq!(ast::FunIdentifier::parse("float3[12]"), Ok(expected.clone()));
+    assert_eq!(ast::FunIdentifier::parse("float3  [\t 12\n]"), Ok(expected));
 }
 
 #[test]
@@ -1963,7 +1963,7 @@ fn parse_compound_statement() {
                     ty: ast::FullySpecifiedTypeData {
                         qualifier: None,
                         ty: ast::TypeSpecifierData {
-                            ty: ast::TypeSpecifierNonArrayData::ISampler3D.into(),
+                            ty: ast::TypeSpecifierNonArrayData::Sampler.into(),
                             array_specifier: None,
                         }
                         .into(),
@@ -1989,11 +1989,11 @@ fn parse_compound_statement() {
     .into();
 
     assert_eq!(
-        ast::CompoundStatement::parse("{ if (true) {} isampler3D x; return 42 ; }"),
+        ast::CompoundStatement::parse("{ if (true) {} sampler x; return 42 ; }"),
         Ok(expected.clone())
     );
     assert_eq!(
-        ast::CompoundStatement::parse("{if(true){}isampler3D x;return 42;}"),
+        ast::CompoundStatement::parse("{if(true){}sampler x;return 42;}"),
         Ok(expected)
     );
 }
@@ -2813,7 +2813,7 @@ fn parse_dot_field_expr_array() {
 
 #[test]
 fn parse_dot_field_expr_statement() {
-    let src = "vec3 v = smoothstep(vec3(border_width), vec3(0.0), v_barycenter).zyx;";
+    let src = "float3 v = smoothstep(float3(border_width), float3(0.0), v_barycenter).zyx;";
     let fun = ast::FunIdentifierData::ident("smoothstep");
     let args = vec![
         ast::ExprData::FunCall(
