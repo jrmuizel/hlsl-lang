@@ -64,6 +64,18 @@ pub fn lang_token(
                 types::TypeName::MAT4X1 => Token::Mat4x2, // Map to closest equivalent
                 // Basic HLSL sampler type
                 types::TypeName::SAMPLER => Token::Sampler,
+                // HLSL texture types
+                types::TypeName::TEXTURE_1D => Token::Texture1D,
+                types::TypeName::TEXTURE_2D => Token::Texture2D,
+                types::TypeName::TEXTURE_3D => Token::Texture3D,
+                types::TypeName::TEXTURE_CUBE => Token::TextureCube,
+                types::TypeName::TEXTURE_1D_ARRAY => Token::Texture1DArray,
+                types::TypeName::TEXTURE_2D_ARRAY => Token::Texture2DArray,
+                types::TypeName::TEXTURE_CUBE_ARRAY => Token::TextureCubeArray,
+                types::TypeName::TEXTURE_2D_MS => Token::Texture2DMS,
+                types::TypeName::TEXTURE_2D_MS_ARRAY => Token::Texture2DMSArray,
+                types::TypeName::TEXTURE_2D_RECT => Token::Texture2DRect,
+                types::TypeName::TEXTURE_BUFFER => Token::TextureBuffer,
                 other => Token::TypeName(other.to_string().into()),
             },
             types::Token::FLOAT_CONST(val) => Token::FloatConstant(val),

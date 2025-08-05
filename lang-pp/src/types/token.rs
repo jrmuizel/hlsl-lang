@@ -124,6 +124,39 @@ pub enum TypeName {
     /// "sampler" (HLSL sampler type)
     #[display("sampler")]
     SAMPLER,
+    /// "Texture1D" (HLSL texture type)
+    #[display("Texture1D")]
+    TEXTURE_1D,
+    /// "Texture2D" (HLSL texture type)
+    #[display("Texture2D")]
+    TEXTURE_2D,
+    /// "Texture3D" (HLSL texture type)
+    #[display("Texture3D")]
+    TEXTURE_3D,
+    /// "TextureCube" (HLSL texture type)
+    #[display("TextureCube")]
+    TEXTURE_CUBE,
+    /// "Texture1DArray" (HLSL texture type)
+    #[display("Texture1DArray")]
+    TEXTURE_1D_ARRAY,
+    /// "Texture2DArray" (HLSL texture type)
+    #[display("Texture2DArray")]
+    TEXTURE_2D_ARRAY,
+    /// "TextureCubeArray" (HLSL texture type)
+    #[display("TextureCubeArray")]
+    TEXTURE_CUBE_ARRAY,
+    /// "Texture2DMS" (HLSL texture type)
+    #[display("Texture2DMS")]
+    TEXTURE_2D_MS,
+    /// "Texture2DMSArray" (HLSL texture type)
+    #[display("Texture2DMSArray")]
+    TEXTURE_2D_MS_ARRAY,
+    /// "Texture2DRect" (HLSL texture type)
+    #[display("Texture2DRect")]
+    TEXTURE_2D_RECT,
+    /// "TextureBuffer" (HLSL texture type)
+    #[display("TextureBuffer")]
+    TEXTURE_BUFFER,
     /// Reserved for future use
     RESERVED(TypeNameAtom),
     /// Generic type name
@@ -204,6 +237,28 @@ impl TypeName {
             return MAT4X4.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("sampler") {
             return SAMPLER.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("Texture1D") {
+            return TEXTURE_1D.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("Texture2D") {
+            return TEXTURE_2D.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("Texture3D") {
+            return TEXTURE_3D.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("TextureCube") {
+            return TEXTURE_CUBE.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("Texture1DArray") {
+            return TEXTURE_1D_ARRAY.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("Texture2DArray") {
+            return TEXTURE_2D_ARRAY.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("TextureCubeArray") {
+            return TEXTURE_CUBE_ARRAY.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("Texture2DMS") {
+            return TEXTURE_2D_MS.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("Texture2DMSArray") {
+            return TEXTURE_2D_MS_ARRAY.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("Texture2DRect") {
+            return TEXTURE_2D_RECT.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("TextureBuffer") {
+            return TEXTURE_BUFFER.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("uint") {
             return UINT.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("uint2") {
