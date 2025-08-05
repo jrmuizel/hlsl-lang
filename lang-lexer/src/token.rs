@@ -70,23 +70,23 @@ pub enum Token {
     #[lang_util(token = "float4x3", kind = "type name")]
     Mat4x3,
     #[lang_util(token = "uint2x2", kind = "type name")]
-    UMat2,
-    #[lang_util(token = "uint3x3", kind = "type name")]
-    UMat3,
-    #[lang_util(token = "uint4x4", kind = "type name")]
-    UMat4,
+    UMat22,
     #[lang_util(token = "uint2x3", kind = "type name")]
-    UMat2x3,
+    UMat23,
     #[lang_util(token = "uint2x4", kind = "type name")]
-    UMat2x4,
+    UMat24,
     #[lang_util(token = "uint3x2", kind = "type name")]
-    UMat3x2,
+    UMat32,
+    #[lang_util(token = "uint3x3", kind = "type name")]
+    UMat33,
     #[lang_util(token = "uint3x4", kind = "type name")]
-    UMat3x4,
+    UMat34,
     #[lang_util(token = "uint4x2", kind = "type name")]
-    UMat4x2,
+    UMat42,
     #[lang_util(token = "uint4x3", kind = "type name")]
-    UMat4x3,
+    UMat43,
+    #[lang_util(token = "uint4x4", kind = "type name")]
+    UMat44,
     #[lang_util(token = "dvec2", kind = "type name")]
     DVec2,
     #[lang_util(token = "dvec3", kind = "type name")]
