@@ -135,8 +135,6 @@ pub enum Token {
     Patch,
     #[lang_util(token = "sample", kind = "storage qualifier", kind = "type qualifier")]
     Sample,
-    #[lang_util(token = "buffer", kind = "storage qualifier", kind = "type qualifier")]
-    Buffer,
     #[lang_util(token = "shared", kind = "storage qualifier", kind = "type qualifier")]
     Shared,
     #[lang_util(

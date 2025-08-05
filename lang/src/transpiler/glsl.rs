@@ -1100,7 +1100,6 @@ where
         ast::StorageQualifierData::Patch => f.write_str("patch"),
         ast::StorageQualifierData::Sample => f.write_str("sample"),
         ast::StorageQualifierData::Uniform => f.write_str("uniform"),
-        ast::StorageQualifierData::Buffer => f.write_str("buffer"),
         ast::StorageQualifierData::Shared => f.write_str("shared"),
         ast::StorageQualifierData::Coherent => f.write_str("coherent"),
         ast::StorageQualifierData::Volatile => f.write_str("volatile"),

@@ -137,10 +137,7 @@ fn parse_storage_qualifier() {
         ast::StorageQualifier::parse("uniform"),
         Ok(ast::StorageQualifierData::Uniform.into())
     );
-    assert_eq!(
-        ast::StorageQualifier::parse("buffer"),
-        Ok(ast::StorageQualifierData::Buffer.into())
-    );
+
     assert_eq!(
         ast::StorageQualifier::parse("shared"),
         Ok(ast::StorageQualifierData::Shared.into())
@@ -1798,127 +1795,6 @@ fn parse_function_definition() {
         Ok(expected)
     );
 }
-
-#[test]
-fn parse_buffer_block_0() {
-    let src = include_str!("../data/tests/buffer_block_0.glsl");
-    let main_fn = ast::ExternalDeclarationData::FunctionDefinition(
-        ast::FunctionDefinitionData {
-            attributes: None,
-            prototype: ast::FunctionPrototypeData {
-                ty: ast::FullySpecifiedTypeData {
-                    qualifier: None,
-                    ty: ast::TypeSpecifierData {
-                        ty: ast::TypeSpecifierNonArrayData::Void.into(),
-                        array_specifier: None,
-                    }
-                    .into(),
-                }
-                .into(),
-                name: "main".into_node(),
-                parameters: Vec::new(),
-                semantic: None,
-            }
-            .into(),
-            statement: ast::CompoundStatementData {
-                statement_list: Vec::new(),
-            }
-            .into(),
-        }
-        .into(),
-    );
-
-    let buffer_block = ast::ExternalDeclarationData::Declaration(
-        ast::DeclarationData::Block(
-            ast::BlockData {
-                qualifier: ast::TypeQualifierData {
-                    qualifiers: vec![ast::TypeQualifierSpecData::Storage(
-                        ast::StorageQualifierData::Buffer.into(),
-                    )
-                    .into()],
-                }
-                .into(),
-                name: "Foo".into_node(),
-                fields: vec![ast::StructFieldSpecifierData {
-                    qualifier: None,
-                    ty: ast::TypeSpecifierData {
-                        ty: ast::TypeSpecifierNonArrayData::Float.into(),
-                        array_specifier: None,
-                    }
-                    .into(),
-                    identifiers: vec![ast::ArrayedIdentifierData::new(
-                        "tiles".into_node(),
-                        Some(
-                            ast::ArraySpecifierData {
-                                dimensions: vec![ast::ArraySpecifierDimensionData::Unsized.into()],
-                            }
-                            .into(),
-                        ),
-                    )
-                    .into()],
-                }
-                .into()],
-                identifier: Some("main_tiles".into_node()),
-            }
-            .into(),
-        )
-        .into(),
-    );
-
-    let expected = ast::TranslationUnit(vec![buffer_block.into(), main_fn.into()]);
-
-    assert_eq!(ast::TranslationUnit::parse(src), Ok(expected));
-}
-
-#[test]
-fn parse_layout_buffer_block_0() {
-    let src = include_str!("../data/tests/layout_buffer_block_0.glsl");
-    let layout = ast::LayoutQualifierData {
-        ids: vec![
-            ast::LayoutQualifierSpecData::Identifier(
-                "set".into_node(),
-                Some(Box::new(ast::ExprData::IntConst(0).into())),
-            )
-            .into(),
-            ast::LayoutQualifierSpecData::Identifier(
-                "binding".into_node(),
-                Some(Box::new(ast::ExprData::IntConst(0).into())),
-            )
-            .into(),
-        ],
-    }
-    .into();
-    let type_qual = ast::TypeQualifierData {
-        qualifiers: vec![
-            ast::TypeQualifierSpecData::Layout(layout).into(),
-            ast::TypeQualifierSpecData::Storage(ast::StorageQualifierData::Buffer.into()).into(),
-        ],
-    }
-    .into();
-    let block = ast::ExternalDeclarationData::Declaration(
-        ast::DeclarationData::Block(
-            ast::BlockData {
-                qualifier: type_qual,
-                name: "Foo".into_node(),
-                fields: vec![ast::StructFieldSpecifierData {
-                    qualifier: None,
-                    ty: ast::TypeSpecifierData::from(ast::TypeSpecifierNonArrayData::Float).into(),
-                    identifiers: vec!["a".into_node()],
-                }
-                .into()],
-                identifier: Some("foo".into_node()),
-            }
-            .into(),
-        )
-        .into(),
-    );
-
-    let expected = ast::TranslationUnit(vec![block.into()]);
-
-    assert_eq!(ast::TranslationUnit::parse(src), Ok(expected));
-}
-
-
 
 #[cfg(not(feature = "lexer-full"))]
 fn parse_pp(

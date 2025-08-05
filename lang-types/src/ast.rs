@@ -907,9 +907,7 @@ pub enum StorageQualifierData {
     /// `uniform` storage qualifier
     #[lang_util(display(extra = "uniform"))]
     Uniform,
-    /// `buffer` storage qualifier
-    #[lang_util(display(extra = "buffer"))]
-    Buffer,
+
     /// `shared` storage qualifier
     #[lang_util(display(extra = "shared"))]
     Shared,

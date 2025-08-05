@@ -583,7 +583,6 @@ storage_qualifier_data: ast::StorageQualifierData = {
     "patch"     => ast::StorageQualifierData::Patch,
     "sample"    => ast::StorageQualifierData::Sample,
     "uniform"   => ast::StorageQualifierData::Uniform,
-    "buffer"    => ast::StorageQualifierData::Buffer,
     "shared"    => ast::StorageQualifierData::Shared,
     "coherent"  => ast::StorageQualifierData::Coherent,
     "volatile"  => ast::StorageQualifierData::Volatile,
@@ -592,7 +591,6 @@ storage_qualifier_data: ast::StorageQualifierData = {
     "writeonly" => ast::StorageQualifierData::WriteOnly,
     "register"  => ast::StorageQualifierData::Attribute,
     "packoffset"=> ast::StorageQualifierData::Varying,
-    "tbuffer"   => ast::StorageQualifierData::Buffer,
     "subroutine" <t:("(" <comma<type_specifier>> ")")?> =>
         ast::StorageQualifierData::Subroutine(t.unwrap_or_else(|| vec![])),
 };
@@ -974,7 +972,6 @@ extern {
         "patch"                  => Token::Patch,
         "sample"                 => Token::Sample,
         "uniform"                => Token::Uniform,
-        "buffer"                 => Token::Buffer,
         "cbuffer"                => Token::CBuffer,
         "tbuffer"                => Token::TBuffer,
         "shared"                 => Token::Shared,

@@ -503,9 +503,6 @@ pub enum Token {
     /// "uniform"
     #[lang_util(token = "uniform", kind = "storage qualifier", kind = "type qualifier")]
     UNIFORM,
-    /// "buffer"
-    #[lang_util(token = "buffer", kind = "storage qualifier", kind = "type qualifier")]
-    BUFFER,
     /// "shared"
     #[lang_util(token = "shared", kind = "storage qualifier", kind = "type qualifier")]
     SHARED,
@@ -1019,10 +1016,8 @@ impl Token {
         // TODO: Only return keywords according to versions and extensions
         if *keyword_atom == keyword!("const") {
             Some(CONST)
-        } else if *keyword_atom == keyword!("uniform") {
+        } else         if *keyword_atom == keyword!("uniform") {
             Some(UNIFORM)
-        } else if *keyword_atom == keyword!("buffer") {
-            Some(BUFFER)
         } else if *keyword_atom == keyword!("shared") {
             Some(SHARED)
         } else if *keyword_atom == keyword!("attribute") {

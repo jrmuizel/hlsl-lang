@@ -86,7 +86,6 @@ fn main() {
         .atoms(&[
             "const",
             "uniform",
-            "buffer",
             "shared",
             "attribute",
             "varying",
