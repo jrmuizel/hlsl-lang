@@ -54,6 +54,18 @@ fn main() {
             "float4x4",
             // Basic sampler type for HLSL
             "sampler",
+            // HLSL texture types
+            "Texture1D",
+            "Texture2D", 
+            "Texture3D",
+            "TextureCube",
+            "Texture1DArray",
+            "Texture2DArray",
+            "TextureCubeArray",
+            "Texture2DMS",
+            "Texture2DMSArray",
+            "Texture2DRect",
+            "TextureBuffer",
         ])
         .write_to_file(&out_dir.join("type_names.rs"))
         .expect("failed to generate atoms");
