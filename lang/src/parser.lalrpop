@@ -645,12 +645,13 @@ function_prototype: ast::FunctionPrototype = {
 };
 
 single_declaration_data: ast::SingleDeclarationData = {
-    <t:fully_specified_type> <i:arrayed_identifier> <e:("=" <initializer>)?> => {
-        let i = i.into_inner();
+    <t:fully_specified_type> <i:identifier> <a:array_specifier?> <s:(":" <semantic>)?> <r:(":" <resource_binding>)?> <e:("=" <initializer>)?> => {
         ast::SingleDeclarationData {
             ty: t,
-            name: Some(i.ident),
-            array_specifier: i.array_spec,
+            name: Some(i),
+            array_specifier: a,
+            semantic: s,
+            resource_binding: r,
             initializer: e,
         }
     },
@@ -658,6 +659,8 @@ single_declaration_data: ast::SingleDeclarationData = {
         ty: t,
         name: None,
         array_specifier: None,
+        semantic: None,
+        resource_binding: None,
         initializer: None,
     },
 };
@@ -707,9 +710,17 @@ sampler_state_property: ast::SamplerStateProperty = {
 
 sampler_state_declaration: ast::SamplerState = {
     <l:@L> "SamplerState" <n:identifier> "{" <p:sampler_state_property*> "}" <r:@R> =>
-        ast::SamplerStateData { name: n, properties: p }.spanned(l, r),
+        ast::SamplerStateData { name: n, resource_binding: None, properties: p }.spanned(l, r),
+    <l:@L> "SamplerState" <n:identifier> ":" <reg:resource_binding> "{" <p:sampler_state_property*> "}" <r:@R> =>
+        ast::SamplerStateData { name: n, resource_binding: Some(reg), properties: p }.spanned(l, r),
+    <l:@L> "SamplerState" <n:identifier> ":" <reg:resource_binding> ";" <r:@R> =>
+        ast::SamplerStateData { name: n, resource_binding: Some(reg), properties: vec![] }.spanned(l, r),
     <l:@L> "SamplerComparisonState" <n:identifier> "{" <p:sampler_state_property*> "}" <r:@R> =>
-        ast::SamplerStateData { name: n, properties: p }.spanned(l, r)
+        ast::SamplerStateData { name: n, resource_binding: None, properties: p }.spanned(l, r),
+    <l:@L> "SamplerComparisonState" <n:identifier> ":" <reg:resource_binding> "{" <p:sampler_state_property*> "}" <r:@R> =>
+        ast::SamplerStateData { name: n, resource_binding: Some(reg), properties: p }.spanned(l, r),
+    <l:@L> "SamplerComparisonState" <n:identifier> ":" <reg:resource_binding> ";" <r:@R> =>
+        ast::SamplerStateData { name: n, resource_binding: Some(reg), properties: vec![] }.spanned(l, r)
 };
 
 declaration: ast::Declaration = {

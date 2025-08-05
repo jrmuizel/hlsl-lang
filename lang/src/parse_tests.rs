@@ -1223,6 +1223,8 @@ fn parse_declaration_init_declarator_list_single() {
         ty: ty.into(),
         name: Some("foo".into_node()),
         array_specifier: None,
+        semantic: None,
+        resource_binding: None,
         initializer: Some(
             ast::InitializerData::Simple(Box::new(ast::ExprData::IntConst(34).into())).into(),
         ),
@@ -1258,6 +1260,8 @@ fn parse_declaration_init_declarator_list_complex() {
         ty: ty.into(),
         name: Some("foo".into_node()),
         array_specifier: None,
+        semantic: None,
+        resource_binding: None,
         initializer: Some(
             ast::InitializerData::Simple(Box::new(ast::ExprData::IntConst(34).into())).into(),
         ),
@@ -1566,6 +1570,8 @@ fn parse_iteration_statement_for_empty() {
                     .into(),
                     name: Some("i".into_node()),
                     array_specifier: None,
+                    semantic: None,
+                    resource_binding: None,
                     initializer: Some(
                         ast::InitializerData::Simple(Box::new(
                             ast::ExprData::FloatConst(0.).into(),
@@ -1717,6 +1723,8 @@ fn parse_compound_statement() {
                     .into(),
                     name: Some("x".into_node()),
                     array_specifier: None,
+                    semantic: None,
+                    resource_binding: None,
                     initializer: None,
                 }
                 .into(),
@@ -2470,6 +2478,8 @@ fn parse_dot_field_expr_statement() {
         .into(),
         name: Some("v".into_node()),
         array_specifier: None,
+        semantic: None,
+        resource_binding: None,
         initializer: Some(ini.into()),
     };
     let expected: ast::Statement = ast::StatementData::Declaration(

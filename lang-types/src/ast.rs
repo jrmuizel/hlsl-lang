@@ -1176,6 +1176,8 @@ impl_node_content! {
 pub struct SamplerStateData {
     /// SamplerState name
     pub name: Identifier,
+    /// Optional resource binding
+    pub resource_binding: Option<ResourceBinding>,
     /// Property assignments
     pub properties: Vec<SamplerStateProperty>,
 }
@@ -1318,6 +1320,10 @@ pub struct SingleDeclarationData {
     pub name: Option<Identifier>,
     /// Array specification
     pub array_specifier: Option<ArraySpecifier>,
+    /// Optional semantic specification (HLSL)
+    pub semantic: Option<Semantic>,
+    /// Optional resource binding (HLSL)
+    pub resource_binding: Option<ResourceBinding>,
     /// Initializer expression
     pub initializer: Option<Initializer>,
 }
@@ -1766,6 +1772,8 @@ impl StatementData {
                         ty: ty.into().into(),
                         name: Some(name.into().into()),
                         array_specifier: array_specifier.into(),
+                        semantic: None,
+                        resource_binding: None,
                         initializer: initializer.into(),
                     }
                     .into(),
