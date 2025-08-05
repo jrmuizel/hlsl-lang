@@ -144,7 +144,6 @@ fn main() {
             "fixed",
             "unsigned",
             "superp",
-            "input",
             "output",
             "filter",
             "sizeof",

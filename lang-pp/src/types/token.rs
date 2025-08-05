@@ -740,9 +740,7 @@ pub enum Token {
     /// "superp"
     #[lang_util(token = "superp", kind = "reserved keyword")]
     SUPERP,
-    /// "input"
-    #[lang_util(token = "input", kind = "reserved keyword")]
-    INPUT,
+
     /// "output"
     #[lang_util(token = "output", kind = "reserved keyword")]
     OUTPUT,
@@ -1131,8 +1129,6 @@ impl Token {
             Some(UNSIGNED)
         } else if *keyword_atom == keyword!("superp") {
             Some(SUPERP)
-        } else if *keyword_atom == keyword!("input") {
-            Some(INPUT)
         } else if *keyword_atom == keyword!("output") {
             Some(OUTPUT)
         } else if *keyword_atom == keyword!("filter") {

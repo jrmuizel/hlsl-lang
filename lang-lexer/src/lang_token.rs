@@ -200,7 +200,6 @@ pub fn lang_token(
             | types::Token::FIXED
             | types::Token::UNSIGNED
             | types::Token::SUPERP
-            | types::Token::INPUT
             | types::Token::OUTPUT
             | types::Token::FILTER
             | types::Token::SIZEOF
