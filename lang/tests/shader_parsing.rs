@@ -145,6 +145,21 @@ fn test_shader_parsing() {
         test_failed = true;
     }
 
+    // Print errors for expected failures for debugging purposes
+    let expected_failures: Vec<_> = actual_fail_set
+        .iter()
+        .filter(|shader| expected_fail_set.contains(shader.as_str()))
+        .collect();
+
+    if !expected_failures.is_empty() {
+        println!("\n📋 EXPECTED FAILURES (parsing errors for reference):");
+        for shader in &expected_failures {
+            if let Some((_, error)) = actual_fail_shaders.iter().find(|(path, _)| path == *shader) {
+                println!("  {}: {}", shader, error);
+            }
+        }
+    }
+
     if test_failed {
         panic!("Shader parsing results did not match expectations. See output above for details.");
     }
