@@ -620,11 +620,12 @@ function_parameter_declaration: ast::FunctionParameterDeclaration = {
 }
 
 function_prototype: ast::FunctionPrototype = {
-    <l:@L> <rt:fully_specified_type> <n:identifier> "(" <p:comma<function_parameter_declaration>> ")" <r:@R> =>
+    <l:@L> <rt:fully_specified_type> <n:identifier> "(" <p:comma<function_parameter_declaration>> ")" <s:(":" <semantic>)?> <r:@R> =>
         ast::FunctionPrototypeData {
             ty: rt,
             name: n,
             parameters: p,
+            semantic: s,
         }.spanned(l, r),
 };
 

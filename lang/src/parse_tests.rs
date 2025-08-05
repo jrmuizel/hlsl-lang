@@ -1746,6 +1746,7 @@ fn parse_function_definition() {
         ty: rt.into(),
         name: "foo".into_node(),
         parameters: Vec::new(),
+        semantic: None,
     }
     .into();
     let st0 = ast::StatementData::Jump(
@@ -1794,6 +1795,7 @@ fn parse_buffer_block_0() {
                 .into(),
                 name: "main".into_node(),
                 parameters: Vec::new(),
+                semantic: None,
             }
             .into(),
             statement: ast::CompoundStatementData {

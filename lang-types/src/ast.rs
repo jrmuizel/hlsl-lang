@@ -1191,6 +1191,8 @@ pub struct FunctionPrototypeData {
     pub name: Identifier,
     /// Function parameters
     pub parameters: Vec<FunctionParameterDeclaration>,
+    /// Function return semantic (HLSL)
+    pub semantic: Option<Semantic>,
 }
 
 impl_node_content! {
