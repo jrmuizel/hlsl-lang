@@ -707,7 +707,6 @@ declaration: ast::Declaration = {
     <l:@L> <i:init_declarator_list> ";"  <r:@R> => ast::DeclarationData::InitDeclaratorList(i).spanned(l, r),
     <l:@L> <p:precision_declaration> ";" <r:@R> => p.spanned(l, r),
     <l:@L> <b:block_declaration> ";"     <r:@R> => ast::DeclarationData::Block(b).spanned(l, r),
-    <l:@L> <c:cbuffer_declaration> ";"   <r:@R> => ast::DeclarationData::CBuffer(c).spanned(l, r),
     <l:@L> "invariant" <i:identifier> ";" <r:@R> => ast::DeclarationData::Invariant(i).spanned(l, r),
     <l:@L> <q:type_qualifier> ";" <r:@R> => ast::DeclarationData::TypeOnly(q).spanned(l, r),
 };
@@ -849,6 +848,7 @@ external_declaration: Option<ast::ExternalDeclaration> = {
     <l:@L> <p:preprocessor> <r:@R>        => Some(ast::ExternalDeclarationData::Preprocessor(p).spanned(l, r)),
     <l:@L> <f:function_definition> <r:@R> => Some(ast::ExternalDeclarationData::FunctionDefinition(f).spanned(l, r)),
     <l:@L> <d:declaration> <r:@R>         => Some(ast::ExternalDeclarationData::Declaration(d).spanned(l, r)),
+    <l:@L> <c:cbuffer_declaration> <r:@R> => Some(ast::ExternalDeclarationData::Declaration(ast::DeclarationData::CBuffer(c).spanned(l, r)).spanned(l, r)),
     ";"                                   => None,
 };
 
