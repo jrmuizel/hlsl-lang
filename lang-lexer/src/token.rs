@@ -198,7 +198,7 @@ pub enum Token {
     #[lang_util(token = "atomic_uint", kind = "type name")]
     AtomicUInt,
     #[lang_util(token = "Texture1D", kind = "type name")]
-    Sampler1D,
+    Texture1D,
     #[lang_util(
         token = "sampler1DShadow",
         kind = "type name",
@@ -234,7 +234,7 @@ pub enum Token {
     )]
     USampler1DArray,
     #[lang_util(token = "Texture2D", kind = "type name")]
-    Sampler2D,
+    Texture2D,
     #[lang_util(
         token = "sampler2DShadow",
         kind = "type name",
@@ -314,13 +314,13 @@ pub enum Token {
     )]
     USampler2DMsArray,
     #[lang_util(token = "Texture3D", kind = "type name")]
-    Sampler3D,
+    Texture3D,
     #[lang_util(token = "isampler3D", kind = "type name")]
     ISampler3D,
     #[lang_util(token = "usampler3D", kind = "type name")]
     USampler3D,
     #[lang_util(token = "TextureCube", kind = "type name")]
-    SamplerCube,
+    TextureCube,
     #[lang_util(
         token = "samplerCubeShadow",
         kind = "type name",
@@ -460,94 +460,37 @@ pub enum Token {
     #[lang_util(token = "uimageBuffer", kind = "type name")]
     UImageBuffer,
 
-    // Begin Vulkan-target keywords
-    #[lang_util(token = "texture1D")]
-    Texture1D,
-    #[lang_util(token = "texture1DArray")]
-    Texture1DArray,
-    #[lang_util(token = "itexture1D")]
-    ITexture1D,
-    #[lang_util(token = "itexture1DArray")]
-    ITexture1DArray,
-    #[lang_util(token = "utexture1D")]
-    UTexture1D,
-    #[lang_util(token = "utexture1DArray")]
-    UTexture1DArray,
-    #[lang_util(token = "texture2D")]
-    Texture2D,
-    #[lang_util(token = "texture2DArray")]
-    Texture2DArray,
-    #[lang_util(token = "itexture2D")]
-    ITexture2D,
-    #[lang_util(token = "itexture2DArray")]
-    ITexture2DArray,
-    #[lang_util(token = "utexture2D")]
-    UTexture2D,
-    #[lang_util(token = "utexture2DArray")]
-    UTexture2DArray,
-    #[lang_util(token = "texture2DRect")]
-    Texture2DRect,
-    #[lang_util(token = "itexture2DRect")]
-    ITexture2DRect,
-    #[lang_util(token = "utexture2DRect")]
-    UTexture2DRect,
-    #[lang_util(token = "texture2DMS")]
-    Texture2DMs,
-    #[lang_util(token = "itexture2DMS")]
-    ITexture2DMs,
-    #[lang_util(token = "utexture2DMS")]
-    UTexture2DMs,
-    #[lang_util(token = "texture2DMSArray")]
-    Texture2DMsArray,
-    #[lang_util(token = "itexture2DMSArray")]
-    ITexture2DMsArray,
-    #[lang_util(token = "utexture2DMSArray")]
-    UTexture2DMsArray,
-    #[lang_util(token = "texture3D")]
-    Texture3D,
-    #[lang_util(token = "itexture3D")]
-    ITexture3D,
-    #[lang_util(token = "utexture3D")]
-    UTexture3D,
-    #[lang_util(token = "textureCube")]
-    TextureCube,
-    #[lang_util(token = "itextureCube")]
-    ITextureCube,
-    #[lang_util(token = "utextureCube")]
-    UTextureCube,
-    #[lang_util(token = "textureCubeArray")]
-    TextureCubeArray,
-    #[lang_util(token = "itextureCubeArray")]
-    ITextureCubeArray,
-    #[lang_util(token = "utextureCubeArray")]
-    UTextureCubeArray,
-    #[lang_util(token = "textureBuffer")]
-    TextureBuffer,
-    #[lang_util(token = "itextureBuffer")]
-    ITextureBuffer,
-    #[lang_util(token = "utextureBuffer")]
-    UTextureBuffer,
-    #[lang_util(token = "sampler")]
+    // HLSL-specific sampler types
+    #[lang_util(token = "sampler", kind = "type name")]
     Sampler,
-    #[lang_util(token = "samplerShadow")]
-    SamplerShadow,
-    #[lang_util(token = "SamplerState")]
+    #[lang_util(token = "SamplerState", kind = "type name")]
     SamplerState,
-    #[lang_util(token = "SamplerComparisonState")]
+    #[lang_util(token = "SamplerComparisonState", kind = "type name")]
     SamplerComparisonState,
-    #[lang_util(token = "subpassInput")]
-    SubpassInput,
-    #[lang_util(token = "isubpassInput")]
-    ISubpassInput,
-    #[lang_util(token = "usubpassInput")]
-    USubpassInput,
-    #[lang_util(token = "subpassInputMS")]
-    SubpassInputMs,
-    #[lang_util(token = "isubpassInputMS")]
-    ISubpassInputMs,
-    #[lang_util(token = "usubpassInputMS")]
-    USubpassInputMs,
-    // End Vulkan-target keywords
+    #[lang_util(token = "Texture1DArray", kind = "type name")]
+    Texture1DArray,
+    #[lang_util(token = "Texture2DArray", kind = "type name")]
+    Texture2DArray,
+    #[lang_util(token = "TextureCubeArray", kind = "type name")]
+    TextureCubeArray,
+    #[lang_util(token = "Texture2DMS", kind = "type name")]
+    Texture2DMS,
+    #[lang_util(token = "Texture2DMSArray", kind = "type name")]
+    Texture2DMSArray,
+    #[lang_util(token = "sampler2D", kind = "type name")]
+    Sampler2D,
+    #[lang_util(token = "Texture2DRect", kind = "type name")]
+    Texture2DRect,
+    #[lang_util(token = "TextureBuffer", kind = "type name")]
+    TextureBuffer,
+    #[lang_util(token = "sampler1D", kind = "type name")]
+    Sampler1D,
+    #[lang_util(token = "sampler3D", kind = "type name")]
+    Sampler3D,
+    #[lang_util(token = "samplerCube", kind = "type name")]
+    SamplerCube,
+
+    
     #[lang_util(token = "struct", kind = "struct", kind = "keyword")]
     Struct,
     #[lang_util(token = "void", kind = "type name")]
