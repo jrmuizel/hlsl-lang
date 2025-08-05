@@ -874,6 +874,16 @@ where
         ast::TypeSpecifierNonArrayData::TextureBuffer => f.write_str("textureBuffer"),
         ast::TypeSpecifierNonArrayData::StructuredBuffer => f.write_str("StructuredBuffer"),
         ast::TypeSpecifierNonArrayData::RWStructuredBuffer => f.write_str("RWStructuredBuffer"),
+        ast::TypeSpecifierNonArrayData::StructuredBufferTemplate(ref t) => {
+            f.write_str("StructuredBuffer<")?;
+            show_type_specifier(f, t, state)?;
+            f.write_str(">")
+        },
+        ast::TypeSpecifierNonArrayData::RWStructuredBufferTemplate(ref t) => {
+            f.write_str("RWStructuredBuffer<")?;
+            show_type_specifier(f, t, state)?;
+            f.write_str(">")
+        },
     }
 }
 

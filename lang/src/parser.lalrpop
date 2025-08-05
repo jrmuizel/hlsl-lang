@@ -243,6 +243,7 @@ type_specifier_non_array: ast::TypeSpecifierNonArray = {
     <l:@L> <t:type_specifier_non_struct> <r:@R> => t.spanned(l, r),
     <l:@L> <s:struct_specifier>          <r:@R> => ast::TypeSpecifierNonArrayData::Struct(s).spanned(l, r),
     <l:@L> <t:type_name>                 <r:@R> => ast::TypeSpecifierNonArrayData::TypeName(t).spanned(l, r),
+    <l:@L> <t:template_type_specifier>   <r:@R> => t.spanned(l, r),
 };
 
 type_specifier: ast::TypeSpecifier = {
@@ -1163,5 +1164,11 @@ extern {
         "RWStructuredBuffer"     => Token::RWStructuredBuffer,
     }
 }
+
+// Template type specifiers for HLSL
+template_type_specifier: ast::TypeSpecifierNonArrayData = {
+    <l:@L> "StructuredBuffer" "<" <t:type_specifier> ">" <r:@R> => ast::TypeSpecifierNonArrayData::StructuredBufferTemplate(Box::new(t)),
+    <l:@L> "RWStructuredBuffer" "<" <t:type_specifier> ">" <r:@R> => ast::TypeSpecifierNonArrayData::RWStructuredBufferTemplate(Box::new(t)),
+};
 
 // vim: ft=rust

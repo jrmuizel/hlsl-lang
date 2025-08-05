@@ -157,6 +157,12 @@ pub enum TypeName {
     /// "TextureBuffer" (HLSL texture type)
     #[display("TextureBuffer")]
     TEXTURE_BUFFER,
+    /// "StructuredBuffer" (HLSL buffer type)
+    #[display("StructuredBuffer")]
+    STRUCTUREDBUFFER,
+    /// "RWStructuredBuffer" (HLSL buffer type)
+    #[display("RWStructuredBuffer")]
+    RWSTRUCTUREDBUFFER,
     /// Reserved for future use
     RESERVED(TypeNameAtom),
     /// Generic type name
@@ -259,6 +265,10 @@ impl TypeName {
             return TEXTURE_2D_RECT.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("TextureBuffer") {
             return TEXTURE_BUFFER.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("StructuredBuffer") {
+            return STRUCTUREDBUFFER.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("RWStructuredBuffer") {
+            return RWSTRUCTUREDBUFFER.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("uint") {
             return UINT.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("uint2") {

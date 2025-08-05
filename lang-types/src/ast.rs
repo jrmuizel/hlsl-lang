@@ -656,6 +656,12 @@ pub enum TypeSpecifierNonArrayData {
     /// `RWStructuredBuffer` type specifier
     #[lang_util(display(extra = "RWStructuredBuffer"))]
     RWStructuredBuffer,
+    /// `StructuredBuffer<T>` template type specifier
+    #[lang_util(display(extra = "StructuredBuffer"))]
+    StructuredBufferTemplate(Box<TypeSpecifier>),
+    /// `RWStructuredBuffer<T>` template type specifier
+    #[lang_util(display(extra = "RWStructuredBuffer"))]
+    RWStructuredBufferTemplate(Box<TypeSpecifier>),
 }
 
 impl_node_content! {

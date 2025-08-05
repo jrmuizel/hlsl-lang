@@ -76,6 +76,8 @@ pub fn lang_token(
                 types::TypeName::TEXTURE_2D_MS_ARRAY => Token::Texture2DMSArray,
                 types::TypeName::TEXTURE_2D_RECT => Token::Texture2DRect,
                 types::TypeName::TEXTURE_BUFFER => Token::TextureBuffer,
+                types::TypeName::STRUCTUREDBUFFER => Token::StructuredBuffer,
+                types::TypeName::RWSTRUCTUREDBUFFER => Token::RWStructuredBuffer,
                 other => Token::TypeName(other.to_string().into()),
             },
             types::Token::FLOAT_CONST(val) => Token::FloatConstant(val),
