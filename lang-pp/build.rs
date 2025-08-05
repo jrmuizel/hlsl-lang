@@ -52,6 +52,16 @@ fn main() {
             "float4x2",
             "float4x3",
             "float4x4",
+            // HLSL uint matrix types
+            "uint2x2",
+            "uint2x3", 
+            "uint2x4",
+            "uint3x2",
+            "uint3x3",
+            "uint3x4",
+            "uint4x2",
+            "uint4x3",
+            "uint4x4",
             // Basic sampler type for HLSL
             "sampler",
             // HLSL texture types

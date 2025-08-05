@@ -614,6 +614,42 @@ pub enum TypeSpecifierNonArrayData {
     Struct(StructSpecifier),
     /// Raw type name
     TypeName(TypeName),
+    /// `umat2` type specifier  
+    #[lang_util(display(extra = "umat2"))]
+    UMat2,
+    /// `umat3` type specifier
+    #[lang_util(display(extra = "umat3"))]
+    UMat3,
+    /// `umat4` type specifier
+    #[lang_util(display(extra = "umat4"))]
+    UMat4,
+    /// `umat2x2` type specifier
+    #[lang_util(display(extra = "umat2x2"))]
+    UMat22,
+    /// `umat2x3` type specifier
+    #[lang_util(display(extra = "umat2x3"))]
+    UMat23,
+    /// `umat2x4` type specifier
+    #[lang_util(display(extra = "umat2x4"))]
+    UMat24,
+    /// `umat3x2` type specifier
+    #[lang_util(display(extra = "umat3x2"))]
+    UMat32,
+    /// `umat3x3` type specifier
+    #[lang_util(display(extra = "umat3x3"))]
+    UMat33,
+    /// `umat3x4` type specifier
+    #[lang_util(display(extra = "umat3x4"))]
+    UMat34,
+    /// `umat4x2` type specifier
+    #[lang_util(display(extra = "umat4x2"))]
+    UMat42,
+    /// `umat4x3` type specifier
+    #[lang_util(display(extra = "umat4x3"))]
+    UMat43,
+    /// `umat4x4` type specifier
+    #[lang_util(display(extra = "umat4x4"))]
+    UMat44,
 }
 
 impl_node_content! {
@@ -829,6 +865,15 @@ pub enum StorageQualifierData {
     /// `const` storage qualifier
     #[lang_util(display(extra = "const"))]
     Const,
+    /// `static` storage qualifier
+    #[lang_util(display(extra = "static"))]
+    Static,
+    /// `extern` storage qualifier
+    #[lang_util(display(extra = "extern"))]
+    Extern,
+    /// `inline` storage qualifier
+    #[lang_util(display(extra = "inline"))]
+    Inline,
     /// `inout` storage qualifier
     #[lang_util(display(extra = "inout"))]
     InOut,

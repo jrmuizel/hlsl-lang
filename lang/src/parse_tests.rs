@@ -98,6 +98,18 @@ fn parse_storage_qualifier() {
         Ok(ast::StorageQualifierData::Const.into())
     );
     assert_eq!(
+        ast::StorageQualifier::parse("static"),
+        Ok(ast::StorageQualifierData::Static.into())
+    );
+    assert_eq!(
+        ast::StorageQualifier::parse("extern"),
+        Ok(ast::StorageQualifierData::Extern.into())
+    );
+    assert_eq!(
+        ast::StorageQualifier::parse("inline"),
+        Ok(ast::StorageQualifierData::Inline.into())
+    );
+    assert_eq!(
         ast::StorageQualifier::parse("inout"),
         Ok(ast::StorageQualifierData::InOut.into())
     );

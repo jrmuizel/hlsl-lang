@@ -562,6 +562,9 @@ precision_qualifier: ast::PrecisionQualifier = {
 
 storage_qualifier_data: ast::StorageQualifierData = {
     "const"     => ast::StorageQualifierData::Const,
+    "static"    => ast::StorageQualifierData::Static,
+    "extern"    => ast::StorageQualifierData::Extern,
+    "inline"    => ast::StorageQualifierData::Inline,
     "inout"     => ast::StorageQualifierData::InOut,
     "in"        => ast::StorageQualifierData::In,
     "out"       => ast::StorageQualifierData::Out,

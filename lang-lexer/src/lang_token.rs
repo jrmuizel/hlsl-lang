@@ -133,6 +133,9 @@ pub fn lang_token(
                 return Err((token_kind, types::token::ErrorKind::InvalidToken));
             }
             types::Token::CONST => Token::Const,
+            types::Token::STATIC => Token::Static,
+            types::Token::EXTERN => Token::Extern,
+            types::Token::INLINE => Token::Inline,
             types::Token::UNIFORM => Token::Uniform,
             types::Token::BUFFER => Token::Buffer,
             types::Token::SHARED => Token::Shared,
@@ -189,11 +192,8 @@ pub fn lang_token(
             | types::Token::THIS
             | types::Token::RESOURCE
             | types::Token::GOTO
-            | types::Token::INLINE
             | types::Token::NOINLINE
             | types::Token::PUBLIC
-            | types::Token::STATIC
-            | types::Token::EXTERN
             | types::Token::EXTERNAL
             | types::Token::INTERFACE
             | types::Token::LONG

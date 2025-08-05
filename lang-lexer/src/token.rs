@@ -5,6 +5,12 @@ use lang_util::SmolStr;
 pub enum Token {
     #[lang_util(token = "const", kind = "storage qualifier", kind = "type qualifier")]
     Const,
+    #[lang_util(token = "static", kind = "storage qualifier", kind = "type qualifier")]
+    Static,
+    #[lang_util(token = "extern", kind = "storage qualifier", kind = "type qualifier")]
+    Extern,
+    #[lang_util(token = "inline", kind = "storage qualifier", kind = "type qualifier")]
+    Inline,
     #[lang_util(token = "bool", kind = "type name")]
     Bool,
     #[lang_util(token = "float", kind = "type name")]
@@ -63,6 +69,24 @@ pub enum Token {
     Mat4x2,
     #[lang_util(token = "float4x3", kind = "type name")]
     Mat4x3,
+    #[lang_util(token = "uint2x2", kind = "type name")]
+    UMat2,
+    #[lang_util(token = "uint3x3", kind = "type name")]
+    UMat3,
+    #[lang_util(token = "uint4x4", kind = "type name")]
+    UMat4,
+    #[lang_util(token = "uint2x3", kind = "type name")]
+    UMat2x3,
+    #[lang_util(token = "uint2x4", kind = "type name")]
+    UMat2x4,
+    #[lang_util(token = "uint3x2", kind = "type name")]
+    UMat3x2,
+    #[lang_util(token = "uint3x4", kind = "type name")]
+    UMat3x4,
+    #[lang_util(token = "uint4x2", kind = "type name")]
+    UMat4x2,
+    #[lang_util(token = "uint4x3", kind = "type name")]
+    UMat4x3,
     #[lang_util(token = "dvec2", kind = "type name")]
     DVec2,
     #[lang_util(token = "dvec3", kind = "type name")]
@@ -161,12 +185,6 @@ pub enum Token {
     Register,
     #[lang_util(token = "packoffset", kind = "storage qualifier", kind = "type qualifier")]
     Packoffset,
-    #[lang_util(token = "static", kind = "storage qualifier", kind = "type qualifier")]
-    Static,
-    #[lang_util(token = "extern", kind = "storage qualifier", kind = "type qualifier")]
-    Extern,
-    #[lang_util(token = "inline", kind = "storage qualifier", kind = "type qualifier")]
-    Inline,
     #[lang_util(token = "SV_Position", kind = "semantic")]
     SvPosition,
     #[lang_util(token = "SV_Target", kind = "semantic")]
