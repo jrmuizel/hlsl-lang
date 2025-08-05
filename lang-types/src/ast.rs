@@ -1048,6 +1048,8 @@ pub enum DeclarationData {
     TypeOnly(TypeQualifier),
     /// CBuffer declaration
     CBuffer(CBuffer),
+    /// SamplerState declaration
+    SamplerState(SamplerState),
 }
 
 impl_node_content! {
@@ -1090,6 +1092,38 @@ pub struct CBufferData {
 impl_node_content! {
     /// Type alias for `Node<CBufferData>`.
     pub type CBuffer = Node<CBufferData>;
+}
+
+/// A sampler state property assignment (e.g., Filter = MIN_MAG_MIP_LINEAR)
+#[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", serde(crate = "rserde"))]
+pub struct SamplerStatePropertyData {
+    /// Property name
+    pub name: Identifier,
+    /// Property value
+    pub value: Identifier,
+}
+
+impl_node_content! {
+    /// Type alias for `Node<SamplerStatePropertyData>`.
+    pub type SamplerStateProperty = Node<SamplerStatePropertyData>;
+}
+
+/// A SamplerState block declaration
+#[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", serde(crate = "rserde"))]
+pub struct SamplerStateData {
+    /// SamplerState name
+    pub name: Identifier,
+    /// Property assignments
+    pub properties: Vec<SamplerStateProperty>,
+}
+
+impl_node_content! {
+    /// Type alias for `Node<SamplerStateData>`.
+    pub type SamplerState = Node<SamplerStateData>;
 }
 
 /// Function identifier.

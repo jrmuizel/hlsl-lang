@@ -120,6 +120,14 @@ macro_rules! make_visitor_trait {
         Visit::Children
       }
 
+      fn visit_sampler_state(&mut self, _: $($ref)* ast::SamplerState) -> Visit {
+        Visit::Children
+      }
+
+      fn visit_sampler_state_property(&mut self, _: $($ref)* ast::SamplerStateProperty) -> Visit {
+        Visit::Children
+      }
+
       fn visit_for_init_statement(&mut self, _: $($ref)* ast::ForInitStatement) -> Visit {
         Visit::Children
       }
@@ -748,6 +756,8 @@ macro_rules! make_host_trait {
             ast::DeclarationData::Invariant(ident) => ident.$mthd_name(visitor),
 
             ast::DeclarationData::TypeOnly(q) => q.$mthd_name(visitor),
+
+            ast::DeclarationData::SamplerState(sampler_state) => sampler_state.$mthd_name(visitor),
           }
         }
       }
@@ -786,6 +796,37 @@ macro_rules! make_host_trait {
           for field in $($ref)* self.fields {
             field.$mthd_name(visitor);
           }
+        }
+      }
+    }
+
+    impl $host_ty for ast::SamplerState {
+      fn $mthd_name<V>($($ref)* self, visitor: &mut V)
+      where
+          V: $visitor_ty,
+      {
+        let visit = visitor.visit_sampler_state(self);
+
+        if visit == Visit::Children {
+          self.name.$mthd_name(visitor);
+
+          for prop in $($ref)* self.properties {
+            prop.$mthd_name(visitor);
+          }
+        }
+      }
+    }
+
+    impl $host_ty for ast::SamplerStateProperty {
+      fn $mthd_name<V>($($ref)* self, visitor: &mut V)
+      where
+          V: $visitor_ty,
+      {
+        let visit = visitor.visit_sampler_state_property(self);
+
+        if visit == Visit::Children {
+          self.name.$mthd_name(visitor);
+          self.value.$mthd_name(visitor);
         }
       }
     }
@@ -1425,6 +1466,7 @@ macro_rules! make_host_trait {
     }
   }
 }
+
 
 // immutable
 make_visitor_trait!(Visitor, &);

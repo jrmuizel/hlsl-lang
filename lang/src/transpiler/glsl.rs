@@ -1546,6 +1546,10 @@ where
         ast::DeclarationData::TypeOnly(ref q) => {
             show_type_qualifier(f, q, state)?;
         }
+        ast::DeclarationData::SamplerState(ref s) => {
+            // For now, just output a comment since GLSL doesn't have direct SamplerState equivalent
+            writeln!(f, "// SamplerState {} block (HLSL-specific)", s.content.name.content.as_str())?;
+        }
     }
 
     state.write_declaration_terminator(f)

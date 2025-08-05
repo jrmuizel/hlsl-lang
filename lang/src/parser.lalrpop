@@ -245,8 +245,6 @@ type_specifier_non_struct: ast::TypeSpecifierNonArrayData = {
     "itextureCubeArray"      => ast::TypeSpecifierNonArrayData::ITextureCubeArray,
     "sampler"                => ast::TypeSpecifierNonArrayData::Sampler,
     "samplerShadow"          => ast::TypeSpecifierNonArrayData::SamplerShadow,
-    "SamplerState"           => ast::TypeSpecifierNonArrayData::Sampler,
-    "SamplerComparisonState" => ast::TypeSpecifierNonArrayData::SamplerShadow,
     "StructuredBuffer"       => ast::TypeSpecifierNonArrayData::SamplerBuffer,
     "RWStructuredBuffer"     => ast::TypeSpecifierNonArrayData::ImageBuffer,
     "ByteAddressBuffer"      => ast::TypeSpecifierNonArrayData::SamplerBuffer,
@@ -706,6 +704,18 @@ cbuffer_declaration: ast::CBuffer = {
         ast::CBufferData { name: n, fields: f }.spanned(l, r)
 };
 
+sampler_state_property: ast::SamplerStateProperty = {
+    <l:@L> <name:identifier> "=" <value:identifier> ";" <r:@R> =>
+        ast::SamplerStatePropertyData { name, value }.spanned(l, r)
+};
+
+sampler_state_declaration: ast::SamplerState = {
+    <l:@L> "SamplerState" <n:identifier> "{" <p:sampler_state_property*> "}" <r:@R> =>
+        ast::SamplerStateData { name: n, properties: p }.spanned(l, r),
+    <l:@L> "SamplerComparisonState" <n:identifier> "{" <p:sampler_state_property*> "}" <r:@R> =>
+        ast::SamplerStateData { name: n, properties: p }.spanned(l, r)
+};
+
 declaration: ast::Declaration = {
     <l:@L> <p:function_prototype> ";"    <r:@R> => {
         ctx.new_identifier(&p.name, IdentifierContext::FunctionPrototype);
@@ -856,6 +866,7 @@ external_declaration: Option<ast::ExternalDeclaration> = {
     <l:@L> <f:function_definition> <r:@R> => Some(ast::ExternalDeclarationData::FunctionDefinition(f).spanned(l, r)),
     <l:@L> <d:declaration> <r:@R>         => Some(ast::ExternalDeclarationData::Declaration(d).spanned(l, r)),
     <l:@L> <c:cbuffer_declaration> <r:@R> => Some(ast::ExternalDeclarationData::Declaration(ast::DeclarationData::CBuffer(c).spanned(l, r)).spanned(l, r)),
+    <l:@L> <s:sampler_state_declaration> <r:@R> => Some(ast::ExternalDeclarationData::Declaration(ast::DeclarationData::SamplerState(s).spanned(l, r)).spanned(l, r)),
     ";"                                   => None,
 };
 
@@ -1105,8 +1116,8 @@ extern {
         "itextureCubeArray"      => Token::ITextureCubeArray,
         "sampler"                => Token::Sampler,
         "samplerShadow"          => Token::SamplerShadow,
-        "SamplerState"           => Token::Sampler,
-        "SamplerComparisonState" => Token::SamplerShadow,
+        "SamplerState"           => Token::SamplerState,
+        "SamplerComparisonState" => Token::SamplerComparisonState,
         "StructuredBuffer"       => Token::SamplerBuffer,
         "RWStructuredBuffer"     => Token::ImageBuffer,
         "ByteAddressBuffer"      => Token::SamplerBuffer,

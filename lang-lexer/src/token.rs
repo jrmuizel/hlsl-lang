@@ -531,6 +531,10 @@ pub enum Token {
     Sampler,
     #[lang_util(token = "samplerShadow")]
     SamplerShadow,
+    #[lang_util(token = "SamplerState")]
+    SamplerState,
+    #[lang_util(token = "SamplerComparisonState")]
+    SamplerComparisonState,
     #[lang_util(token = "subpassInput")]
     SubpassInput,
     #[lang_util(token = "isubpassInput")]
