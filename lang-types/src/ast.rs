@@ -695,7 +695,38 @@ impl_node_content! {
     pub type StructFieldSpecifier = Node<StructFieldSpecifierData>;
 }
 
-/// An identifier with an optional array specifier.
+/// A semantic specifier for HLSL (e.g., SV_Position, COLOR0).
+#[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", serde(crate = "rserde"))]
+#[lang_util(display(leaf))]
+pub struct SemanticData(#[lang_util(display(extra))] pub SmolStr);
+
+impl_node_content! {
+    /// Type alias for `Node<SemanticData>`.
+    pub type Semantic = Node<SemanticData>;
+}
+
+impl SemanticData {
+    /// Returns this semantic as a string slice
+    pub fn as_str(&self) -> &str {
+        self.0.as_str()
+    }
+}
+
+impl From<&str> for SemanticData {
+    fn from(semantic: &str) -> Self {
+        Self(semantic.into())
+    }
+}
+
+impl fmt::Display for SemanticData {
+    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+        self.0.fmt(f)
+    }
+}
+
+/// An identifier with an optional array specifier and optional semantic.
 #[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "serde", serde(crate = "rserde"))]
@@ -704,6 +735,8 @@ pub struct ArrayedIdentifierData {
     pub ident: Identifier,
     /// Attached array specification
     pub array_spec: Option<ArraySpecifier>,
+    /// Attached semantic specification (HLSL)
+    pub semantic: Option<Semantic>,
 }
 
 impl_node_content! {
@@ -721,6 +754,21 @@ impl ArrayedIdentifierData {
         Self {
             ident: ident.into(),
             array_spec: array_spec.into(),
+            semantic: None,
+        }
+    }
+
+    /// Create a new [ArrayedIdentifier] with semantic information
+    pub fn new_with_semantic<I, AS, S>(ident: I, array_spec: AS, semantic: S) -> Self
+    where
+        I: Into<Identifier>,
+        AS: Into<Option<ArraySpecifier>>,
+        S: Into<Option<Semantic>>,
+    {
+        Self {
+            ident: ident.into(),
+            array_spec: array_spec.into(),
+            semantic: semantic.into(),
         }
     }
 }
@@ -730,6 +778,7 @@ impl From<&str> for ArrayedIdentifierData {
         Self {
             ident: IdentifierData::from(ident).into(),
             array_spec: None,
+            semantic: None,
         }
     }
 }

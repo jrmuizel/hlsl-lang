@@ -322,9 +322,17 @@ unary_op: ast::UnaryOp = {
     <l:@L> <u:unary_op_data> <r:@R> => u.spanned(l, r)
 };
 
+semantic: ast::Semantic = {
+    <l:@L> <i:identifier> <r:@R> => ast::SemanticData::from(i.as_str()).spanned(l, r),
+    <l:@L> "SV_Position" <r:@R> => ast::SemanticData::from("SV_Position").spanned(l, r),
+    <l:@L> "SV_Target" <r:@R> => ast::SemanticData::from("SV_Target").spanned(l, r),
+    <l:@L> "SV_VertexID" <r:@R> => ast::SemanticData::from("SV_VertexID").spanned(l, r),
+    <l:@L> "SV_InstanceID" <r:@R> => ast::SemanticData::from("SV_InstanceID").spanned(l, r),
+};
+
 arrayed_identifier: ast::ArrayedIdentifier = {
-    <l:@L> <i:identifier> <a:array_specifier?> <r:@R> =>
-        ast::ArrayedIdentifierData { ident: i, array_spec: a }.spanned(l, r),
+    <l:@L> <i:identifier> <a:array_specifier?> <s:(":" <semantic>)?> <r:@R> =>
+        ast::ArrayedIdentifierData { ident: i, array_spec: a, semantic: s }.spanned(l, r),
 };
 
 multiplicative_expression: ast::Expr = {
