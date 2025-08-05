@@ -159,6 +159,8 @@ pub fn lang_token(
             types::Token::PRECISION => Token::Precision,
             types::Token::STRUCT => Token::Struct,
             types::Token::CBUFFER => Token::CBuffer,
+            types::Token::SAMPLER_STATE => Token::SamplerState,
+            types::Token::SAMPLER_COMPARISON_STATE => Token::SamplerComparisonState,
             types::Token::ATTRIBUTE => Token::Attribute,
             types::Token::VARYING => Token::Varying,
             types::Token::COMMON

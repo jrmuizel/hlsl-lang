@@ -104,6 +104,8 @@ fn main() {
             "precision",
             "struct",
             "cbuffer",
+            "SamplerState",
+            "SamplerComparisonState",
             // Reserved for future use
             "common",
             "partition",

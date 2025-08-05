@@ -603,6 +603,12 @@ pub enum Token {
     /// "cbuffer"
     #[lang_util(token = "cbuffer", kind = "keyword")]
     CBUFFER,
+    /// "SamplerState"
+    #[lang_util(token = "SamplerState", kind = "type name")]
+    SAMPLER_STATE,
+    /// "SamplerComparisonState"
+    #[lang_util(token = "SamplerComparisonState", kind = "type name")]
+    SAMPLER_COMPARISON_STATE,
     // Reserved for future use
     /// "common"
     #[lang_util(token = "common", kind = "reserved keyword")]
@@ -1014,6 +1020,10 @@ impl Token {
             Some(STRUCT)
         } else if *keyword_atom == keyword!("cbuffer") {
             Some(CBUFFER)
+        } else if *keyword_atom == keyword!("SamplerState") {
+            Some(SAMPLER_STATE)
+        } else if *keyword_atom == keyword!("SamplerComparisonState") {
+            Some(SAMPLER_COMPARISON_STATE)
         }
         // Reserved for future use
         else if *keyword_atom == keyword!("common") {
