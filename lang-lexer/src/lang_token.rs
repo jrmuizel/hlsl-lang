@@ -55,6 +55,7 @@ pub fn lang_token(
                 types::TypeName::MAT4X2 => Token::Mat4x2,
                 types::TypeName::MAT4X3 => Token::Mat4x3,
                 types::TypeName::MAT4X4 => Token::Mat44,
+                types::TypeName::MATRIX => Token::Mat44, // matrix is equivalent to float4x4
                 types::TypeName::MAT1X1 => Token::Mat22, // Map to closest equivalent
                 types::TypeName::MAT1X2 => Token::Mat2x3, // Map to closest equivalent
                 types::TypeName::MAT1X3 => Token::Mat2x3, // Map to closest equivalent
@@ -146,6 +147,7 @@ pub fn lang_token(
             types::Token::READONLY => Token::ReadOnly,
             types::Token::WRITEONLY => Token::WriteOnly,
             types::Token::REGISTER => Token::Register,
+            types::Token::PACKOFFSET => Token::Packoffset,
             types::Token::LAYOUT => Token::Layout,
             types::Token::CENTROID => Token::Centroid,
             types::Token::FLAT => Token::Flat,

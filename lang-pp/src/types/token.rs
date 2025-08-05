@@ -100,6 +100,9 @@ pub enum TypeName {
     /// "float4x4" (HLSL matrix type)
     #[display("float4x4")]
     MAT4X4,
+    /// "matrix" (HLSL matrix type, equivalent to float4x4)
+    #[display("matrix")]
+    MATRIX,
     /// "float1x1" through "float4x4" (HLSL matrix types)
     #[display("float1x1")]
     MAT1X1,
@@ -308,6 +311,8 @@ impl TypeName {
             return MAT3X1.gate(version >= 100, false, type_name_atom, is_type_name);
         } else if type_name_atom == type_name!("float4x1") {
             return MAT4X1.gate(version >= 100, false, type_name_atom, is_type_name);
+        } else if type_name_atom == type_name!("matrix") {
+            return MATRIX.gate(version >= 100, false, type_name_atom, is_type_name);
         }
 
         let result = is_type_name(&type_name_atom);
@@ -558,6 +563,13 @@ pub enum Token {
         kind = "type qualifier"
     )]
     REGISTER,
+    /// "packoffset"
+    #[lang_util(
+        token = "packoffset",
+        kind = "storage qualifier",
+        kind = "type qualifier"
+    )]
+    PACKOFFSET,
     /// "layout"
     #[lang_util(token = "layout", kind = "layout qualifier", kind = "type qualifier")]
     LAYOUT,

@@ -52,6 +52,7 @@ fn main() {
             "float4x2",
             "float4x3",
             "float4x4",
+            "matrix",
             // HLSL uint matrix types
             "uint2x2",
             "uint2x3", 
@@ -95,6 +96,7 @@ fn main() {
             "readonly",
             "writeonly",
             "register",
+            "packoffset",
             "layout",
             "centroid",
             "flat",
