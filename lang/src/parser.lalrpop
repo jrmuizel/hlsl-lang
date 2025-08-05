@@ -231,11 +231,12 @@ type_specifier_non_struct: ast::TypeSpecifierNonArrayData = {
     "usamplerCubeArray"      => ast::TypeSpecifierNonArrayData::USamplerCubeArray,
     "uimageCubeArray"        => ast::TypeSpecifierNonArrayData::UImageCubeArray,
     "sampler"                => ast::TypeSpecifierNonArrayData::Sampler,
-    "StructuredBuffer"       => ast::TypeSpecifierNonArrayData::SamplerBuffer,
-    "RWStructuredBuffer"     => ast::TypeSpecifierNonArrayData::ImageBuffer,
+    "StructuredBuffer"       => ast::TypeSpecifierNonArrayData::StructuredBuffer,
+    "RWStructuredBuffer"     => ast::TypeSpecifierNonArrayData::RWStructuredBuffer,
     "ByteAddressBuffer"      => ast::TypeSpecifierNonArrayData::SamplerBuffer,
     "RWByteAddressBuffer"    => ast::TypeSpecifierNonArrayData::ImageBuffer,
     "vector"                 => ast::TypeSpecifierNonArrayData::Vec4,
+    "TextureBuffer"          => ast::TypeSpecifierNonArrayData::TextureBuffer,
 };
 
 type_specifier_non_array: ast::TypeSpecifierNonArray = {
@@ -1113,8 +1114,8 @@ extern {
         "sampler"                => Token::Sampler,
         "SamplerState"           => Token::SamplerState,
         "SamplerComparisonState" => Token::SamplerComparisonState,
-        "StructuredBuffer"       => Token::SamplerBuffer,
-        "RWStructuredBuffer"     => Token::ImageBuffer,
+        "StructuredBuffer"       => Token::StructuredBuffer,
+        "RWStructuredBuffer"     => Token::RWStructuredBuffer,
         "ByteAddressBuffer"      => Token::SamplerBuffer,
         "RWByteAddressBuffer"    => Token::ImageBuffer,
         "vector"                 => Token::Vec4,
@@ -1157,6 +1158,9 @@ extern {
         "disable"                => Token::PpExtDisable,
         pp_path_absolute         => Token::PpPathAbsolute(_),
         pp_path_relative         => Token::PpPathRelative(_),
+        "TextureBuffer"          => Token::TextureBuffer,
+        "StructuredBuffer"       => Token::StructuredBuffer,
+        "RWStructuredBuffer"     => Token::RWStructuredBuffer,
     }
 }
 

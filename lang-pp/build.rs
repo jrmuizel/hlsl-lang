@@ -76,6 +76,8 @@ fn main() {
             "Texture2DMSArray",
             "Texture2DRect",
             "TextureBuffer",
+            "StructuredBuffer",
+            "RWStructuredBuffer",
         ])
         .write_to_file(&out_dir.join("type_names.rs"))
         .expect("failed to generate atoms");

@@ -650,6 +650,12 @@ pub enum TypeSpecifierNonArrayData {
     /// `umat4x4` type specifier
     #[lang_util(display(extra = "umat4x4"))]
     UMat44,
+    /// `StructuredBuffer` type specifier
+    #[lang_util(display(extra = "StructuredBuffer"))]
+    StructuredBuffer,
+    /// `RWStructuredBuffer` type specifier
+    #[lang_util(display(extra = "RWStructuredBuffer"))]
+    RWStructuredBuffer,
 }
 
 impl_node_content! {

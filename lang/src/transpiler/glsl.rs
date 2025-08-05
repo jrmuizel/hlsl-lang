@@ -871,6 +871,9 @@ where
         ast::TypeSpecifierNonArrayData::USubpassInputMs => f.write_str("usubpassInputMS"),
         ast::TypeSpecifierNonArrayData::Struct(ref st) => show_struct_non_declaration(f, st, state),
         ast::TypeSpecifierNonArrayData::TypeName(ref tn) => show_type_name(f, tn, state),
+        ast::TypeSpecifierNonArrayData::TextureBuffer => f.write_str("textureBuffer"),
+        ast::TypeSpecifierNonArrayData::StructuredBuffer => f.write_str("StructuredBuffer"),
+        ast::TypeSpecifierNonArrayData::RWStructuredBuffer => f.write_str("RWStructuredBuffer"),
     }
 }
 

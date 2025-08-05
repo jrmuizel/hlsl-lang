@@ -501,6 +501,10 @@ pub enum Token {
     Texture2DRect,
     #[lang_util(token = "TextureBuffer", kind = "type name")]
     TextureBuffer,
+    #[lang_util(token = "StructuredBuffer", kind = "type name")]
+    StructuredBuffer,
+    #[lang_util(token = "RWStructuredBuffer", kind = "type name")]
+    RWStructuredBuffer,
     #[lang_util(token = "sampler1D", kind = "type name")]
     Sampler1D,
     #[lang_util(token = "sampler3D", kind = "type name")]
