@@ -594,7 +594,6 @@ storage_qualifier_data: ast::StorageQualifierData = {
     "writeonly" => ast::StorageQualifierData::WriteOnly,
     "register"  => ast::StorageQualifierData::Attribute,
     "packoffset"=> ast::StorageQualifierData::Varying,
-    "cbuffer"   => ast::StorageQualifierData::Buffer,
     "tbuffer"   => ast::StorageQualifierData::Buffer,
     "subroutine" <t:("(" <comma<type_specifier>> ")")?> =>
         ast::StorageQualifierData::Subroutine(t.unwrap_or_else(|| vec![])),
@@ -687,6 +686,11 @@ block_declaration: ast::Block = {
         ast::BlockData { qualifier: q, name: n, fields: f, identifier: a }.spanned(l, r)
 };
 
+cbuffer_declaration: ast::CBuffer = {
+    <l:@L> "cbuffer" <n:identifier> "{" <f:struct_field_specifier*> "}" <r:@R> =>
+        ast::CBufferData { name: n, fields: f }.spanned(l, r)
+};
+
 declaration: ast::Declaration = {
     <l:@L> <p:function_prototype> ";"    <r:@R> => {
         ctx.new_identifier(&p.name, IdentifierContext::FunctionPrototype);
@@ -695,6 +699,7 @@ declaration: ast::Declaration = {
     <l:@L> <i:init_declarator_list> ";"  <r:@R> => ast::DeclarationData::InitDeclaratorList(i).spanned(l, r),
     <l:@L> <p:precision_declaration> ";" <r:@R> => p.spanned(l, r),
     <l:@L> <b:block_declaration> ";"     <r:@R> => ast::DeclarationData::Block(b).spanned(l, r),
+    <l:@L> <c:cbuffer_declaration> ";"   <r:@R> => ast::DeclarationData::CBuffer(c).spanned(l, r),
     <l:@L> "invariant" <i:identifier> ";" <r:@R> => ast::DeclarationData::Invariant(i).spanned(l, r),
     <l:@L> <q:type_qualifier> ";" <r:@R> => ast::DeclarationData::TypeOnly(q).spanned(l, r),
 };

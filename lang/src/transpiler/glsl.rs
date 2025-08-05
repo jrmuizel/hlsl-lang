@@ -1535,6 +1535,9 @@ where
         ast::DeclarationData::Block(ref block) => {
             show_block(f, block, state)?;
         }
+        ast::DeclarationData::CBuffer(ref cbuffer) => {
+            show_cbuffer(f, cbuffer, state)?;
+        }
         ast::DeclarationData::Invariant(ref ident) => {
             f.write_str("invariant")?;
             f.write_char(' ')?;
@@ -1737,6 +1740,23 @@ where
         show_arrayed_identifier(f, ident, state)?;
     }
 
+    Ok(())
+}
+
+/// Transpile a cbuffer to GLSL
+pub fn show_cbuffer<F>(f: &mut F, cb: &ast::CBuffer, state: &mut FormattingState<'_>) -> std::fmt::Result
+where
+    F: Write + ?Sized,
+{
+    f.write_str("cbuffer ")?;
+    show_identifier(f, &cb.name, state)?;
+    state.enter_block(f)?;
+    for field in &cb.fields {
+        state.flush_line(f)?;
+        show_struct_field(f, field, state)?;
+        state.write_struct_field_separator(f)?;
+    }
+    state.exit_block(f)?;
     Ok(())
 }
 

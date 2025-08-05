@@ -116,6 +116,10 @@ macro_rules! make_visitor_trait {
         Visit::Children
       }
 
+      fn visit_cbuffer(&mut self, _: $($ref)* ast::CBuffer) -> Visit {
+        Visit::Children
+      }
+
       fn visit_for_init_statement(&mut self, _: $($ref)* ast::ForInitStatement) -> Visit {
         Visit::Children
       }
@@ -739,6 +743,8 @@ macro_rules! make_host_trait {
 
             ast::DeclarationData::Block(block) => block.$mthd_name(visitor),
 
+            ast::DeclarationData::CBuffer(cbuffer) => cbuffer.$mthd_name(visitor),
+
             ast::DeclarationData::Invariant(ident) => ident.$mthd_name(visitor),
 
             ast::DeclarationData::TypeOnly(q) => q.$mthd_name(visitor),
@@ -763,6 +769,23 @@ macro_rules! make_host_trait {
           }
 
           self.identifier.$mthd_name(visitor);
+        }
+      }
+    }
+
+    impl $host_ty for ast::CBuffer {
+      fn $mthd_name<V>($($ref)* self, visitor: &mut V)
+      where
+          V: $visitor_ty,
+      {
+        let visit = visitor.visit_cbuffer(self);
+
+        if visit == Visit::Children {
+          self.name.$mthd_name(visitor);
+
+          for field in $($ref)* self.fields {
+            field.$mthd_name(visitor);
+          }
         }
       }
     }

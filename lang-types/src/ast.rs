@@ -997,6 +997,8 @@ pub enum DeclarationData {
     Invariant(Identifier),
     /// Type-only declaration
     TypeOnly(TypeQualifier),
+    /// CBuffer declaration
+    CBuffer(CBuffer),
 }
 
 impl_node_content! {
@@ -1023,6 +1025,22 @@ pub struct BlockData {
 impl_node_content! {
     /// Type alias for `Node<BlockData>`.
     pub type Block = Node<BlockData>;
+}
+
+/// A cbuffer block, containing constant buffer fields
+#[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", serde(crate = "rserde"))]
+pub struct CBufferData {
+    /// CBuffer name
+    pub name: Identifier,
+    /// Declared fields
+    pub fields: Vec<StructFieldSpecifier>,
+}
+
+impl_node_content! {
+    /// Type alias for `Node<CBufferData>`.
+    pub type CBuffer = Node<CBufferData>;
 }
 
 /// Function identifier.

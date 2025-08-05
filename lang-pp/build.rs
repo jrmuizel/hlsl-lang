@@ -103,6 +103,7 @@ fn main() {
             "highp",
             "precision",
             "struct",
+            "cbuffer",
             // Reserved for future use
             "common",
             "partition",

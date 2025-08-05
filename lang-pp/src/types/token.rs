@@ -600,6 +600,9 @@ pub enum Token {
     /// "struct"
     #[lang_util(token = "struct", kind = "struct", kind = "keyword")]
     STRUCT,
+    /// "cbuffer"
+    #[lang_util(token = "cbuffer", kind = "keyword")]
+    CBUFFER,
     // Reserved for future use
     /// "common"
     #[lang_util(token = "common", kind = "reserved keyword")]
@@ -1009,6 +1012,8 @@ impl Token {
             Some(PRECISION)
         } else if *keyword_atom == keyword!("struct") {
             Some(STRUCT)
+        } else if *keyword_atom == keyword!("cbuffer") {
+            Some(CBUFFER)
         }
         // Reserved for future use
         else if *keyword_atom == keyword!("common") {
