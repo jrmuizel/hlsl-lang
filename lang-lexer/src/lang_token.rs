@@ -141,6 +141,7 @@ pub fn lang_token(
             types::Token::RESTRICT => Token::Restrict,
             types::Token::READONLY => Token::ReadOnly,
             types::Token::WRITEONLY => Token::WriteOnly,
+            types::Token::REGISTER => Token::Register,
             types::Token::LAYOUT => Token::Layout,
             types::Token::CENTROID => Token::Centroid,
             types::Token::FLAT => Token::Flat,

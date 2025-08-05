@@ -544,6 +544,13 @@ pub enum Token {
         kind = "type qualifier"
     )]
     WRITEONLY,
+    /// "register"
+    #[lang_util(
+        token = "register",
+        kind = "storage qualifier",
+        kind = "type qualifier"
+    )]
+    REGISTER,
     /// "layout"
     #[lang_util(token = "layout", kind = "layout qualifier", kind = "type qualifier")]
     LAYOUT,
@@ -1022,6 +1029,8 @@ impl Token {
             Some(READONLY)
         } else if *keyword_atom == keyword!("writeonly") {
             Some(WRITEONLY)
+        } else if *keyword_atom == keyword!("register") {
+            Some(REGISTER)
         } else if *keyword_atom == keyword!("layout") {
             Some(LAYOUT)
         } else if *keyword_atom == keyword!("centroid") {

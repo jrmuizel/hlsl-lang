@@ -83,6 +83,7 @@ fn main() {
             "restrict",
             "readonly",
             "writeonly",
+            "register",
             "layout",
             "centroid",
             "flat",

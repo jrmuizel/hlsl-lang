@@ -17,13 +17,13 @@
 //!
 //! The second solution is better because it lets the user handle the memory the way they want:
 //! they might just use a dynamic buffer that implements [`Write`] or simply pass a `&mut`
-//! [`String`]. It’s up to you.
+//! [`String`]. It's up to you.
 //!
 //! # How to use this module
 //!
 //! First, head over to the [`ast`] module. That module defines the AST items defined by GLSL. This
 //! very module provides you with functions like `show_*` taking the AST item and writing it to a
-//! [`Write`] object. You’re likely to be interested in [`show_translation_unit`] to start with.
+//! [`Write`] object. You're likely to be interested in [`show_translation_unit`] to start with.
 //!
 //! [`Cow<str>`]: std::borrow::Cow
 //! [`Write`]: std::fmt::Write
@@ -955,7 +955,7 @@ where
     show_type_specifier(f, &field.ty, state)?;
     f.write_char(' ')?;
 
-    // there’s at least one identifier
+    // there's at least one identifier
     let mut identifiers = field.identifiers.iter();
     let identifier = identifiers.next().unwrap();
 
@@ -1756,6 +1756,15 @@ where
 {
     f.write_str("cbuffer ")?;
     show_identifier(f, &cb.name, state)?;
+    
+    // Add resource binding if present
+    if let Some(ref resource_binding) = cb.resource_binding {
+        f.write_str(" : register(")?;
+        show_identifier(f, &resource_binding.register_type, state)?;
+        show_expr(f, &resource_binding.index, state)?;
+        f.write_str(")")?;
+    }
+    
     state.enter_block(f)?;
     for field in &cb.fields {
         state.flush_line(f)?;

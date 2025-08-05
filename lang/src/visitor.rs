@@ -374,6 +374,10 @@ macro_rules! make_visitor_trait {
       fn visit_attribute_spec(&mut self, _: $($ref)* ast::AttributeSpec) -> Visit {
         Visit::Children
       }
+
+      fn visit_resource_binding(&mut self, _: $($ref)* ast::ResourceBinding) -> Visit {
+        Visit::Children
+      }
     }
   }
 }
@@ -805,6 +809,7 @@ macro_rules! make_host_trait {
 
         if visit == Visit::Children {
           self.name.$mthd_name(visitor);
+          self.resource_binding.$mthd_name(visitor);
 
           for field in $($ref)* self.fields {
             field.$mthd_name(visitor);
@@ -1505,6 +1510,20 @@ macro_rules! make_host_trait {
               param.$mthd_name(visitor);
             }
           }
+        }
+      }
+    }
+
+    impl $host_ty for ast::ResourceBinding {
+      fn $mthd_name<V>($($ref)* self, visitor: &mut V)
+      where
+          V: $visitor_ty,
+      {
+        let visit = visitor.visit_resource_binding(self);
+
+        if visit == Visit::Children {
+          self.register_type.$mthd_name(visitor);
+          self.index.$mthd_name(visitor);
         }
       }
     }

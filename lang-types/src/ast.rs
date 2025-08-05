@@ -1,13 +1,13 @@
 //! HLSL abstract syntax tree and grammar.
 //!
-//! This module exports all the grammar syntax that defines GLSL. You’ll be handling ASTs
+//! This module exports all the grammar syntax that defines GLSL. You'll be handling ASTs
 //! representing your GLSL source.
 //!
 //! The most external form of an HLSL parsed AST is [`TranslationUnit`] (a shader). Some parts of the
 //! tree are *boxed*. This is due to two facts:
 //!
 //! - Recursion is used, hence we need a way to give our types a static size.
-//! - Because of some very deep variants, runtime size would explode if no indirection weren’t
+//! - Because of some very deep variants, runtime size would explode if no indirection weren't
 //!   in place.
 //!
 //! The types are commented so feel free to inspect each of theme. As a starter, you should read
@@ -1085,6 +1085,8 @@ impl_node_content! {
 pub struct CBufferData {
     /// CBuffer name
     pub name: Identifier,
+    /// Optional resource binding
+    pub resource_binding: Option<ResourceBinding>,
     /// Declared fields
     pub fields: Vec<StructFieldSpecifier>,
 }
@@ -1316,7 +1318,7 @@ impl From<Expr> for InitializerData {
 ///
 /// As you can see if you read the variant list, in GLSL, an assignment is an expression. This is a
 /// bit silly but think of an assignment as a statement first then an expression which evaluates to
-/// what the statement “returns”.
+/// what the statement "returns".
 ///
 /// An expression is either an assignment or a list (comma) of assignments.
 #[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
@@ -1889,8 +1891,8 @@ impl_node_content! {
 
 /// Some basic preprocessor directives.
 ///
-/// As it’s important to carry them around the AST because they cannot be substituted in a normal
-/// preprocessor (they’re used by GPU’s compilers), those preprocessor directives are available for
+/// As it's important to carry them around the AST because they cannot be substituted in a normal
+/// preprocessor (they're used by GPU's compilers), those preprocessor directives are available for
 /// inspection.
 #[derive(Clone, Debug, PartialEq, Eq, NodeContentDisplay)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
@@ -2242,4 +2244,20 @@ impl CommentData {
     pub fn is_multi(&self) -> bool {
         matches!(self, Self::Multi(_))
     }
+}
+
+/// A resource binding specification (e.g., register(b0))
+#[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", serde(crate = "rserde"))]
+pub struct ResourceBindingData {
+    /// Register type (e.g., 'b' for buffer, 't' for texture, 's' for sampler)
+    pub register_type: Identifier,
+    /// Register index
+    pub index: Expr,
+}
+
+impl_node_content! {
+    /// Type alias for `Node<ResourceBindingData>`.
+    pub type ResourceBinding = Node<ResourceBindingData>;
 }

@@ -673,7 +673,17 @@ block_declaration: ast::Block = {
 
 cbuffer_declaration: ast::CBuffer = {
     <l:@L> "cbuffer" <n:identifier> "{" <f:struct_field_specifier*> "}" <r:@R> =>
-        ast::CBufferData { name: n, fields: f }.spanned(l, r)
+        ast::CBufferData { name: n, resource_binding: None, fields: f }.spanned(l, r),
+    <l:@L> "cbuffer" <n:identifier> ":" <reg:resource_binding> "{" <f:struct_field_specifier*> "}" <r:@R> =>
+        ast::CBufferData { name: n, resource_binding: Some(reg), fields: f }.spanned(l, r)
+};
+
+resource_binding: ast::ResourceBinding = {
+    <l:@L> "register" "(" <reg_spec:identifier> ")" <r:@R> =>
+        ast::ResourceBindingData {
+            register_type: ast::IdentifierData::from(&reg_spec.as_str()[0..1]).spanned(l, r),
+            index: ast::ExprData::IntConst(reg_spec.as_str()[1..].parse().unwrap_or(0)).spanned(l, r),
+        }.spanned(l, r)
 };
 
 sampler_state_property: ast::SamplerStateProperty = {
