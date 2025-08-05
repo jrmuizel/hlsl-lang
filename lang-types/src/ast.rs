@@ -1335,6 +1335,8 @@ pub enum ExprData {
     FloatConst(f32),
     /// Double precision floating expression.
     DoubleConst(f64),
+    /// String constant expression.
+    StringConst(String),
     /// A unary expression, gathering a single expression and a unary operator.
     Unary(UnaryOp, Box<Expr>),
     /// A binary expression, gathering two expressions and a binary operator.
@@ -1405,6 +1407,12 @@ impl From<f32> for ExprData {
 impl From<f64> for ExprData {
     fn from(x: f64) -> ExprData {
         Self::DoubleConst(x)
+    }
+}
+
+impl From<String> for ExprData {
+    fn from(x: String) -> ExprData {
+        Self::StringConst(x)
     }
 }
 
@@ -1578,11 +1586,43 @@ impl_node_content! {
     pub type ExternalDeclaration = Node<ExternalDeclarationData>;
 }
 
+/// HLSL attribute specification.
+#[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", serde(crate = "rserde"))]
+pub struct AttributeSpecData {
+    /// Attribute name
+    pub name: Identifier,
+    /// Attribute parameters (optional)
+    pub params: Option<Vec<Expr>>,
+}
+
+impl_node_content! {
+    /// Type alias for `Node<AttributeSpecData>`.
+    pub type AttributeSpec = Node<AttributeSpecData>;
+}
+
+/// HLSL attribute (e.g., [domain("isoline")]).
+#[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", serde(crate = "rserde"))]
+pub struct AttributeData {
+    /// The attribute specification
+    pub spec: AttributeSpec,
+}
+
+impl_node_content! {
+    /// Type alias for `Node<AttributeData>`.
+    pub type Attribute = Node<AttributeData>;
+}
+
 /// Function definition.
 #[derive(Clone, Debug, PartialEq, NodeContentDisplay)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "serde", serde(crate = "rserde"))]
 pub struct FunctionDefinitionData {
+    /// HLSL attributes (optional)
+    pub attributes: Option<Vec<Attribute>>,
     /// Function prototype
     pub prototype: FunctionPrototype,
     /// Function body

@@ -366,6 +366,14 @@ macro_rules! make_visitor_trait {
       fn visit_expr_statement(&mut self, _: $($ref)* ast::ExprStatement) -> Visit {
         Visit::Children
       }
+
+      fn visit_attribute(&mut self, _: $($ref)* ast::Attribute) -> Visit {
+        Visit::Children
+      }
+
+      fn visit_attribute_spec(&mut self, _: $($ref)* ast::AttributeSpec) -> Visit {
+        Visit::Children
+      }
     }
   }
 }
@@ -725,6 +733,11 @@ macro_rules! make_host_trait {
         let visit = visitor.visit_function_definition(self);
 
         if visit == Visit::Children {
+          if let Some(attributes) = $($ref)* self.attributes {
+            for attr in attributes.$iter() {
+              attr.$mthd_name(visitor);
+            }
+          }
           self.prototype.$mthd_name(visitor);
           self.statement.$mthd_name(visitor);
         }
@@ -1459,6 +1472,37 @@ macro_rules! make_host_trait {
               for i in i.$iter() {
                 i.$mthd_name(visitor);
               }
+            }
+          }
+        }
+      }
+    }
+
+    impl $host_ty for ast::Attribute {
+      fn $mthd_name<V>($($ref)* self, visitor: &mut V)
+      where
+          V: $visitor_ty,
+      {
+        let visit = visitor.visit_attribute(self);
+
+        if visit == Visit::Children {
+          self.spec.$mthd_name(visitor);
+        }
+      }
+    }
+
+    impl $host_ty for ast::AttributeSpec {
+      fn $mthd_name<V>($($ref)* self, visitor: &mut V)
+      where
+          V: $visitor_ty,
+      {
+        let visit = visitor.visit_attribute_spec(self);
+
+        if visit == Visit::Children {
+          self.name.$mthd_name(visitor);
+          if let Some(params) = $($ref)* self.params {
+            for param in params.$iter() {
+              param.$mthd_name(visitor);
             }
           }
         }

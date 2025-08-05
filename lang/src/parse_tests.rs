@@ -1756,6 +1756,7 @@ fn parse_function_definition() {
         .into(),
     );
     let expected: ast::FunctionDefinition = ast::FunctionDefinitionData {
+        attributes: None,
         prototype: fp,
         statement: ast::CompoundStatementData {
             statement_list: vec![st0.into()],
@@ -1783,6 +1784,7 @@ fn parse_buffer_block_0() {
     let src = include_str!("../data/tests/buffer_block_0.glsl");
     let main_fn = ast::ExternalDeclarationData::FunctionDefinition(
         ast::FunctionDefinitionData {
+            attributes: None,
             prototype: ast::FunctionPrototypeData {
                 ty: ast::FullySpecifiedTypeData {
                     qualifier: None,

@@ -625,7 +625,8 @@ impl HasPrecedence for ast::ExprData {
             | Self::UIntConst(_)
             | Self::BoolConst(_)
             | Self::FloatConst(_)
-            | Self::DoubleConst(_) => 0,
+            | Self::DoubleConst(_)
+            | Self::StringConst(_) => 0,
             // Precedence operator expression is precedence of operator
             Self::Unary(op, _) => op.precedence(),
             Self::Binary(op, _, _) => op.precedence(),
@@ -1229,6 +1230,7 @@ where
         ast::ExprData::BoolConst(ref x) => write!(f, "{}", x),
         ast::ExprData::FloatConst(ref x) => show_float(f, *x, state),
         ast::ExprData::DoubleConst(ref x) => show_double(f, *x, state),
+        ast::ExprData::StringConst(ref x) => write!(f, "\"{}\"", x),
         ast::ExprData::Unary(ref op, ref e) => {
             // Note: all unary ops are right-to-left associative
             show_unary_op(f, op, state)?;

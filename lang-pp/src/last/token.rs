@@ -49,13 +49,23 @@ pub(super) fn token_from_syntax_kind(
         | SyntaxKind::ERROR
         | SyntaxKind::ROOT
         | SyntaxKind::_LAST
-        | SyntaxKind::QUOTE_STRING
         | SyntaxKind::ANGLE_STRING
         | SyntaxKind::BACKSLASH
         | SyntaxKind::DEFINED
         | SyntaxKind::PP_CONCAT
         | SyntaxKind::PP_CONCAT_OP => {
             return (ERROR(ErrorKind::InvalidToken), None);
+        }
+        SyntaxKind::QUOTE_STRING => {
+            // Extract the content of the quoted string (without quotes)
+            let text = value.text().to_string();
+            // Remove the surrounding quotes
+            let string_content = if text.len() >= 2 && text.starts_with('"') && text.ends_with('"') {
+                &text[1..text.len()-1]
+            } else {
+                &text
+            };
+            return (STRING_CONST(string_content.into()), None);
         }
         // Those need further processing
         SyntaxKind::IDENT_KW => {}

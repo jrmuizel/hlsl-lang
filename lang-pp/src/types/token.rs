@@ -333,6 +333,9 @@ pub enum Token {
     /// Double constant
     #[lang_util(parser = "DOUBLE_CONST", kind = "double constant", kind = "literal")]
     DOUBLE_CONST(f64),
+    /// String constant
+    #[lang_util(parser = "STRING_CONST", kind = "string constant", kind = "literal")]
+    STRING_CONST(SmolStr),
     // Multi-char tokens
     /// <<
     #[lang_util(token = "<<", kind = "binary operator", kind = "operator")]
@@ -793,8 +796,10 @@ impl Token {
         target_vulkan: bool,
         is_type_name: impl Fn(&TypeNameAtom) -> TypeNameState,
     ) -> (Token, Option<TypeNameState>) {
+
         use Token::*;
         let kind = &*token;
+
 
         match kind {
             lexer::Token::IDENT_KW | lexer::Token::DIGITS => {}
@@ -945,8 +950,18 @@ impl Token {
             | lexer::Token::WS => {
                 return (WS, None);
             }
-            lexer::Token::QUOTE_STRING
-            | lexer::Token::ANGLE_STRING
+                        lexer::Token::QUOTE_STRING => {
+                // Extract the content of the quoted string (without quotes)
+                let text = Unescaped::new(token.raw(source)).to_string();
+                // Remove the surrounding quotes
+                let string_content = if text.len() >= 2 && text.starts_with('"') && text.ends_with('"') {
+                    &text[1..text.len()-1]
+                } else {
+                    &text
+                };
+                return (STRING_CONST(string_content.to_string().into()), None);
+            }
+            lexer::Token::ANGLE_STRING
             | lexer::Token::BACKSLASH
             | lexer::Token::ERROR
             | lexer::Token::PP_CONCAT => {

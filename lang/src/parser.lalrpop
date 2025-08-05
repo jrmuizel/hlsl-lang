@@ -40,12 +40,13 @@ type_name: ast::TypeName = {
 };
 
 primary_expression: ast::Expr = {
-    <l:@L> <e:identifier>      <r:@R> => ast::ExprData::Variable(e).spanned(l, r),
-    <l:@L> <e:double_constant> <r:@R> => ast::ExprData::DoubleConst(e.into()).spanned(l, r),
-    <l:@L> <e:float_constant>  <r:@R> => ast::ExprData::FloatConst(e.into()).spanned(l, r),
-    <l:@L> <e:uint_constant>   <r:@R> => ast::ExprData::UIntConst(e.into()).spanned(l, r),
-    <l:@L> <e:int_constant>    <r:@R> => ast::ExprData::IntConst(e.into()).spanned(l, r),
-    <l:@L> <e:bool_constant>   <r:@R> => ast::ExprData::BoolConst(e.into()).spanned(l, r),
+    <l:@L> <e:identifier>       <r:@R> => ast::ExprData::Variable(e).spanned(l, r),
+    <l:@L> <e:double_constant>  <r:@R> => ast::ExprData::DoubleConst(e.into()).spanned(l, r),
+    <l:@L> <e:float_constant>   <r:@R> => ast::ExprData::FloatConst(e.into()).spanned(l, r),
+    <l:@L> <e:uint_constant>    <r:@R> => ast::ExprData::UIntConst(e.into()).spanned(l, r),
+    <l:@L> <e:int_constant>     <r:@R> => ast::ExprData::IntConst(e.into()).spanned(l, r),
+    <l:@L> <e:bool_constant>    <r:@R> => ast::ExprData::BoolConst(e.into()).spanned(l, r),
+    <l:@L> <e:string_constant>  <r:@R> => ast::ExprData::StringConst(e.into()).spanned(l, r),
     "(" <expr> ")",
 };
 
@@ -699,8 +700,22 @@ declaration: ast::Declaration = {
     <l:@L> <q:type_qualifier> ";" <r:@R> => ast::DeclarationData::TypeOnly(q).spanned(l, r),
 };
 
+attribute_spec: ast::AttributeSpec = {
+    <l:@L> <name:identifier> <params:("(" <comma<assignment_expression>> ")")?> <r:@R> => ast::AttributeSpecData {
+        name,
+        params: params.map(|p| p),
+    }.spanned(l, r)
+};
+
+attribute: ast::Attribute = {
+    <l:@L> "[" <spec:attribute_spec> "]" <r:@R> => ast::AttributeData {
+        spec,
+    }.spanned(l, r)
+};
+
 function_definition: ast::FunctionDefinition = {
-    <l:@L> <p:function_prototype> <s:compound_statement> <r:@R> => ast::FunctionDefinitionData {
+    <l:@L> <attrs:attribute*> <p:function_prototype> <s:compound_statement> <r:@R> => ast::FunctionDefinitionData {
+        attributes: if attrs.is_empty() { None } else { Some(attrs) },
         prototype: p,
         statement: s,
     }.spanned(l, r)
@@ -863,6 +878,7 @@ extern {
         bool_constant            => Token::BoolConstant(_),
         float_constant           => Token::FloatConstant(_),
         double_constant          => Token::DoubleConstant(_),
+        string_constant          => Token::StringConstant(_),
         "("                      => Token::LeftParen,
         ")"                      => Token::RightParen,
         "["                      => Token::LeftBracket,

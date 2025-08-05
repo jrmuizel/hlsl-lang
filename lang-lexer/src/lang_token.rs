@@ -83,6 +83,7 @@ pub fn lang_token(
             types::Token::UINT_CONST(val) => Token::UIntConstant(val),
             types::Token::BOOL_CONST(val) => Token::BoolConstant(val),
             types::Token::DOUBLE_CONST(val) => Token::DoubleConstant(val),
+            types::Token::STRING_CONST(val) => Token::StringConstant(val),
             types::Token::LEFT_OP => Token::LeftOp,
             types::Token::RIGHT_OP => Token::RightOp,
             types::Token::INC_OP => Token::IncOp,

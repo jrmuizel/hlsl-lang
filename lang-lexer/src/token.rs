@@ -539,6 +539,8 @@ pub enum Token {
     BoolConstant(bool),
     #[lang_util(parser = "double_constant", kind = "literal")]
     DoubleConstant(f64),
+    #[lang_util(parser = "string_constant", kind = "literal")]
+    StringConstant(SmolStr),
     #[lang_util(token = "<<", kind = "binary operator", kind = "operator")]
     LeftOp,
     #[lang_util(token = ">>", kind = "binary operator", kind = "operator")]
@@ -782,11 +784,13 @@ impl_from!(u32 => UIntConstant);
 impl_from!(f32 => FloatConstant);
 impl_from!(f64 => DoubleConstant);
 impl_from!(bool => BoolConstant);
+impl_from!(SmolStr => StringConstant);
 
 impl From<Token> for String {
     fn from(value: Token) -> Self {
         match value {
             Token::PpRest(s) => s,
+            Token::StringConstant(s) => s.to_string(),
             other => panic!("cannot convert {:?} into String", other),
         }
     }

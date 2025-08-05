@@ -92,7 +92,7 @@ pub type ParseError<E> = lang_util::error::ParseError<E>;
 
 /// Default lexer to use for parsing sources
 #[cfg(not(feature = "lexer-full"))]
-pub type DefaultLexer<'i> = glsl_lang_lexer::min::str::Lexer<'i>;
+pub type DefaultLexer<'i> = hlsl_lang_lexer::min::str::Lexer<'i>;
 
 /// Default lexer to use for parsing sources
 #[cfg(feature = "lexer-full")]
