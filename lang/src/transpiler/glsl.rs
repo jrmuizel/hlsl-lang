@@ -1101,6 +1101,7 @@ where
         ast::StorageQualifierData::Sample => f.write_str("sample"),
         ast::StorageQualifierData::Uniform => f.write_str("uniform"),
         ast::StorageQualifierData::Shared => f.write_str("shared"),
+        ast::StorageQualifierData::GroupShared => f.write_str("shared"), // HLSL groupshared maps to GLSL shared
         ast::StorageQualifierData::Coherent => f.write_str("coherent"),
         ast::StorageQualifierData::Volatile => f.write_str("volatile"),
         ast::StorageQualifierData::Restrict => f.write_str("restrict"),

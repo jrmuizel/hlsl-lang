@@ -911,6 +911,9 @@ pub enum StorageQualifierData {
     /// `shared` storage qualifier
     #[lang_util(display(extra = "shared"))]
     Shared,
+    /// `groupshared` storage qualifier (HLSL)
+    #[lang_util(display(extra = "groupshared"))]
+    GroupShared,
     /// `coherent` storage qualifier
     #[lang_util(display(extra = "coherent"))]
     Coherent,
