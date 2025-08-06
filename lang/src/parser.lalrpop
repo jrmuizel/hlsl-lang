@@ -723,11 +723,11 @@ sampler_state_declaration: ast::SamplerState = {
 };
 
 declaration: ast::Declaration = {
+    <l:@L> <i:init_declarator_list> ";"  <r:@R> => ast::DeclarationData::InitDeclaratorList(i).spanned(l, r),
     <l:@L> <p:function_prototype> ";"    <r:@R> => {
         ctx.new_identifier(&p.name, IdentifierContext::FunctionPrototype);
         ast::DeclarationData::FunctionPrototype(p).spanned(l, r)
     },
-    <l:@L> <i:init_declarator_list> ";"  <r:@R> => ast::DeclarationData::InitDeclaratorList(i).spanned(l, r),
     <l:@L> <p:precision_declaration> ";" <r:@R> => p.spanned(l, r),
     <l:@L> <b:block_declaration> ";"     <r:@R> => ast::DeclarationData::Block(b).spanned(l, r),
     <l:@L> "invariant" <i:identifier> ";" <r:@R> => ast::DeclarationData::Invariant(i).spanned(l, r),
@@ -880,6 +880,10 @@ preprocessor: ast::Preprocessor = {
     <l:@L> "#version"   <p:preprocessor_version>   <r:@R> => ast::PreprocessorData::Version(p).spanned(l, r),
     <l:@L> "#extension" <p:preprocessor_extension> <r:@R> => ast::PreprocessorData::Extension(p).spanned(l, r),
 };
+
+
+
+
 
 external_declaration: Option<ast::ExternalDeclaration> = {
     <l:@L> <p:preprocessor> <r:@R>        => Some(ast::ExternalDeclarationData::Preprocessor(p).spanned(l, r)),
