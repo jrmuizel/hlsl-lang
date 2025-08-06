@@ -511,6 +511,9 @@ pub enum Token {
     /// "shared"
     #[lang_util(token = "shared", kind = "storage qualifier", kind = "type qualifier")]
     SHARED,
+    /// "groupshared" (HLSL)
+    #[lang_util(token = "groupshared", kind = "storage qualifier", kind = "type qualifier")]
+    GROUPSHARED,
     /// "attribute"
     #[lang_util(
         token = "attribute",
@@ -1032,6 +1035,8 @@ impl Token {
             Some(UNIFORM)
         } else if *keyword_atom == keyword!("shared") {
             Some(SHARED)
+        } else if *keyword_atom == keyword!("groupshared") {
+            Some(GROUPSHARED)
         } else if *keyword_atom == keyword!("attribute") {
             Some(ATTRIBUTE)
         } else if *keyword_atom == keyword!("varying") {

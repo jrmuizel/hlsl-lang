@@ -48,7 +48,6 @@ const EXPECTED_FAIL_SHADERS: &[&str] = &[
     "shaders/Sdk/Direct3D11/HDRToneMappingCS11/FilterCS.hlsl",
     "shaders/Sdk/Direct3D11/HDRToneMappingCS11/BrightPassAndHorizFilterCS.hlsl",
     "shaders/Sdk/Direct3D11/HDRToneMappingCS11/skybox11.hlsl",
-    "shaders/Sdk/Direct3D11/HDRToneMappingCS11/ReduceToSingleCS.hlsl",
     "shaders/Sdk/Direct3D11/HDRToneMappingCS11/FinalPass.hlsl",
     "shaders/Sdk/Direct3D11/HDRToneMappingCS11/ReduceTo1DCS.hlsl",
 ];
@@ -228,7 +227,6 @@ const EXPECTED_FAIL_DATA_HLSL: &[&str] = &[
     "hlsl.struct.split.nested.geom",
     "hlsl.mintypes.frag",
     "hlsl.sample.offsetarray.dx10.frag",
-    "hlsl.basic.comp",
     "hlsl.wavequad.comp",
     "hlsl.structarray.flatten.geom",
     "hlsl.matType.bool.frag",

@@ -137,6 +137,8 @@ pub enum Token {
     Sample,
     #[lang_util(token = "shared", kind = "storage qualifier", kind = "type qualifier")]
     Shared,
+    #[lang_util(token = "groupshared", kind = "storage qualifier", kind = "type qualifier")]
+    GroupShared,
     #[lang_util(
         token = "coherent",
         kind = "storage qualifier",
