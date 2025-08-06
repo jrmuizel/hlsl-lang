@@ -884,6 +884,8 @@ where
             show_type_specifier(f, t, state)?;
             f.write_str(">")
         },
+        ast::TypeSpecifierNonArrayData::SamplerState => f.write_str("SamplerState"),
+        ast::TypeSpecifierNonArrayData::SamplerComparisonState => f.write_str("SamplerComparisonState"),
     }
 }
 
