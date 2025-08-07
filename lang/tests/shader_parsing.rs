@@ -1,8 +1,54 @@
 use hlsl_lang::{ast, parse::DefaultParse};
+use hlsl_lang_pp::processor::fs::StdProcessor;
 use std::fs;
 use std::path::Path;
 use std::collections::HashSet;
 use std::panic;
+
+/// Parse a shader file with full filesystem context for includes
+fn parse_shader_with_fs_context(path: &Path) -> Result<ast::TranslationUnit, Box<dyn std::error::Error>> {
+    // Create a preprocessor with filesystem support
+    let mut processor = StdProcessor::new();
+    
+    // Add common include directories that might be used by shaders
+    if let Some(parent_dir) = path.parent() {
+        processor.system_paths_mut().push(parent_dir.to_path_buf());
+    }
+    
+    // Try to parse with preprocessing first
+    match processor.parse(path) {
+        Ok(parsed) => {
+            // Process through preprocessor to handle includes
+            let mut processed_source = String::new();
+            for result in parsed.into_iter() {
+                match result {
+                    Ok(event) => {
+                        use hlsl_lang_pp::processor::event::Event;
+                        match event {
+                            Event::Token { token, .. } => {
+                                processed_source.push_str(&token.text());
+                            }
+                            _ => {} // Ignore other events like directives, errors, etc.
+                        }
+                    }
+                    Err(e) => {
+                        return Err(format!("Preprocessing error: {}", e).into());
+                    }
+                }
+            }
+            
+            // Parse the preprocessed source
+            ast::TranslationUnit::parse(&processed_source)
+                .map_err(|e| format!("Parse error after preprocessing: {}", e).into())
+        }
+        Err(_e) => {
+            // Fall back to direct parsing without preprocessing
+            let source = fs::read_to_string(path)?;
+            ast::TranslationUnit::parse(&source)
+                .map_err(|e| format!("Direct parse error: {}", e).into())
+        }
+    }
+}
 
 /// Shaders that are expected to fail parsing
 const EXPECTED_FAIL_SHADERS: &[&str] = &[
@@ -124,7 +170,6 @@ const EXPECTED_FAIL_DATA_HLSL: &[&str] = &[
     "hlsl.partialInit.frag",
     "hlsl.intrinsics.promote.outputs.frag",
     "hlsl.sample.dx9.vert",
-    "hlsl.pp.line.frag",
     "hlsl.matpack-pragma.frag",
     "hlsl.getdimensions.dx10.frag",
     "hlsl.samplecmplevelzero.offsetarray.dx10.frag",
@@ -154,7 +199,6 @@ const EXPECTED_FAIL_DATA_HLSL: &[&str] = &[
     "hlsl.load.basic.dx10.vert",
     "hlsl.color.hull.tesc",
     "hlsl.clipdistance-1.geom",
-    "hlsl.-D-U.frag",
     "hlsl.float4.frag",
     "hlsl.pp.line4.frag",
     "hlsl.constructimat.frag",
@@ -308,17 +352,14 @@ fn test_shader_parsing() {
         let path_str = path.to_string_lossy();
         total_shaders += 1;
 
-        // Read the shader file
-        let source = match fs::read_to_string(path) {
-            Ok(content) => content,
-            Err(e) => {
-                actual_fail_shaders.push((path_str.to_string(), format!("Failed to read file - {}", e)));
-                continue;
-            }
-        };
+        // Check if file is readable (we'll let the parser handle the actual reading)
+        if !path.exists() {
+            actual_fail_shaders.push((path_str.to_string(), "File not found".to_string()));
+            continue;
+        }
 
-        // Try to parse the shader
-        match ast::TranslationUnit::parse(&source) {
+        // Try to parse the shader with filesystem context
+        match parse_shader_with_fs_context(path) {
             Ok(_) => {
                 println!("✓ Parsed successfully: {}", path_str);
                 actual_pass_shaders.push(path_str.to_string());
@@ -420,22 +461,19 @@ fn test_data_hlsl_parsing() {
             if file_name.starts_with("hlsl.") {
                 total_shaders += 1;
 
-                // Read the shader file
-                let source = match fs::read_to_string(&path) {
-                    Ok(content) => content,
-                    Err(e) => {
-                        actual_fail_shaders.push((file_name.to_string(), format!("Failed to read file - {}", e)));
-                        continue;
-                    }
-                };
+                // Check if file is readable (we'll let the parser handle the actual reading)
+                if !path.exists() {
+                    actual_fail_shaders.push((file_name.to_string(), "File not found".to_string()));
+                    continue;
+                }
 
-                // Try to parse the shader
-                match ast::TranslationUnit::parse(&source) {
+                // Try to parse the shader with filesystem context
+                match parse_shader_with_fs_context(&path) {
                     Ok(_) => {
                         actual_pass_shaders.push(file_name.to_string());
                     }
-                    Err(_) => {
-                        actual_fail_shaders.push((file_name.to_string(), "Parse error".to_string()));
+                    Err(e) => {
+                        actual_fail_shaders.push((file_name.to_string(), format!("Parse error - {}", e)));
                     }
                 }
             }

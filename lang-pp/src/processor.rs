@@ -45,7 +45,7 @@ impl IncludeMode {
 
 impl Default for IncludeMode {
     fn default() -> Self {
-        Self::None
+        Self::GoogleInclude { warn: false }
     }
 }
 
@@ -210,8 +210,8 @@ impl<'r> ProcessorStateBuilder<'r> {
 
         let mut state =
             ProcessorState {
-                // No #include extensions enabled
-                include_mode: IncludeMode::None,
+                // Google #include extensions enabled by default
+                include_mode: IncludeMode::default(),
                 // Spec 3.3, "There is a built-in macro definition for each profile the implementation
                 // supports. All implementations provide the following macro:
                 // `#define GL_core_profile 1`
@@ -238,7 +238,7 @@ impl<'r> ProcessorStateBuilder<'r> {
                     .map(|definition| (definition.name().into(), definition))
                     .collect(),
                 version: Version::default(),
-                cpp_style_line: false,
+                cpp_style_line: true,
             };
 
         for (name, behavior) in self.extensions {
