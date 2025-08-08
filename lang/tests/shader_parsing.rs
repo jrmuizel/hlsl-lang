@@ -1,4 +1,5 @@
-use hlsl_lang::{ast, parse::DefaultParse};
+use hlsl_lang::{lexer::full::fs::PreprocessorExt, parse::IntoParseBuilderExt};
+use hlsl_lang_pp::processor::fs::StdProcessor;
 use std::fs;
 use std::path::Path;
 use std::collections::HashSet;
@@ -315,8 +316,17 @@ fn test_shader_parsing() {
             }
         };
 
-        // Try to parse the shader
-        match ast::TranslationUnit::parse(&source) {
+        // Try to parse the shader with preprocessor
+        let mut processor = StdProcessor::new();
+        match processor
+            .open_source(&source, path.parent().unwrap_or_else(|| Path::new(".")))
+            .builder()
+            .parse()
+            .map(|(mut tu, _, iter)| {
+                iter.into_directives().inject(&mut tu);
+                tu
+            })
+        {
             Ok(_) => {
                 println!("✓ Parsed successfully: {}", path_str);
                 actual_pass_shaders.push(path_str.to_string());
@@ -427,8 +437,17 @@ fn test_data_hlsl_parsing() {
                     }
                 };
 
-                // Try to parse the shader
-                match ast::TranslationUnit::parse(&source) {
+                // Try to parse the shader with preprocessor
+                let mut processor = StdProcessor::new();
+                match processor
+                    .open_source(&source, path.parent().unwrap_or_else(|| Path::new(".")))
+                    .builder()
+                    .parse()
+                    .map(|(mut tu, _, iter)| {
+                        iter.into_directives().inject(&mut tu);
+                        tu
+                    })
+                {
                     Ok(_) => {
                         actual_pass_shaders.push(file_name.to_string());
                     }
