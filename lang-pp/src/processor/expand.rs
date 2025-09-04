@@ -100,8 +100,14 @@ impl ExpandLocation {
 
     pub fn line_to_line_number(&self, raw_line: u32) -> u32 {
         if let Some((origin, line_override)) = &self.line_override {
-            let offset = line_override.line_number() as i64 - *origin as i64 - 2;
-            (raw_line as i64 + offset) as u32
+            // Per spec, a #line directive affects the line number of the FOLLOWING line.
+            // Do not apply the override to the directive line itself or any preceding line.
+            if raw_line > *origin {
+                let offset = line_override.line_number() as i64 - *origin as i64 - 2;
+                (raw_line as i64 + offset) as u32
+            } else {
+                raw_line
+            }
         } else {
             raw_line
         }

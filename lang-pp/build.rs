@@ -88,6 +88,7 @@ fn main() {
             "const",
             "uniform",
             "shared",
+            "groupshared",
             "attribute",
             "varying",
             "coherent",

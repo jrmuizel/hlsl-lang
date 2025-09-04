@@ -141,6 +141,7 @@ pub fn lang_token(
             types::Token::INLINE => Token::Inline,
             types::Token::UNIFORM => Token::Uniform,
             types::Token::SHARED => Token::Shared,
+            types::Token::GROUPSHARED => Token::GroupShared,
             types::Token::COHERENT => Token::Coherent,
             types::Token::VOLATILE => Token::Volatile,
             types::Token::RESTRICT => Token::Restrict,

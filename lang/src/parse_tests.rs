@@ -143,6 +143,10 @@ fn parse_storage_qualifier() {
         Ok(ast::StorageQualifierData::Shared.into())
     );
     assert_eq!(
+        ast::StorageQualifier::parse("groupshared"),
+        Ok(ast::StorageQualifierData::GroupShared.into())
+    );
+    assert_eq!(
         ast::StorageQualifier::parse("coherent"),
         Ok(ast::StorageQualifierData::Coherent.into())
     );
@@ -2450,4 +2454,17 @@ fn parse_dangling_else() {
         )
         .into())
     );
+}
+
+#[test]
+fn test_groupshared_basic() {
+    // Test simple groupshared declaration
+    let result = ast::TranslationUnit::parse("groupshared float4 sharedData[128];");
+    assert!(result.is_ok(), "Failed to parse basic groupshared declaration: {:?}", result.err());
+
+    // Test groupshared with different types
+    let result = ast::TranslationUnit::parse("groupshared uint counter;");
+    assert!(result.is_ok(), "Failed to parse groupshared uint: {:?}", result.err());
+    
+    println!("✓ Successfully parsed groupshared declarations!");
 }

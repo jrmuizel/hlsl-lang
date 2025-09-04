@@ -481,6 +481,10 @@ impl Event {
     ) -> Self {
         let (source_id, inner, node) = d.into_inner();
         let pos = node.text_range();
+        let file_override: lang_util::located::FileOverride = location
+            .line_override()
+            .map(|(_, pl)| pl.clone().into())
+            .unwrap_or_default();
 
         Self::Directive {
             directive: EventDirective {
@@ -492,6 +496,7 @@ impl Event {
                         Error::builder()
                             .pos(pos)
                             .resolve_file(location)
+                            .file_override(file_override.clone())
                             .finish(error.into())
                     })
                     .collect(),
@@ -515,10 +520,15 @@ impl Event {
         location: &ExpandLocation,
         masked: bool,
     ) -> Self {
+        let file_override: lang_util::located::FileOverride = location
+            .line_override()
+            .map(|(_, pl)| pl.clone().into())
+            .unwrap_or_default();
         Self::Error {
             error: Error::builder()
                 .pos(pos)
                 .resolve_file(location)
+                .file_override(file_override)
                 .finish(e.into()),
             masked,
         }
